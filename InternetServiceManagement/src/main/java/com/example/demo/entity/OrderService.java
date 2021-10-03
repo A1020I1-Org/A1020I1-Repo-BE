@@ -21,6 +21,7 @@ public class OrderService {
     private int quantity;
     private int unit;
     private int totalMoney;
+    private String oder_date;
 
     public OrderService() {
     }
@@ -71,5 +72,13 @@ public class OrderService {
 
     public void setTotalMoney(int totalMoney) {
         this.totalMoney = totalMoney;
+    }
+
+    public String getOder_date() {
+        return oder_date;
+    }
+
+    public void setOder_date(String oder_date) {
+        this.oder_date = oder_date;
     }
 }

@@ -10,7 +10,7 @@ public class Pay {
     @Id
     private int payId;
     private double totalPayment;
-    private String status;
+    private boolean status;
 
     @ManyToOne(targetEntity = Customer.class)
     @JoinColumn(name = "customerId", referencedColumnName = "customerId")
@@ -35,11 +35,11 @@ public class Pay {
         this.totalPayment = totalPayment;
     }
 
-    public String getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
