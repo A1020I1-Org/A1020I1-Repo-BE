@@ -6,7 +6,6 @@ import java.util.Set;
 @Entity
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerId;
     private String fullName;
     private String dateOfBirth;
