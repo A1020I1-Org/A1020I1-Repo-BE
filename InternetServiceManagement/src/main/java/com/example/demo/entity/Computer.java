@@ -6,8 +6,7 @@ import java.util.Set;
 @Entity
 public class Computer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int computerId;
+    private String computerId;
     private String computerLocation;
     private String computerStartUsedDate;
     private String computerWarrantyPeriod;
