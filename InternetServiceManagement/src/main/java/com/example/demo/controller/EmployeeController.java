@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Employee;
+import com.example.demo.entity.Position;
 import com.example.demo.service.EmployeeService;
+import com.example.demo.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +18,16 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
+    @Autowired
+    PositionService positionService;
+
+    @ModelAttribute("positions")
+    public List<Position> showAllPosition() {
+        return positionService.findAll();
+    }
+
     @RequestMapping(value = "/listEmployee", method = RequestMethod.GET)
-    public ResponseEntity <List<Employee>>getAllEmployee() {
+    public ResponseEntity<List<Employee>> getAllEmployee() {
         List<Employee> employeeList = employeeService.getAllEmployee();
         if (employeeList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
