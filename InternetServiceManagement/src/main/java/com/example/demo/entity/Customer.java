@@ -6,7 +6,7 @@ import java.util.Set;
 @Entity
 public class Customer {
     @Id
-    private String customerId;
+    private int customerId;
     private String fullName;
     private String dateOfBirth;
     private String email;
