@@ -12,7 +12,6 @@ public class Service {
     private String unit;
     private int quantity;
     private int prices;
-    private String image;
 
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
@@ -60,13 +59,7 @@ public class Service {
         this.prices = prices;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
+  
 
     public Set<OrderService> getOrderServices() {
         return orderServices;
