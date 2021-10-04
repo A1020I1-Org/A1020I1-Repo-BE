@@ -16,9 +16,13 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
-    @ModelAttribute("listEmployee")
-    public List<Employee> getAllEmployee() {
-        return employeeService.getAllEmployee();
+    @RequestMapping(value = "/listEmployee", method = RequestMethod.GET)
+    public ResponseEntity <List<Employee>>getAllEmployee() {
+        List<Employee> employeeList = employeeService.getAllEmployee();
+        if (employeeList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(employeeList, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/deleteEmployee/{id}", method = RequestMethod.DELETE)
