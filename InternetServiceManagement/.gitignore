@@ -36,5 +36,3 @@ out/
 ### VS Code ###
 .vscode/
 
-### Of MT ###
-"/src/main/resources/application.properties" 
