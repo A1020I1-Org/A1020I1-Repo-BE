@@ -5,7 +5,6 @@ import javax.persistence.*;
 @Entity
 public class Employee {
     @Id
-  
     private String employeeId;
     private String fullName;
     private String dateOfBirth;
@@ -15,7 +14,7 @@ public class Employee {
     private String level;
     private String startWorkDate;
     private int yearOfExp;
-    private long avtUrl;
+    private String avtUrl;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userName",referencedColumnName = "userName")
@@ -28,11 +27,11 @@ public class Employee {
     public Employee() {
     }
 
-    public int getEmployeeId() {
+    public String getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
     }
 
@@ -100,11 +99,11 @@ public class Employee {
         this.yearOfExp = yearOfExp;
     }
 
-    public long getAvtUrl() {
+    public String getAvtUrl() {
         return avtUrl;
     }
 
-    public void setAvtUrl(long avtUrl) {
+    public void setAvtUrl(String avtUrl) {
         this.avtUrl = avtUrl;
     }
 
