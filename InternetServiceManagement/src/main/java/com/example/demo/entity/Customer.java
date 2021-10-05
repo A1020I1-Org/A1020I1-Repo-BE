@@ -6,7 +6,7 @@ import java.util.Set;
 @Entity
 public class Customer {
     @Id
-    private int customerId;
+    private String customerId;
     private String fullName;
     private String dateOfBirth;
     private String email;
@@ -31,11 +31,11 @@ public class Customer {
     public Customer() {
     }
 
-    public int getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 

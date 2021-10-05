@@ -6,7 +6,7 @@ import java.util.Set;
 @Entity
 public class Computer {
     @Id
-    private String computerId;
+    private int computerId;
     private String computerLocation;
     private String computerStartUsedDate;
     private String computerWarrantyPeriod;
