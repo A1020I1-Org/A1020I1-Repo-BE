@@ -5,8 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "order_service")
 public class OrderService {
-    @EmbeddedId
-    private OrderServiceKey id;
+
+    @Id
+    private Integer id;
 
     @ManyToOne
     @MapsId("customerId")
@@ -14,9 +15,12 @@ public class OrderService {
     private Customer customer;
 
     @ManyToOne
-    @MapsId("serviceId")
     @JoinColumn(name = "service_id")
     private Service service;
+
+    @ManyToOne
+    @JoinColumn(name = "order_service_total_id")
+    private OrderServiceToTal orderServiceToTal;
 
     private int quantity;
     private int unit;
@@ -26,11 +30,11 @@ public class OrderService {
     public OrderService() {
     }
 
-    public OrderServiceKey getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(OrderServiceKey id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -80,5 +84,13 @@ public class OrderService {
 
     public void setOder_date(String oder_date) {
         this.oder_date = oder_date;
+    }
+
+    public OrderServiceToTal getOrderServiceToTal() {
+        return orderServiceToTal;
+    }
+
+    public void setOrderServiceToTal(OrderServiceToTal orderServiceToTal) {
+        this.orderServiceToTal = orderServiceToTal;
     }
 }
