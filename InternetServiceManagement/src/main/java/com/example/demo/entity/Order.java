@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "order_hour")
 public class Order {
+
     @Id
     private Integer id;
 
@@ -34,6 +35,14 @@ public class Order {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Pay getPay() {
+        return pay;
+    }
+
+    public void setPay(Pay pay) {
+        this.pay = pay;
     }
 
     public Customer getCustomer() {

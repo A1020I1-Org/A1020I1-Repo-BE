@@ -5,10 +5,12 @@ import javax.persistence.*;
 @Entity
 @Table(name = "order_service")
 public class OrderService {
+
     @Id
     private Integer id;
 
     @ManyToOne
+    @MapsId("customerId")
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
@@ -19,7 +21,6 @@ public class OrderService {
     @ManyToOne
     @JoinColumn(name = "order_service_total_id")
     private OrderServiceToTal orderServiceToTal;
-
 
     private int quantity;
     private int unit;
@@ -83,5 +84,13 @@ public class OrderService {
 
     public void setOder_date(String oder_date) {
         this.oder_date = oder_date;
+    }
+
+    public OrderServiceToTal getOrderServiceToTal() {
+        return orderServiceToTal;
+    }
+
+    public void setOrderServiceToTal(OrderServiceToTal orderServiceToTal) {
+        this.orderServiceToTal = orderServiceToTal;
     }
 }

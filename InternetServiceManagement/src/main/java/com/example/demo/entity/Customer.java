@@ -108,7 +108,6 @@ public class Customer {
         this.orderServices = orderServices;
     }
 
-
     public Set<Order> getOrders() {
         return orders;
     }
