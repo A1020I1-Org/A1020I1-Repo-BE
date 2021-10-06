@@ -37,6 +37,21 @@ public class EmployeeController {
         }
         return new ResponseEntity<>(employeeList, HttpStatus.OK);
     }
+    @RequestMapping(value = "/searchEmployee", method = RequestMethod.GET)
+    public ResponseEntity<Page<Employee>> searchEmployee(@RequestParam(value = "id") String id,
+                                                         @RequestParam(value = "date1") String date1,
+                                                         @RequestParam(value = "date2") String date2,
+                                                         @RequestParam(value = "work1") String work1,
+                                                         @RequestParam(value = "work2") String work2,
+                                                         @RequestParam(value = "address") String address,
+                                                         @RequestParam(value = "positionName") String positionName,
+                                                         @PageableDefault(size = 4) Pageable pageable) {
+        Page<Employee> employeeList = employeeService.searchEmployee(id,date1,date2,work1,work2,address,positionName,pageable);
+        if (employeeList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(employeeList, HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/deleteEmployee/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Employee> deleteEmployee(@PathVariable("id") String id) {

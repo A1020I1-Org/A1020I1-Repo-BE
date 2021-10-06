@@ -31,4 +31,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.deleteById(id);
     }
 
+    @Override
+    public Page<Employee> searchEmployee(String id, String date1, String date2, String work1, String work2, String address, String positionName, Pageable pageable) {
+        return employeeRepository.searchEmployee(id,date1,date2,work1,work2,address,positionName,pageable);
+    }
+
 }

@@ -13,4 +13,5 @@ public interface EmployeeService {
 
     void deleteEmployee(String id);
 
+    Page<Employee> searchEmployee(String id, String date1, String date2, String work1, String work2, String address, String positionName, Pageable pageable);
 }
