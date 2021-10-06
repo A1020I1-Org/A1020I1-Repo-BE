@@ -57,7 +57,6 @@ public class Account {
     public Set<AccountRole> getAccountRoles() {
         return accountRoles;
     }
-
     public void setAccountRoles(Set<AccountRole> accountRoles) {
         this.accountRoles = accountRoles;
     }

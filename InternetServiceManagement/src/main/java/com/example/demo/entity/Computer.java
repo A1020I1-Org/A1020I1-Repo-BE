@@ -38,11 +38,11 @@ public class Computer {
     public Computer() {
     }
 
-    public int getComputerId() {
+    public String getComputerId() {
         return computerId;
     }
 
-    public void setComputerId(int computerId) {
+    public void setComputerId(String computerId) {
         this.computerId = computerId;
     }
 
