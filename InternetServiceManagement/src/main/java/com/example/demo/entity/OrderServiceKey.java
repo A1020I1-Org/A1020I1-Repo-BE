@@ -10,7 +10,7 @@ public class OrderServiceKey implements Serializable {
     private int customerId;
 
     @Column(name = "service_id")
-    private int serviceId;
+    private String serviceId;
 
     public OrderServiceKey() {
     }
@@ -23,11 +23,11 @@ public class OrderServiceKey implements Serializable {
         this.customerId = customerId;
     }
 
-    public int getServiceId() {
+    public String getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(int serviceId) {
+    public void setServiceId(String serviceId) {
         this.serviceId = serviceId;
     }
 }

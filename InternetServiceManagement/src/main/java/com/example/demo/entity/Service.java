@@ -6,7 +6,6 @@ import java.util.Set;
 @Entity
 public class Service {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String serviceId;
     private String serviceName;
     private String unit;

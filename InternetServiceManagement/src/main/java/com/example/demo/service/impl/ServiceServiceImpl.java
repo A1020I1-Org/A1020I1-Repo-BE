@@ -1,9 +1,10 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.repository.ServiceRepository;
-import com.example.demo.repository.impl.ServiceRepositoryImpl;
 import com.example.demo.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class ServiceServiceImpl implements ServiceService {
     }
 
     @Override
-    public com.example.demo.entity.Service searchService(String nameSearch) {
-        return serviceRepository.findOne()
+    public Page<com.example.demo.entity.Service> search(Pageable pageable, String searchName) {
+        return serviceRepository.search(pageable,searchName);
     }
 }
