@@ -6,7 +6,6 @@ import java.util.Set;
 @Entity
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerId;
     private String fullName;
     private String dateOfBirth;
@@ -22,9 +21,6 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
-
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-    private Set<Pay> pays;
 
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
     Set<Order> orders;
@@ -110,14 +106,6 @@ public class Customer {
 
     public void setOrderServices(Set<OrderService> orderServices) {
         this.orderServices = orderServices;
-    }
-
-    public Set<Pay> getPays() {
-        return pays;
-    }
-
-    public void setPays(Set<Pay> pays) {
-        this.pays = pays;
     }
 
     public Set<Order> getOrders() {

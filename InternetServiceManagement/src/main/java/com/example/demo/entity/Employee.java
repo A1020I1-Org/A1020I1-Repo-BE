@@ -5,8 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int employeeId;
+    private String employeeId;
     private String fullName;
     private String dateOfBirth;
     private String email;
@@ -28,11 +27,13 @@ public class Employee {
     public Employee() {
     }
 
-    public int getEmployeeId() {
+
+    public String getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(String employeeId) {
+
         this.employeeId = employeeId;
     }
 

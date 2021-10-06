@@ -6,8 +6,7 @@ import java.util.Set;
 @Entity
 public class Game {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int gameId;
+    private String gameId;
     private String gameName;
     private String gameCategory;
     @Column(length = 255)
@@ -20,11 +19,11 @@ public class Game {
     public Game() {
     }
 
-    public int getGameId() {
+    public String getGameId() {
         return gameId;
     }
 
-    public void setGameId(int gameId) {
+    public void setGameId(String gameId) {
         this.gameId = gameId;
     }
 

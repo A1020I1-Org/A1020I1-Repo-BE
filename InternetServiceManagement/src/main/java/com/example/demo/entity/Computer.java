@@ -6,8 +6,7 @@ import java.util.Set;
 @Entity
 public class Computer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int computerId;
+    private String computerId;
     private String computerLocation;
     private String computerStartUsedDate;
     private String computerWarrantyPeriod;
@@ -39,11 +38,12 @@ public class Computer {
     public Computer() {
     }
 
-    public int getComputerId() {
+
+    public String getComputerId() {
         return computerId;
     }
 
-    public void setComputerId(int computerId) {
+    public void setComputerId(String computerId) {
         this.computerId = computerId;
     }
 
