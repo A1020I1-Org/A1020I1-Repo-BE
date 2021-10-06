@@ -5,8 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "order_hour")
 public class Order {
-    @EmbeddedId
-    private OrderKey id;
+
+    @Id
+    private Integer id;
 
     @ManyToOne
     @MapsId("customerId")
@@ -18,6 +19,9 @@ public class Order {
     @JoinColumn(name = "computer_id")
     private Computer computer;
 
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Pay pay;
+
     private String startTime;
     private String endTime;
     private int usageTime;
@@ -25,12 +29,20 @@ public class Order {
     public Order() {
     }
 
-    public OrderKey getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(OrderKey id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Pay getPay() {
+        return pay;
+    }
+
+    public void setPay(Pay pay) {
+        this.pay = pay;
     }
 
     public Customer getCustomer() {
