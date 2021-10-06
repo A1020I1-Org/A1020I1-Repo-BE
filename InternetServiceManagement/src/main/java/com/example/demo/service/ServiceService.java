@@ -11,4 +11,6 @@ public interface ServiceService {
     Service findServiceById(String serviceId);
 
     Service deleteService (String serviceId);
+
+    Service searchService (String nameSearch);
 }

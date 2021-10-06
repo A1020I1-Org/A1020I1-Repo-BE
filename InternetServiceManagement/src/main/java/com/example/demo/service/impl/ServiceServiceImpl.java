@@ -27,4 +27,9 @@ public class ServiceServiceImpl implements ServiceService {
         serviceRepository.deleteById(serviceId);
         return null;
     }
+
+    @Override
+    public com.example.demo.entity.Service searchService(String nameSearch) {
+        return serviceRepository.findOne()
+    }
 }

@@ -14,8 +14,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/service")
 public class ServiceController {
-
-    @Qualifier("serviceRepositoryImpl")
     @Autowired
     private ServiceService serviceService;
 
