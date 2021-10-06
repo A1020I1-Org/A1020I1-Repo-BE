@@ -1,11 +1,7 @@
 package com.example.demo.entity;
 
-import javax.persistence.*;
-import java.util.Set;
 
-@Entity
-public class Customer {
-    @Id
+public class AccountCustomer {
     private int customerId;
     private String fullName;
     private String dateOfBirth;
@@ -14,24 +10,13 @@ public class Customer {
     private String phone;
     private boolean status;
     private String idCard;
+    private String userName;
+    private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userName",referencedColumnName = "userName")
-    private Account account;
-
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    Set<OrderService> orderServices;
-
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-    private Set<Pay> pays;
-
-    @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
-    Set<Order> orders;
-
-    public Customer() {
+    public AccountCustomer() {
     }
 
-    public Customer(int customerId, String fullName, String dateOfBirth, String email, String address, String phone, boolean status, String idCard, Account account) {
+    public AccountCustomer(int customerId, String fullName, String dateOfBirth, String email, String address, String phone, boolean status, String idCard, String userName, String password) {
         this.customerId = customerId;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
@@ -40,7 +25,8 @@ public class Customer {
         this.phone = phone;
         this.status = status;
         this.idCard = idCard;
-        this.account = account;
+        this.userName = userName;
+        this.password = password;
     }
 
     public int getCustomerId() {
@@ -107,35 +93,19 @@ public class Customer {
         this.idCard = idCard;
     }
 
-    public Account getAccount() {
-        return account;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public Set<OrderService> getOrderServices() {
-        return orderServices;
+    public String getPassword() {
+        return password;
     }
 
-    public void setOrderServices(Set<OrderService> orderServices) {
-        this.orderServices = orderServices;
-    }
-
-    public Set<Pay> getPays() {
-        return pays;
-    }
-
-    public void setPays(Set<Pay> pays) {
-        this.pays = pays;
-    }
-
-    public Set<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
