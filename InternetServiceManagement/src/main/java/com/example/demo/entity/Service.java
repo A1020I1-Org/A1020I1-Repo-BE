@@ -6,13 +6,11 @@ import java.util.Set;
 @Entity
 public class Service {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int serviceId;
+    private String serviceId;
     private String serviceName;
     private String unit;
     private int quantity;
     private int prices;
-    private String image;
 
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
@@ -20,11 +18,11 @@ public class Service {
     public Service() {
     }
 
-    public int getServiceId() {
+    public String getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(int serviceId) {
+    public void setServiceId(String serviceId) {
         this.serviceId = serviceId;
     }
 
@@ -60,13 +58,7 @@ public class Service {
         this.prices = prices;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
+  
 
     public Set<OrderService> getOrderServices() {
         return orderServices;
