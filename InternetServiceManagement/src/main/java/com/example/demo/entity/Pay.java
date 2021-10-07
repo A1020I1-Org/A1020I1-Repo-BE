@@ -49,4 +49,19 @@ public class Pay {
         this.status = status;
     }
 
+    public OrderServiceToTal getOrderServiceToTal() {
+        return orderServiceToTal;
+    }
+
+    public void setOrderServiceToTal(OrderServiceToTal orderServiceToTal) {
+        this.orderServiceToTal = orderServiceToTal;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 }
