@@ -1,17 +1,19 @@
 package com.example.demo.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
 @Table(name = "order_service_total")
 public class OrderServiceToTal {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private int serviceTotalMoney;
 
-    private String dateOrderService;
+    private Date dateOrderService;
 
     @OneToMany(mappedBy = "orderServiceToTal", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
@@ -54,11 +56,11 @@ public class OrderServiceToTal {
         this.pay = pay;
     }
 
-    public String getDateOrderService() {
+    public Date getDateOrderService() {
         return dateOrderService;
     }
 
-    public void setDateOrderService(String dateOrderService) {
+    public void setDateOrderService(Date dateOrderService) {
         this.dateOrderService = dateOrderService;
     }
 }
