@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Entity
 public class Employee {
