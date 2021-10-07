@@ -43,8 +43,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void updateCustomer(CustomerRequest customerRequest) {
-        Customer customer = customerRepository.findById(customerRequest.getCustomerId()).orElse(null);
+    public void updateCustomer(CustomerRequest customerRequest, Integer id) {
+        Customer customer = customerRepository.findById(id).orElse(null);
         Account account = accountRepository.findByUserName(customerRequest.getUsername()).orElse(null);
         if (customer != null && account != null) {
             if (customerRequest.getPassword().equals(customerRequest.getPasswordRetype())) {
@@ -61,5 +61,10 @@ public class CustomerServiceImpl implements CustomerService {
                 accountRepository.save(account);
             }
         }
+    }
+
+    @Override
+    public Customer findById(Integer id) {
+        return customerRepository.findById(id).orElse(null);
     }
 }
