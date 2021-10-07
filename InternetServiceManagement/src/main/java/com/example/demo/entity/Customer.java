@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -15,16 +17,20 @@ public class Customer {
     private boolean status;
     private String idCard;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userName",referencedColumnName = "userName")
     private Account account;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     private Set<Pay> pays;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
     Set<Order> orders;
 

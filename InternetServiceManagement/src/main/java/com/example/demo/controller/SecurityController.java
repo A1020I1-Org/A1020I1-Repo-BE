@@ -9,7 +9,10 @@ import com.example.demo.sercurity.AccountDetailServiceImpl;
 import com.example.demo.sercurity.AccountDetailsImpl;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.CustomerService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -32,7 +35,7 @@ public class SecurityController {
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private AccountDetailServiceImpl accountDetailService;
-//    @Autowired
+    //    @Autowired
 //    private AccountRoleService accountRoleService;
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -44,30 +47,32 @@ public class SecurityController {
     @PostMapping(value = "/api/public/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginRequest loginRequest) throws Exception {
         Authentication authentication;
+        Account account = accountService.findByUserName(loginRequest.getUsername());
         try {
             authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
             );
-        } catch (Exception e
-        ) {
+        }catch (Exception e) {
             if (accountService.findByUserName(loginRequest.getUsername()) != null) {
-                throw new BadCredentialsException("Tên đăng nhập hoặc mật khẩu không chính xác!", e);
+                ObjectMapper mapper = new ObjectMapper();
+                JsonNode json = mapper.readTree("{\"error\": \"Tên đăng nhập hoặc mật khẩu không đúng\"}");
+                return new ResponseEntity<>(json, HttpStatus.NOT_FOUND);
             } else {
-                throw new UsernameNotFoundException("Tên đăng nhập không tồn tại!", e);
+                ObjectMapper mapper = new ObjectMapper();
+                JsonNode json = mapper.readTree("{\"error\": \"Không tìm thấy tài khoản\"}");
+                return new ResponseEntity<>(json, HttpStatus.NOT_FOUND);
             }
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtTokenUtil.generateJwtToken(loginRequest.getUsername());
         AccountDetailsImpl userDetails = (AccountDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Account account = accountService.findByUserName(loginRequest.getUsername());
-        Customer membership = customerService.findByAccount(account.getUserName());
+        Customer customer = customerService.findByAccount(account.getUserName());
         account.setPassword("");
-        System.out.println("test :"+jwt);
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(
-                new JwtResponse(jwt, account,membership, roles)
+                new JwtResponse(jwt, account, customer, roles)
         );
     }
 }
