@@ -18,13 +18,13 @@ public class ServiceController {
         this.serviceService = serviceService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Service> post(@RequestBody Service service) {
         this.serviceService.save(service);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Service> update(@PathVariable String id, @RequestBody Service service){
         if (this.serviceService.findById(id) == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
