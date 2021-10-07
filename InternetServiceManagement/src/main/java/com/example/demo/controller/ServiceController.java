@@ -5,6 +5,7 @@ import com.example.demo.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -21,9 +22,9 @@ public class ServiceController {
     private ServiceService serviceService;
 
     @GetMapping(value = "/list")
-    public ResponseEntity<List<Service>> listAllService() {
-        List<Service> serviceList = serviceService.findAllService();
-        if (serviceList.isEmpty()) {
+    public ResponseEntity<Page<Service>> listAllService(@PageableDefault(size = 3) Pageable pageable) {
+        Page<Service> serviceList = serviceService.findAllService(pageable);
+        if (serviceList == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(serviceList, HttpStatus.OK);
@@ -40,7 +41,7 @@ public class ServiceController {
         return new ResponseEntity<>(service, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/list/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Service> deleteService(@PathVariable("id") String serviceId) {
         System.out.println("Fetching and Deleting Service with service id" + serviceId);
         Service service = serviceService.findServiceById(serviceId);
@@ -55,11 +56,10 @@ public class ServiceController {
 
     @GetMapping(value = "/search")
     public ResponseEntity<Page<Service>> searchService(@RequestParam("searchName") String searchName,
-                                                 @PageableDefault(3) Pageable pageable) {
+                                                 @PageableDefault(size = 3) Pageable pageable) {
         Page<Service> searchService = serviceService.search(pageable, searchName);
         System.out.println(searchService);
        if (searchService == null){
-           System.out.println("Not found");
            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
        }
         return new ResponseEntity<>(searchService,HttpStatus.OK);
