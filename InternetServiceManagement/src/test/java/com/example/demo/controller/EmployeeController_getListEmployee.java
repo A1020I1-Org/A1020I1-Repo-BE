@@ -18,10 +18,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class EmployeeRestController_getListEmployee {
+public class EmployeeController_getListEmployee {
     @Autowired
     private EmployeeController employeeController;
 
@@ -42,12 +42,12 @@ public class EmployeeRestController_getListEmployee {
     public void getListEmployee_6() {
 
         ResponseEntity<Page<Employee>> responseEntity
-                = this.employeeController.getAllEmployee(PageRequest.of(0, 1));
+                = this.employeeController.getAllEmployee(PageRequest.of(0, 2));
 
         Assertions.assertEquals(200, responseEntity.getStatusCodeValue());
         Assertions.assertEquals(1, responseEntity.getBody().getTotalPages());
         Assertions.assertEquals(1, responseEntity.getBody().getTotalElements());
         Assertions.assertEquals("1",
-                responseEntity.getBody().getContent().get(1).getFullName());
+                responseEntity.getBody().getContent().get(0).getEmployeeId());
     }
 }
