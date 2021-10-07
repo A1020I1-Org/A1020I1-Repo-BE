@@ -5,7 +5,6 @@ import javax.persistence.*;
 @Entity
 public class Employee {
     @Id
-  
     private String employeeId;
     private String fullName;
     private String dateOfBirth;
