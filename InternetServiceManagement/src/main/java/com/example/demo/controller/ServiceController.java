@@ -22,7 +22,7 @@ public class ServiceController {
     private ServiceService serviceService;
 
     @GetMapping(value = "/list")
-    public ResponseEntity<Page<Service>> listAllService(@PageableDefault(size = 3) Pageable pageable) {
+    public ResponseEntity<Page<Service>> listAllService(@PageableDefault(size = 4) Pageable pageable) {
         Page<Service> serviceList = serviceService.findAllService(pageable);
         if (serviceList == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

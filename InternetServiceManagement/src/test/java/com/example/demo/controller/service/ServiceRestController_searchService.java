@@ -52,7 +52,7 @@ public class ServiceRestController_searchService {
     public void searchService_10() throws Exception {
         mockMvc.perform(
                 MockMvcRequestBuilders
-                        .get("/service/search")
+                        .get("/service/search?searchName=")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
