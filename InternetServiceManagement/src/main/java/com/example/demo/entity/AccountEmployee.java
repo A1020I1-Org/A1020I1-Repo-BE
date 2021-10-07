@@ -1,10 +1,6 @@
 package com.example.demo.entity;
 
-import javax.persistence.*;
-
-@Entity
-public class Employee {
-    @Id
+public class AccountEmployee {
     private String employeeId;
     private String fullName;
     private String dateOfBirth;
@@ -15,19 +11,14 @@ public class Employee {
     private String startWorkDate;
     private int yearOfExp;
     private String avtUrl;
+    private int idPosition;
+    private String userName;
+    private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userName",referencedColumnName = "userName")
-    private Account account;
-
-    @ManyToOne(targetEntity = Position.class)
-    @JoinColumn(name = "positionId", referencedColumnName = "positionId")
-    private Position position;
-
-    public Employee() {
+    public AccountEmployee() {
     }
 
-    public Employee(String employeeId, String fullName, String dateOfBirth, String email, String address, String phone, String level, String startWorkDate, int yearOfExp, String avtUrl, Account account, Position position) {
+    public AccountEmployee(String employeeId, String fullName, String dateOfBirth, String email, String address, String phone, String level, String startWorkDate, int yearOfExp, String avtUrl, int idPosition, String userName, String password) {
         this.employeeId = employeeId;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
@@ -38,8 +29,9 @@ public class Employee {
         this.startWorkDate = startWorkDate;
         this.yearOfExp = yearOfExp;
         this.avtUrl = avtUrl;
-        this.account = account;
-        this.position = position;
+        this.idPosition = idPosition;
+        this.userName = userName;
+        this.password = password;
     }
 
     public String getEmployeeId() {
@@ -122,19 +114,27 @@ public class Employee {
         this.avtUrl = avtUrl;
     }
 
-    public Account getAccount() {
-        return account;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public Position getPosition() {
-        return position;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getIdPosition() {
+        return idPosition;
+    }
+
+    public void setIdPosition(int idPosition) {
+        this.idPosition = idPosition;
     }
 }
