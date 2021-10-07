@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface EmployeeRepository extends JpaRepository<Employee,String> {
     @Query( value="select * \n" +
             "from employee e\n" +
-            "inner join position p on p.position_id= e.employee_id\n" +
+            "inner join position p on p.position_id= e.position_id\n" +
             "where e.employee_id =:id or e.date_of_birth between :dateStart and :dateEnd " +
             "or e.start_work_date between :workStart and :workEnd or address =:address or p.position_name =:positionName ",
             nativeQuery = true)
