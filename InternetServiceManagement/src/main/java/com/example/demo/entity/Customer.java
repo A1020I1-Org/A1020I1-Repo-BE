@@ -13,7 +13,6 @@ public class Customer {
     private String address;
     private String phone;
     private boolean status;
-    private String idCard;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userName",referencedColumnName = "userName")
@@ -82,14 +81,6 @@ public class Customer {
 
     public void setStatus(boolean status) {
         this.status = status;
-    }
-
-    public String getIdCard() {
-        return idCard;
-    }
-
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
     }
 
     public Account getAccount() {
