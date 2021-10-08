@@ -1,21 +1,24 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 public class Account {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private String userName;
     @Column(length = 255)
     private String password;
 
     @OneToOne(mappedBy = "account" ,cascade = CascadeType.ALL)
     private Customer customer;
-
+    @JsonManagedReference
     @OneToOne(mappedBy = "account" ,cascade = CascadeType.ALL)
     private Employee employee;
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     Set<AccountRole> accountRoles;
 

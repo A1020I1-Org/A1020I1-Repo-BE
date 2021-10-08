@@ -1,50 +1,52 @@
-package com.example.demo.entity;
+package com.example.demo.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.demo.entity.Account;
+import com.example.demo.entity.Position;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.*;
 
-@Entity
-public class Employee {
+public class EmployeeDto implements Validator {
     @Id
+    @NotEmpty
+    @Pattern(regexp = "NV-\\d{4}")
     private String employeeId;
+    @NotEmpty
+    @Size(min = 5, max = 10)
     private String fullName;
+    @NotEmpty
     private String dateOfBirth;
+    @NotEmpty
+    @Size(max = 20)
+    @Pattern(regexp = "^[A-Za-z0-9]+@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$")
     private String email;
+    @NotEmpty
     private String address;
+    @NotEmpty
+    @Pattern(regexp = "^\\+090\\d{9,10}$")
     private String phone;
+    @NotNull
+    @Min(1)
     private String level;
+    @NotEmpty
     private String startWorkDate;
+    @NotNull
+    @Min(0)
+    @Max(100)
     private int yearOfExp;
     private String avtUrl;
-    @JsonBackReference
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userName",referencedColumnName = "userName")
-    private Account account;
-    @JsonBackReference
-    @ManyToOne(targetEntity = Position.class)
-    @JoinColumn(name = "positionId", referencedColumnName = "positionId")
-    private Position position;
 
-    public Employee() {
+    private AccountDto accountDto;
+    private PositionDto positionDto;
+
+    public EmployeeDto() {
     }
 
-    public Employee(String employeeId, String fullName, String dateOfBirth, String email, String address, String phone, String level, String startWorkDate, int yearOfExp, String avtUrl, Account account, Position position) {
-        this.employeeId = employeeId;
-        this.fullName = fullName;
-        this.dateOfBirth = dateOfBirth;
-        this.email = email;
-        this.address = address;
-        this.phone = phone;
-        this.level = level;
-        this.startWorkDate = startWorkDate;
-        this.yearOfExp = yearOfExp;
-        this.avtUrl = avtUrl;
-        this.account = account;
-        this.position = position;
-    }
 
     public String getEmployeeId() {
         return employeeId;
@@ -126,19 +128,33 @@ public class Employee {
         this.avtUrl = avtUrl;
     }
 
-    public Account getAccount() {
-        return account;
+    public AccountDto getAccountDto() {
+        return accountDto;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccountDto(AccountDto accountDto) {
+        this.accountDto = accountDto;
     }
 
-    public Position getPosition() {
-        return position;
+    public PositionDto getPositionDto() {
+        return positionDto;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    public void setPositionDto(PositionDto positionDto) {
+        this.positionDto = positionDto;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        EmployeeDto employeeDto = (EmployeeDto) target;
+        if(!employeeDto.fullName.matches("[A-Za-z] +")){
+            errors.rejectValue("fullName", "fullName.invalidFormat");
+        }
+
     }
 }

@@ -1,33 +1,20 @@
 package com.example.demo.entity;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.*;
 
 public class AccountEmployee {
-    @NotEmpty
-    @Pattern(regexp = "NV-\\d{4}")
+
     private String employeeId;
-    @NotEmpty
-    @Size(min = 5, max = 10)
     private String fullName;
-    @NotEmpty
     private String dateOfBirth;
-    @NotEmpty
-    @Size(max = 20)
-    @Pattern(regexp = "^[A-Za-z0-9]+@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$")
     private String email;
-    @NotEmpty
     private String address;
-    @NotEmpty
-    @Pattern(regexp = "^\\+090\\d{9,10}$")
     private String phone;
-    @NotNull
-    @Min(1)
     private String level;
-    @NotEmpty
     private String startWorkDate;
-    @NotNull
-    @Min(0)
-    @Max(100)
     private int yearOfExp;
     private String avtUrl;
     private int idPosition;
