@@ -50,4 +50,52 @@ public class EmployeeController_getListEmployee {
         Assertions.assertEquals("1",
                 responseEntity.getBody().getContent().get(0).getEmployeeId());
     }
+
+    @Test
+    public void getListEmployee_7() throws Exception {
+        mockMvc.perform(
+                MockMvcRequestBuilders
+                        .get("/employee/searchEmployee","null")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+    @Test
+    public void getListEmployee_8() throws Exception {
+        mockMvc.perform(
+                MockMvcRequestBuilders
+                        .get("/employee/searchEmployee","")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+    @Test
+    public void getListEmployee_9() throws Exception {
+        mockMvc.perform(
+                MockMvcRequestBuilders
+                        .get("/employee/searchEmployee","123")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+    @Test
+    public void getListEmployee_10() throws Exception {
+        mockMvc.perform(
+                MockMvcRequestBuilders
+                        .get("/employee/searchEmployee")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+    @Test
+    public void getListEmployee_11() {
+        ResponseEntity<Page<Employee>> responseEntity
+                = this.employeeController.searchEmployee("1","2021-10-07",
+                "2021-10-10","2021-10-07","2021-10-10",
+                "Nghệ An","Lao Công",PageRequest.of(0,2));
+
+        Assertions.assertEquals(200, responseEntity.getStatusCodeValue());
+        Assertions.assertEquals(1, responseEntity.getBody().getTotalPages());
+        Assertions.assertEquals(1, responseEntity.getBody().getTotalElements());
+    }
 }
