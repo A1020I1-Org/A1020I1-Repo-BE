@@ -26,6 +26,7 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
 
+
     @JsonIgnore
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     private Set<Pay> pays;
@@ -115,14 +116,6 @@ public class Customer {
 
     public void setOrderServices(Set<OrderService> orderServices) {
         this.orderServices = orderServices;
-    }
-
-    public Set<Pay> getPays() {
-        return pays;
-    }
-
-    public void setPays(Set<Pay> pays) {
-        this.pays = pays;
     }
 
     public Set<Order> getOrders() {

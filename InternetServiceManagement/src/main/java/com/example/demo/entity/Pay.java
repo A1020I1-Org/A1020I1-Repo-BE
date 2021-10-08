@@ -3,7 +3,9 @@ package com.example.demo.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
+
 
 @Entity
 public class Pay {
@@ -12,9 +14,13 @@ public class Pay {
     private double totalPayment;
     private boolean status;
 
-    @ManyToOne(targetEntity = Customer.class)
-    @JoinColumn(name = "customerId", referencedColumnName = "customerId")
-    private Customer customer;
+    @OneToOne
+    @JoinColumn(name = "order_service_total_id")
+    private OrderServiceToTal orderServiceToTal;
+
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     public Pay() {
     }
@@ -43,11 +49,19 @@ public class Pay {
         this.status = status;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public OrderServiceToTal getOrderServiceToTal() {
+        return orderServiceToTal;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setOrderServiceToTal(OrderServiceToTal orderServiceToTal) {
+        this.orderServiceToTal = orderServiceToTal;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }
