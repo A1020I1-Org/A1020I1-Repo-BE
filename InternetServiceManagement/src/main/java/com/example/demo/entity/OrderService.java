@@ -23,7 +23,7 @@ public class OrderService {
     private OrderServiceToTal orderServiceToTal;
 
     private int quantity;
-    private int unit;
+    private String unit;
     private int totalMoney;
     private String oder_date;
 
@@ -62,11 +62,11 @@ public class OrderService {
         this.quantity = quantity;
     }
 
-    public int getUnit() {
+    public String getUnit() {
         return unit;
     }
 
-    public void setUnit(int unit) {
+    public void setUnit(String unit) {
         this.unit = unit;
     }
 
