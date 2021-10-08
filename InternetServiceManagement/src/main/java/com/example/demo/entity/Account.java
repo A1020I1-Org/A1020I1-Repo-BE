@@ -10,8 +10,8 @@ public class Account {
     @Column(length = 255)
     private String password;
 
-    @OneToOne(mappedBy = "account" ,cascade = CascadeType.ALL)
-    private Customer customer;
+//    @OneToOne(mappedBy = "account" ,cascade = CascadeType.ALL)
+//    private Customer customer;
 
     @OneToOne(mappedBy = "account" ,cascade = CascadeType.ALL)
     private Employee employee;
@@ -38,13 +38,13 @@ public class Account {
         this.password = password;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+//    public Customer getCustomer() {
+//        return customer;
+//    }
+//
+//    public void setCustomer(Customer customer) {
+//        this.customer = customer;
+//    }
 
     public Employee getEmployee() {
         return employee;
