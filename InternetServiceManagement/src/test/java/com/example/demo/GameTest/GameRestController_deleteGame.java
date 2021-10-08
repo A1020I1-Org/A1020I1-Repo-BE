@@ -1,6 +1,5 @@
 package com.example.demo.GameTest;
 
-import com.example.demo.controller.GamesController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,7 +19,6 @@ public class GameRestController_deleteGame {
 
     @Test
     public void testDeleteGame_25() throws Exception {
-
         mockMvc.perform(
                 MockMvcRequestBuilders
                         .get("/games/delete/{id}", "null")
@@ -55,7 +53,7 @@ public class GameRestController_deleteGame {
     public void testDeleteGame_28() throws Exception {
         mockMvc.perform(
                 MockMvcRequestBuilders
-                        .get("/games/delete/{id}", "1")
+                        .get("/games/delete/{id}", "5")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful());

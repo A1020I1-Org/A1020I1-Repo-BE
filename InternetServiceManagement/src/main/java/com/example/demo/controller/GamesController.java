@@ -31,6 +31,7 @@ public class GamesController {
     @GetMapping(value = "/delete/{id}")
     public ResponseEntity<Game>deleteGame(@PathVariable String id){
         Game gameId = this.gameService.findById(id);
+        System.out.println("a "+gameId);
         if (gameId == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
