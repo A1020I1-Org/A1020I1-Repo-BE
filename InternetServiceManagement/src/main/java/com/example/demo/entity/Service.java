@@ -6,7 +6,8 @@ import java.util.Set;
 @Entity
 public class Service {
     @Id
-    private String serviceId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int serviceId;
     private String serviceName;
     private String unit;
     private int quantity;
@@ -18,11 +19,11 @@ public class Service {
     public Service() {
     }
 
-    public String getServiceId() {
+    public int getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(String serviceId) {
+    public void setServiceId(int serviceId) {
         this.serviceId = serviceId;
     }
 
