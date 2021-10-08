@@ -18,30 +18,43 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ComputerController_listComputer {
-
+public class ComputerController_searchComputer {
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private ComputerController computerController;
-
     @Test
-    public void testGetListComputer_1() throws Exception {
-        ResponseEntity<Page<Computer>> responseEntity
-                = this.computerController.listComputer(PageRequest.of(0, 2));
-        Assertions.assertEquals(404, responseEntity.getStatusCodeValue());
+    public void searchComputer_3() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/computer/searchComputer/","null"))
+                .andExpect(status().is4xxClientError());
     }
     @Test
-    public void testGetListComputer_2(){
+    public void searchComputer_4() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/computer/searchComputer/"," "))
+                .andExpect(status().is4xxClientError());
+    }
+    @Test
+    public void searchComputer_5() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/computer/searchComputer/","CP0002"))
+                .andExpect(status().is4xxClientError());
+    }
+    @Test
+    public void searchComputer_6() throws Exception {
+        mockMvc.perform(
+                MockMvcRequestBuilders
+                        .get("/computer/searchComputer")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+    @Test
+    public void searchComputer_7() {
         ResponseEntity<Page<Computer>> responseEntity
-                = this.computerController.listComputer(PageRequest.of(0,3));
+                = this.computerController.searchComputer("CP0002","A0002","2020/12/13","2020/12/17","","",PageRequest.of(0,3));
 
         Assertions.assertEquals(200, responseEntity.getStatusCodeValue());
         Assertions.assertEquals(1, responseEntity.getBody().getTotalPages());
         Assertions.assertEquals(3, responseEntity.getBody().getTotalElements());
-        Assertions.assertEquals("CP0001",
-                responseEntity.getBody().getContent().get(0).getComputerId());
-    }
 
+    }
 }

@@ -22,7 +22,7 @@ public class ComputerController {
     public ResponseEntity<Page<Computer>> listComputer(@PageableDefault(size = 4) Pageable pageable) {
         Page<Computer> computerList = computerService.finAll(pageable);
         if (computerList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(computerList, HttpStatus.OK);
     }
@@ -42,10 +42,12 @@ public class ComputerController {
                                                          @RequestParam("computerLocation") String computerLocation,
                                                          @RequestParam("computerStartUsedDate") String computerStartUsedDate,
                                                          @RequestParam("computerStartUsedTo") String computerStartUsedTo,
-                                                         @RequestParam("type") String type, @RequestParam("status") String status,@PageableDefault(size = 4) Pageable pageable) {
+                                                         @RequestParam("type") String type,
+                                                         @RequestParam("status") String status,
+                                                         @PageableDefault(size = 4) Pageable pageable) {
         Page<Computer> computers = computerService.search(id, computerLocation, computerStartUsedDate,computerStartUsedTo, type, status,pageable);
         if (computers.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(computers, HttpStatus.OK);
 

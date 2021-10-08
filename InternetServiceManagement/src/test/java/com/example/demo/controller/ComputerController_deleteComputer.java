@@ -20,22 +20,22 @@ public class ComputerController_deleteComputer {
     private MockMvc mockMvc;
 
     @Test
-    public void testDeleteComputer_25() throws Exception {
+    public void testDeleteComputer_8() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/computer/deleteComputer/{id}","null"))
                 .andExpect(status().is4xxClientError());
     }
     @Test
-    public void testDeleteComputer_26() throws Exception {
+    public void testDeleteComputer_9() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/computer/deleteComputer/{id}"," "))
                 .andExpect(status().is4xxClientError());
     }
     @Test
-    public void testDeleteComputer_27() throws Exception {
+    public void testDeleteComputer_10() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/computer/deleteComputer/{id}","123"))
                 .andExpect(status().is4xxClientError());
     }
     @Test
-    public void testDeleteComputer_28() throws Exception {
+    public void testDeleteComputer_11() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/computer/deleteComputer/{id}","CP0001"))
                 .andExpect(status().is2xxSuccessful());
     }
