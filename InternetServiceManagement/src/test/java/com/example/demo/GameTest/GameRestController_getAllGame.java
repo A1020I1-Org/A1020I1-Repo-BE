@@ -34,8 +34,6 @@ public class GameRestController_getAllGame {
         Assertions.assertEquals(4, responseEntity.getBody().getTotalElements());
     }
 
-
-
     @Test
     public void testGetListGame_5() throws Exception {
         this.mockMvc
