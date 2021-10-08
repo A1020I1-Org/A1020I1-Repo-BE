@@ -10,8 +10,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ServiceServiceImpl implements ServiceService {
+
     @Autowired
     ServiceRepository serviceRepository;
+  
+    @Override
+    public void save(com.example.demo.entity.Service service) {
+        this.serviceRepository.save(service);
+    }
+
+    @Override
+    public com.example.demo.entity.Service findById(String serviceId) {
+        return this.serviceRepository.findById(serviceId).orElse(null);
+    }
+    
     @Override
     public Page<com.example.demo.entity.Service> findAllService(Pageable pageable) {
         return serviceRepository.findAll(pageable);
