@@ -1,15 +1,12 @@
 package com.example.demo.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 
 @Entity
 public class Pay {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int payId;
     private double totalPayment;
     private boolean status;
@@ -49,4 +46,19 @@ public class Pay {
         this.status = status;
     }
 
+    public OrderServiceToTal getOrderServiceToTal() {
+        return orderServiceToTal;
+    }
+
+    public void setOrderServiceToTal(OrderServiceToTal orderServiceToTal) {
+        this.orderServiceToTal = orderServiceToTal;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 }

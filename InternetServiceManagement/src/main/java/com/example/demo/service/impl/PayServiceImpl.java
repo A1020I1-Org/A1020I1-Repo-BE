@@ -39,9 +39,21 @@ public class PayServiceImpl implements PayService {
     }
 
     @Override
-    public void payment(Integer id) {
+    public boolean pay(Integer id) {
+        Pay payCurrent = payRepository.findById(id).orElse(null);
+        if (payCurrent==null){
+            return false;
+        }else {
+            payCurrent.setStatus(true);
+            payRepository.save(payCurrent);
+            return true;
+        }
 
+    }
 
+    @Override
+    public Page<Pay> search(Pageable pageable, String searchName) {
+        return payRepository.search(pageable,searchName);
     }
 
 }

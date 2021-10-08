@@ -11,6 +11,7 @@ public interface PayService {
     Page<Pay> findAll(Pageable pageable);
     Pay findById(Integer id);
     void save(Pay pay);
-    void payment(Integer id);
+    boolean pay(Integer id);
+    Page<Pay> search(Pageable pageable, String searchName);
 
 }
