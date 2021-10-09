@@ -36,7 +36,7 @@ public class ComputerController {
         return "redirect:/computer";
     }
 
-    @GetMapping("{id}/edit")
+    @GetMapping("/edit/{id}")
     public String editCustomer(@PathVariable String id, Model model) {
         model.addAttribute("computer", computerService.findAll());
         model.addAttribute("customer", computerService.findById(id));

@@ -1,31 +1,44 @@
 package com.example.demo.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.Set;
 
 @Entity
 public class Computer implements Validator {
     @Id
+//    @Pattern(value = "CP[\\d]{4}$",message = "")
+    @Pattern(regexp = "^CP[\\d]{4}$", message = "Mã máy tính phải đúng định dạng CPXXXX (X từ 0-9)")
     private String computerId;
+    @Pattern(regexp = "^[A-Z]{1}[\\d]{4}$", message = "Vị trí phải đúng định dạng CPXXXX (X từ 0-9)")
     private String computerLocation;
+    @DateTimeFormat
     private String computerStartUsedDate;
+    @NotBlank(message = "Thời gian bảo hành không được để trống")
     private String computerWarrantyPeriod;
+    @NotBlank(message = "Cấu hình máy không được để trống")
     private String computerConfiguration;
 
-    @OneToMany(mappedBy = "computer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
+
+    @OneToMany(mappedBy = "computer", cascade = {CascadeType.ALL, CascadeType.REMOVE})
     Set<Order> orders;
 
+    @NotBlank(message = "Hãng sản xuất không được để trống")
     @ManyToOne(targetEntity = Manufacturer.class)
     @JoinColumn(name = "manufacturerId", referencedColumnName = "manufacturerId")
     private Manufacturer manufacturer;
 
     @ManyToOne(targetEntity = Status.class)
     @JoinColumn(name = "statusId", referencedColumnName = "statusId")
+    @NotBlank(message = "trạng thái không được để trống")
     private Status status;
 
+    @NotBlank(message = "Loại phải là 1, 2, 3")
     @ManyToOne(targetEntity = Type.class)
     @JoinColumn(name = "typeId", referencedColumnName = "typeId")
     private Type type;
