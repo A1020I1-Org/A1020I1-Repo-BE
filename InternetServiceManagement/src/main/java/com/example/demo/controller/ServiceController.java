@@ -4,8 +4,10 @@ import com.example.demo.entity.Service;
 import com.example.demo.service.ServiceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,18 +21,25 @@ public class ServiceController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Service> post(@RequestBody Service service) {
-        this.serviceService.save(service);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<Service> post(@Valid @RequestBody Service service, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()){
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }else {
+            this.serviceService.save(service);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Service> update(@PathVariable String id, @RequestBody Service service){
-        if (this.serviceService.findById(id) == null){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<Service> update(@PathVariable String id,
+                                          @Valid @RequestBody Service service,
+                                          BindingResult bindingResult){
+        if (bindingResult.hasFieldErrors()){
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }else {
             this.serviceService.save(service);
             return new ResponseEntity<>(HttpStatus.OK);
         }
+
     }
 }
