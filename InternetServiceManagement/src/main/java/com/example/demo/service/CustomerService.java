@@ -8,5 +8,5 @@ public interface CustomerService {
 
     void updateCustomer(CustomerRequest customerRequest, Integer id);
     
-    Customer findById(Integer id);
+    CustomerRequest findById(Integer id);
 }

@@ -25,14 +25,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void createCustomer(CustomerRequest customerRequest) {
         if (customerRequest.getPassword().equals(customerRequest.getPasswordRetype())){
-            Customer customer = new Customer();
+            Customer customer = toEntity(customerRequest);
             Account account = new Account();
-            customer.setFullName(customerRequest.getFullName());
-            customer.setAddress(customerRequest.getAddress());
-            customer.setDateOfBirth(customerRequest.getDateOfBirth());
-            customer.setEmail(customerRequest.getEmail());
-            customer.setPhone(customerRequest.getPhone());
-            customer.setStatus(customerRequest.getStatus());
             account.setUserName(customerRequest.getUsername());
             account.setPassword(customerRequest.getPassword());
             customer.setAccount(account);
@@ -48,12 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
         Account account = accountRepository.findByUserName(customerRequest.getUsername()).orElse(null);
         if (customer != null && account != null) {
             if (customerRequest.getPassword().equals(customerRequest.getPasswordRetype())) {
-                customer.setFullName(customerRequest.getFullName());
-                customer.setAddress(customerRequest.getAddress());
-                customer.setDateOfBirth(customerRequest.getDateOfBirth());
-                customer.setEmail(customerRequest.getEmail());
-                customer.setPhone(customerRequest.getPhone());
-                customer.setStatus(customerRequest.getStatus());
+                customer = toEntity(customerRequest);
                 account.setPassword(customerRequest.getPassword());
                 customer.setAccount(account);
                 account.setCustomer(customer);
@@ -64,7 +53,54 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer findById(Integer id) {
-        return customerRepository.findById(id).orElse(null);
+    public CustomerRequest findById(Integer id) {
+        Customer customer = customerRepository.findById(id).orElse(null);
+        if (customer != null){
+            return toRequest(customer);
+        }
+        else {
+            return null;
+        }
+    }
+
+    private CustomerRequest toRequest(Customer customer){
+        CustomerRequest customerRequest = new CustomerRequest();
+        customerRequest.setCustomerId(customer.getCustomerId());
+        customerRequest.setFullName(customer.getFullName());
+        customerRequest.setDateOfBirth(customer.getDateOfBirth());
+        customerRequest.setEmail(customer.getEmail());
+        String[] address = customer.getAddress().split(",");
+        customerRequest.setProvince(address[0]);
+        customerRequest.setDistrict(address[1]);
+        customerRequest.setCommune(address[2]);
+        customerRequest.setPhone(customer.getPhone());
+        customerRequest.setUsername(customer.getAccount().getUserName());
+        customerRequest.setPassword(customer.getAccount().getPassword());
+        customerRequest.setPasswordRetype(customer.getAccount().getPassword());
+        customerRequest.setStatus(customer.getStatus());
+        return customerRequest;
+    }
+
+    private Customer toEntity(CustomerRequest customerRequest){
+        Customer customer = new Customer();
+        if (customerRequest.getCustomerId() != null) {
+            if (customerRepository.findById(customerRequest.getCustomerId()).isPresent()) {
+                customer = customerRepository.findById(customerRequest.getCustomerId()).get();
+            }
+        }
+        customer.setFullName(customerRequest.getFullName());
+        customer.setDateOfBirth(customerRequest.getDateOfBirth());
+        customer.setEmail(customerRequest.getEmail());
+        customer.setAddress(customerRequest.getProvince()
+                + "," + customerRequest.getDistrict() + "," + customerRequest.getCommune());
+        customer.setPhone(customer.getPhone());
+        customer.setStatus(customer.getStatus());
+//        Account account = new Account();
+//        if (!accountRepository.findByUserName(customerRequest.getUsername()).isPresent()){
+//            account.setUserName(customerRequest.getUsername());
+//            account.setPassword(customerRequest.getPassword());
+//            customer.setAccount(account);
+//        }
+        return customer;
     }
 }

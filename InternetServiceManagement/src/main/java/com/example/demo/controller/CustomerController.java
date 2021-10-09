@@ -19,7 +19,7 @@ public class CustomerController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Customer> getCustomer(@PathVariable Integer id){
+    public ResponseEntity<CustomerRequest> getCustomer(@PathVariable Integer id){
         if (customerService.findById(id) == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -29,13 +29,13 @@ public class CustomerController {
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<Customer> createCustomer(@RequestBody CustomerRequest customerRequest){
+    public ResponseEntity<CustomerRequest> createCustomer(@RequestBody CustomerRequest customerRequest){
         customerService.createCustomer(customerRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping(value = "/edit/{id}")
-    public ResponseEntity<Customer> updateCustomer(@RequestBody CustomerRequest customerRequest,
+    public ResponseEntity<CustomerRequest> updateCustomer(@RequestBody CustomerRequest customerRequest,
                                                    @PathVariable Integer id){
         if (customerService.findById(id) == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

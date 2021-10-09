@@ -14,7 +14,10 @@ public class CustomerRequest {
     private String fullName;
     private String dateOfBirth;
     private String email;
-    private String address;
+//    private String address;
+    private String province;
+    private String district;
+    private String commune;
     private String phone;
     private Boolean status;
 //    private String idCard;
