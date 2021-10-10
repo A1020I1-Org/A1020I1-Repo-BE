@@ -8,7 +8,6 @@ import java.util.Set;
 @Entity
 public class Account {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private String userName;
     @Column(length = 255)
     private String password;
@@ -25,10 +24,12 @@ public class Account {
     public Account() {
     }
 
+
     public Account(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
+
 
     public String getUserName() {
         return userName;
@@ -69,4 +70,5 @@ public class Account {
     public void setAccountRoles(Set<AccountRole> accountRoles) {
         this.accountRoles = accountRoles;
     }
+
 }

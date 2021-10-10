@@ -12,6 +12,11 @@ public class AccountServiceImpl implements AccountService {
     AccountRepository accountRepository;
 
     @Override
+    public boolean checkUserName(String userName) {
+        return accountRepository.existsById(userName);
+    }
+
+    @Override
     public void save(Account account) {
         accountRepository.save(account);
     }

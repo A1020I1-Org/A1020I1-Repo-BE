@@ -1,7 +1,5 @@
 package com.example.demo.controller;
-import com.example.demo.dto.AccountDto;
-import com.example.demo.dto.EmployeeDto;
-import com.example.demo.dto.PositionDto;
+import com.example.demo.entity.AccountEmployee;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,183 +20,161 @@ public class EmployeeController_createEmployee {
     @Autowired
     private ObjectMapper objectMapper;
 
-//    @Test
-//    public void createStudent_13() throws Exception {
-//
-//            EmployeeDto employeeDto = new EmployeeDto();
-//            employeeDto.setEmployeeId("null");
-//            employeeDto.setFullName("Nguyen Uyen");
-//            employeeDto.setDateOfBirth("09-10-1999");
-//            employeeDto.setEmail("uyen@gmail.com");
-//            employeeDto.setAddress("nghean");
-//            employeeDto.setPhone("12324266");
-//            employeeDto.setLevel("3");
-//            employeeDto.setStartWorkDate("03-10-2021");
-//            employeeDto.setYearOfExp(10);
-//            employeeDto.setAvtUrl("aaa");
-//            AccountDto accountDto = new AccountDto();
-//            accountDto.setUserName("uyen");
-//            accountDto.setPassword("123");
-//            employeeDto.setAccountDto(accountDto);
-//            PositionDto positionDto = new PositionDto();
-//            positionDto.setPositionId(2);
-//            employeeDto.setPositionDto(positionDto);
-//
-//            this.mockMvc
-//                    .perform(MockMvcRequestBuilders
-//                            .post("/employee/createEmployee")
-//                            .content(this.objectMapper.writeValueAsString(employeeDto))
-//                            .contentType(MediaType.APPLICATION_JSON_VALUE))
-//                    .andDo(print())
-//                    .andExpect(status().is4xxClientError());
-//    }
-//    @Test
-//    public void createStudent_14() throws Exception {
-//
-//        EmployeeDto employeeDto = new EmployeeDto();
-//        employeeDto.setEmployeeId("");
-//        employeeDto.setFullName("Nguyen Uyen");
-//        employeeDto.setDateOfBirth("09-10-1999");
-//        employeeDto.setEmail("uyen@gmail.com");
-//        employeeDto.setAddress("nghean");
-//        employeeDto.setPhone("12324266");
-//        employeeDto.setLevel("3");
-//        employeeDto.setStartWorkDate("03-10-2021");
-//        employeeDto.setYearOfExp(10);
-//        employeeDto.setAvtUrl("aaa");
-//        AccountDto accountDto = new AccountDto();
-//        accountDto.setUserName("uyen");
-//        accountDto.setPassword("123");
-//        employeeDto.setAccountDto(accountDto);
-//        PositionDto positionDto = new PositionDto();
-//        positionDto.setPositionId(2);
-//        employeeDto.setPositionDto(positionDto);
-//
-//        this.mockMvc
-//                .perform(MockMvcRequestBuilders
-//                        .post("/employee/createEmployee")
-//                        .content(this.objectMapper.writeValueAsString(employeeDto))
-//                        .contentType(MediaType.APPLICATION_JSON_VALUE))
-//                .andDo(print())
-//                .andExpect(status().is4xxClientError());
-//    }
-//    @Test
-//    public void createStudent_15() throws Exception {
-//
-//        EmployeeDto employeeDto = new EmployeeDto();
-//        employeeDto.setEmployeeId("NV-02020");
-//        employeeDto.setFullName("Nguyen Uyen");
-//        employeeDto.setDateOfBirth("09-10-1999");
-//        employeeDto.setEmail("uyen@gmail.com");
-//        employeeDto.setAddress("nghean");
-//        employeeDto.setPhone("12324266");
-//        employeeDto.setLevel("3");
-//        employeeDto.setStartWorkDate("03-10-2021");
-//        employeeDto.setYearOfExp(-10);
-//        employeeDto.setAvtUrl("aaa");
-//        AccountDto accountDto = new AccountDto();
-//        accountDto.setUserName("uyen");
-//        accountDto.setPassword("123");
-//        employeeDto.setAccountDto(accountDto);
-//        PositionDto positionDto = new PositionDto();
-//        positionDto.setPositionId(2);
-//        employeeDto.setPositionDto(positionDto);
-//
-//        this.mockMvc
-//                .perform(MockMvcRequestBuilders
-//                        .post("/employee/createEmployee")
-//                        .content(this.objectMapper.writeValueAsString(employeeDto))
-//                        .contentType(MediaType.APPLICATION_JSON_VALUE))
-//                .andDo(print())
-//                .andExpect(status().is4xxClientError());
-//    }
-//
-//    @Test
-//    public void createStudent_16() throws Exception {
-//
-//        EmployeeDto employeeDto = new EmployeeDto();
-//        employeeDto.setEmployeeId("NV-02020");
-//        employeeDto.setFullName("N");
-//        employeeDto.setDateOfBirth("09-10-1999");
-//        employeeDto.setEmail("uyen@gmail.com");
-//        employeeDto.setAddress("nghean");
-//        employeeDto.setPhone("12324266");
-//        employeeDto.setLevel("3");
-//        employeeDto.setStartWorkDate("03-10-2021");
-//        employeeDto.setYearOfExp(-10);
-//        employeeDto.setAvtUrl("aaa");
-//        AccountDto accountDto = new AccountDto();
-//        accountDto.setUserName("uyen");
-//        accountDto.setPassword("123");
-//        employeeDto.setAccountDto(accountDto);
-//        PositionDto positionDto = new PositionDto();
-//        positionDto.setPositionId(2);
-//        employeeDto.setPositionDto(positionDto);
-//
-//        this.mockMvc
-//                .perform(MockMvcRequestBuilders
-//                        .post("/employee/createEmployee")
-//                        .content(this.objectMapper.writeValueAsString(employeeDto))
-//                        .contentType(MediaType.APPLICATION_JSON_VALUE))
-//                .andDo(print())
-//                .andExpect(status().is4xxClientError());
-//    }
-//    @Test
-//    public void createStudent_17() throws Exception {
-//
-//        EmployeeDto employeeDto = new EmployeeDto();
-//        employeeDto.setEmployeeId("NV-02020");
-//        employeeDto.setFullName("Nguyen văn AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-//        employeeDto.setDateOfBirth("09-10-1999");
-//        employeeDto.setEmail("uyen@gmail.com");
-//        employeeDto.setAddress("nghean");
-//        employeeDto.setPhone("12324266");
-//        employeeDto.setLevel("3");
-//        employeeDto.setStartWorkDate("03-10-2021");
-//        employeeDto.setYearOfExp(-10);
-//        employeeDto.setAvtUrl("aaa");
-//        AccountDto accountDto = new AccountDto();
-//        accountDto.setUserName("uyen");
-//        accountDto.setPassword("123");
-//        employeeDto.setAccountDto(accountDto);
-//        PositionDto positionDto = new PositionDto();
-//        positionDto.setPositionId(2);
-//        employeeDto.setPositionDto(positionDto);
-//
-//        this.mockMvc
-//                .perform(MockMvcRequestBuilders
-//                        .post("/employee/createEmployee")
-//                        .content(this.objectMapper.writeValueAsString(employeeDto))
-//                        .contentType(MediaType.APPLICATION_JSON_VALUE))
-//                .andDo(print())
-//                .andExpect(status().is4xxClientError());
-//    }
+    @Test
+    public void createStudent_13() throws Exception {
+
+        AccountEmployee accountEmployee = new AccountEmployee();
+        accountEmployee.setEmployeeId("null");
+        accountEmployee.setFullName("Nguyen");
+        accountEmployee.setDateOfBirth("11-06-1999");
+        accountEmployee.setEmail("abc@gmail.com");
+        accountEmployee.setAddress("da nang");
+        accountEmployee.setPhone("0901630920");
+        accountEmployee.setLevel("test");
+        accountEmployee.setStartWorkDate("10-09-2021");
+        accountEmployee.setYearOfExp(5);
+        accountEmployee.setAvtUrl("abc");
+        accountEmployee.setIdPosition(1);
+        accountEmployee.setUserName("abc11122");
+        accountEmployee.setPassword("abc11122");
+
+            this.mockMvc
+                    .perform(MockMvcRequestBuilders
+                            .post("/employee/createEmployee")
+                            .content(this.objectMapper.writeValueAsString(accountEmployee))
+                            .contentType(MediaType.APPLICATION_JSON_VALUE))
+                    .andDo(print())
+                    .andExpect(status().is4xxClientError());
+    }
+    @Test
+    public void createStudent_14() throws Exception {
+
+        AccountEmployee accountEmployee = new AccountEmployee();
+        accountEmployee.setEmployeeId("null");
+        accountEmployee.setFullName("Nguyen");
+        accountEmployee.setDateOfBirth("11-06-1999");
+        accountEmployee.setEmail("abc@gmail.com");
+        accountEmployee.setAddress("da nang");
+        accountEmployee.setPhone("0901630920");
+        accountEmployee.setLevel("test");
+        accountEmployee.setStartWorkDate("10-09-2021");
+        accountEmployee.setYearOfExp(5);
+        accountEmployee.setAvtUrl("abc");
+        accountEmployee.setIdPosition(1);
+        accountEmployee.setUserName("abc111223");
+        accountEmployee.setPassword("abc111223");
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders
+                        .post("/employee/createEmployee")
+                        .content(this.objectMapper.writeValueAsString(accountEmployee))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+    @Test
+    public void createStudent_15() throws Exception {
+
+
+        AccountEmployee accountEmployee = new AccountEmployee();
+        accountEmployee.setEmployeeId("NV-9999");
+        accountEmployee.setFullName("Nguyen Văn A A A A A A A A A A a a a a a a");
+        accountEmployee.setDateOfBirth("11-06-1999");
+        accountEmployee.setEmail("abc@gmail.com");
+        accountEmployee.setAddress("da nang");
+        accountEmployee.setPhone("0901630920");
+        accountEmployee.setLevel("test");
+        accountEmployee.setStartWorkDate("10-09-2021");
+        accountEmployee.setYearOfExp(5);
+        accountEmployee.setAvtUrl("abc");
+        accountEmployee.setIdPosition(1);
+        accountEmployee.setUserName("abc111224");
+        accountEmployee.setPassword("abc111224");
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders
+                        .post("/employee/createEmployee")
+                        .content(this.objectMapper.writeValueAsString(accountEmployee))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void createStudent_16() throws Exception {
+
+        AccountEmployee accountEmployee = new AccountEmployee();
+        accountEmployee.setEmployeeId("VN-9998");
+        accountEmployee.setFullName("N");
+        accountEmployee.setDateOfBirth("11-06-1999");
+        accountEmployee.setEmail("abc@gmail.com");
+        accountEmployee.setAddress("da nang");
+        accountEmployee.setPhone("0901630920");
+        accountEmployee.setLevel("test");
+        accountEmployee.setStartWorkDate("10-09-2021");
+        accountEmployee.setYearOfExp(5);
+        accountEmployee.setAvtUrl("abc");
+        accountEmployee.setIdPosition(1);
+        accountEmployee.setUserName("abc11122");
+        accountEmployee.setPassword("abc11122");
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders
+                        .post("/employee/createEmployee")
+                        .content(this.objectMapper.writeValueAsString(accountEmployee))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+    @Test
+    public void createStudent_17() throws Exception {
+
+        AccountEmployee accountEmployee = new AccountEmployee();
+        accountEmployee.setEmployeeId("MM-9991");
+        accountEmployee.setFullName("Nguyen van a");
+        accountEmployee.setDateOfBirth("11-06-1999");
+        accountEmployee.setEmail("abc@gmail.com");
+        accountEmployee.setAddress("da nang");
+        accountEmployee.setPhone("0916309250");
+        accountEmployee.setLevel("test");
+        accountEmployee.setStartWorkDate("10-09-2021");
+        accountEmployee.setYearOfExp(5);
+        accountEmployee.setAvtUrl("abc");
+        accountEmployee.setIdPosition(1);
+        accountEmployee.setUserName("abc12359");
+        accountEmployee.setPassword("abc12346");
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders
+                        .post("/employee/createEmployee")
+                        .content(this.objectMapper.writeValueAsString(accountEmployee))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
 
 
     @Test
     public void createStudent_18() throws Exception {
-        EmployeeDto employeeDto = new EmployeeDto();
-        employeeDto.setEmployeeId("NV-0055");
-        employeeDto.setFullName("Nguyen Uyen");
-        employeeDto.setDateOfBirth("09-10-1999");
-        employeeDto.setEmail("uyen@gmail.com");
-        employeeDto.setAddress("nghean");
-        employeeDto.setPhone("12324266");
-        employeeDto.setLevel("3");
-        employeeDto.setStartWorkDate("03-10-2021");
-        employeeDto.setYearOfExp(10);
-        employeeDto.setAvtUrl("aaa");
-        AccountDto accountDto = new AccountDto();
-        accountDto.setUserName("uyen");
-        employeeDto.setAccountDto(accountDto);
-        PositionDto positionDto = new PositionDto();
-        positionDto.setPositionId(2);
-        employeeDto.setPositionDto(positionDto);
+        AccountEmployee accountEmployee = new AccountEmployee();
+        accountEmployee.setEmployeeId("NV-0096");
+        accountEmployee.setFullName("Nguyen");
+        accountEmployee.setDateOfBirth("11-06-1999");
+        accountEmployee.setEmail("abc@gmail.com");
+        accountEmployee.setAddress("da nang");
+        accountEmployee.setPhone("0901630920");
+        accountEmployee.setLevel("test");
+        accountEmployee.setStartWorkDate("10-09-2021");
+        accountEmployee.setYearOfExp(5);
+        accountEmployee.setAvtUrl("abc");
+        accountEmployee.setIdPosition(1);
+        accountEmployee.setUserName("abd11122");
+        accountEmployee.setPassword("abd11122");
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
                 .post("/employee/createEmployee")
-                        .content(this.objectMapper.writeValueAsString(employeeDto))
+                        .content(this.objectMapper.writeValueAsString(accountEmployee))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful());
