@@ -159,7 +159,7 @@ public class EmployeeController_editEmployee {
     public void updateEmployee_18() throws Exception {
         AccountEmployee accountEmployee = new AccountEmployee();
         accountEmployee.setEmployeeId("NV-0098");
-        accountEmployee.setUserName("Nguyen Hoa");
+        accountEmployee.setFullName("Nguyen Hoa");
         accountEmployee.setDateOfBirth("11-06-1999");
         accountEmployee.setEmail("hoaleduc@gmail.com");
         accountEmployee.setAddress("nghean");
@@ -167,14 +167,14 @@ public class EmployeeController_editEmployee {
         accountEmployee.setLevel("test");
         accountEmployee.setStartWorkDate("10-09-2021");
         accountEmployee.setYearOfExp(5);
-        accountEmployee.setAvtUrl("abc");
+        accountEmployee.setAvtUrl("aaaa");
         accountEmployee.setIdPosition(1);
-        accountEmployee.setUserName("abc1112");
-        accountEmployee.setPassword("abc1112");
+        accountEmployee.setUserName("aba11128");
+        accountEmployee.setPassword("aba1112");
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .patch("/employee/updateEmployee/{id}")
+                        .put("/employee/updateEmployee/{id}", "NV-0098")
                         .content(this.objectMapper.writeValueAsString(accountEmployee))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
