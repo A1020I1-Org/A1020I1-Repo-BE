@@ -73,7 +73,7 @@ public class CustomerRestController_EditCustomer {
     }
 
     @Test
-    public void createCustomer_15() throws Exception {
+    public void editCustomer_15() throws Exception {
         CustomerRequest customer = new CustomerRequest();
         customer.setCustomerId(1);
         customer.setFullName("Do Khoa");
@@ -98,7 +98,7 @@ public class CustomerRestController_EditCustomer {
     }
 
     @Test
-    public void createCustomer_16() throws Exception {
+    public void editCustomer_16() throws Exception {
         CustomerRequest customer = new CustomerRequest();
         customer.setCustomerId(1);
         customer.setFullName("Do Khoa");
@@ -123,7 +123,7 @@ public class CustomerRestController_EditCustomer {
     }
 
     @Test
-    public void createCustomer_17() throws Exception {
+    public void editCustomer_17() throws Exception {
         CustomerRequest customer = new CustomerRequest();
         customer.setCustomerId(1);
         customer.setFullName("Do Khoa");
@@ -148,7 +148,7 @@ public class CustomerRestController_EditCustomer {
     }
 
     @Test
-    public void createCustomer_18() throws Exception {
+    public void editCustomer_18() throws Exception {
         CustomerRequest customer = new CustomerRequest();
         customer.setCustomerId(1);
         customer.setFullName("Do Khoa");
@@ -173,7 +173,7 @@ public class CustomerRestController_EditCustomer {
     }
 
     @Test
-    public void createCustomer_19() throws Exception {
+    public void editCustomer_19() throws Exception {
         CustomerRequest customer = new CustomerRequest();
         customer.setCustomerId(573573);
         customer.setFullName("Do Khoa");
