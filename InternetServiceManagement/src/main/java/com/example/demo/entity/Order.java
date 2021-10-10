@@ -27,6 +27,7 @@ public class Order {
     private Date startTime;
     private Date endTime;
     private int usageTime;
+    private boolean status;
 
     public Order() {
     }
@@ -85,5 +86,13 @@ public class Order {
 
     public void setUsageTime(int usageTime) {
         this.usageTime = usageTime;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

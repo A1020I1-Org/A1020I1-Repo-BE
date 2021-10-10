@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
-    @Query("select o from Order o where (o.startTime between :startTime and :endTime) and (o.endTime between :startTime and :endTime)")
+    @Query("select o from Order o where (o.startTime between :startTime and :endTime) and (o.endTime between :startTime and :endTime) and o.status = true ")
     List<Order> findAllInStartTimeToEndTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime);
 
 }

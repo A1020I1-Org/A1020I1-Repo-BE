@@ -45,7 +45,7 @@ public class StatisticalController {
     @GetMapping(value = "/view-by-account")
     public ResponseEntity<List<DataForTopAccount>> viewAccount(@RequestParam(value = "startTime", required = false)String startTime,
                                                                @RequestParam(value="endTime", required = false)String endTime,
-                                                               @RequestParam(value="quarter")String quarter){
+                                                               @RequestParam(value="quarter", required = false)String quarter){
         List<DataForTopAccount> list = this.statisticalService.getDataByAccount(startTime, endTime);
         if(list == null || list.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
