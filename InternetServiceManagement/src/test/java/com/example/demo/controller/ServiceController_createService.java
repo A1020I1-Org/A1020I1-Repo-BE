@@ -99,6 +99,25 @@ public class ServiceController_createService {
                 .andExpect(status().is4xxClientError());
     }
 
+//    @Test
+//    public void createService_17() throws Exception {
+//        Service service = new Service();
+//        service.setServiceId("SV0001");
+//        service.setServiceName("Pepsi");
+//        service.setQuantity(9999999999);
+//        service.setUnit("chai");
+//        service.setPrices(5000);
+//
+//        this.mockMvc
+//                .perform(
+//                        MockMvcRequestBuilders
+//                                .post("/service/create")
+//                                .content(this.objectMapper.writeValueAsString(service))
+//                                .contentType(MediaType.APPLICATION_JSON_VALUE))
+//                .andDo(print())
+//                .andExpect(status().is4xxClientError());
+//    }
+
     @Test
     public void createService_18() throws Exception {
         Service service = new Service();
