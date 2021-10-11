@@ -27,6 +27,7 @@ public class Customer {
     public Customer() {
     }
 
+
     public Customer(String customerId, String fullName, String dateOfBirth, String email, String address, String phone, boolean status) {
         this.customerId = customerId;
         this.fullName = fullName;
