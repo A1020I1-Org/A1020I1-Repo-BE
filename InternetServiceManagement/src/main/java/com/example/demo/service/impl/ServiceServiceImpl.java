@@ -23,7 +23,7 @@ public class ServiceServiceImpl implements ServiceService {
     public com.example.demo.entity.Service findById(String serviceId) {
         return this.serviceRepository.findById(serviceId).orElse(null);
     }
-    
+
     @Override
     public Page<com.example.demo.entity.Service> findAllService(Pageable pageable) {
         return serviceRepository.findAll(pageable);
