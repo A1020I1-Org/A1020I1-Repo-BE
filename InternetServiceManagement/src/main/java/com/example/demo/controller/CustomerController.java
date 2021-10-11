@@ -29,6 +29,6 @@ public class CustomerController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         this.customerService.save(customer);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(customerService.findById(id), HttpStatus.OK);
     }
 }

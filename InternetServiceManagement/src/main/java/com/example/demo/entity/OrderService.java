@@ -19,8 +19,8 @@ public class OrderService {
     private Service service;
 
     @ManyToOne
-    @JoinColumn(name = "order_service_total_id")
-    private OrderServiceToTal orderServiceToTal;
+    @JoinColumn(name = "pay_id")
+    private Pay pay;
 
     private int quantity;
     private int unit;
@@ -86,11 +86,4 @@ public class OrderService {
         this.oder_date = oder_date;
     }
 
-    public OrderServiceToTal getOrderServiceToTal() {
-        return orderServiceToTal;
-    }
-
-    public void setOrderServiceToTal(OrderServiceToTal orderServiceToTal) {
-        this.orderServiceToTal = orderServiceToTal;
-    }
 }

@@ -1,22 +1,20 @@
 package com.example.demo.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
+@Table(name = "pay")
 public class Pay {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int payId;
     private double totalPayment;
     private boolean status;
 
-    @OneToOne
-    @JoinColumn(name = "order_service_total_id")
-    private OrderServiceToTal orderServiceToTal;
+    @OneToMany(mappedBy = "pay", cascade = CascadeType.ALL)
+    Set<OrderService> orderServices;
 
     @OneToOne
     @JoinColumn(name = "order_id")

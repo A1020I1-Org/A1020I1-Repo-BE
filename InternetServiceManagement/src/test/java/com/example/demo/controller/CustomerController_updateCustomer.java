@@ -27,17 +27,123 @@ public class CustomerController_updateCustomer {
     private ObjectMapper objectMapper;
 
     @Test
-    public void createStudent_24() throws Exception {
-//        Customer customer = new Customer("1", "ngoc cuong","1999-10-17", "cuong@gmail.com", "da nang ", "0987654321", true);
-//        HashMap<String, Customer> updates = new HashMap<>();
-//        updates.put("fullname", customer);
-//        this.mockMvc
-//                .perform(MockMvcRequestBuilders.patch("/customer/update/1")
-//                        .contentType(MediaType.APPLICATION_JSON_VALUE)
-//                        .accept(MediaType.APPLICATION_JSON)
-//                        .content(objectMapper.writeValueAsString(updates)))
-//                .andDo(print())
-//                .andExpect(status().is2xxSuccessful());
+    public void updateCustomer_19() throws Exception {
+        Customer customer = new Customer();
+        customer.setCustomerId("1");
+        customer.setFullName("ngoc cuong");
+        customer.setDateOfBirth("1999-10-17");
+        customer.setEmail("cuong@gmail.com");
+        customer.setAddress("da nang");
+        customer.setPhone("098765432");
 
+        this.mockMvc
+                .perform(
+                        MockMvcRequestBuilders
+                                .patch("/customer/update/null")
+                                .content(this.objectMapper.writeValueAsString(customer))
+                                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void updateCustomer_20() throws Exception {
+        Customer customer = new Customer();
+        customer.setCustomerId("1");
+        customer.setFullName("");
+        customer.setDateOfBirth("1999-10-17");
+        customer.setEmail("cuong@gmail.com");
+        customer.setAddress("da nang");
+        customer.setPhone("098765432");
+
+        this.mockMvc
+                .perform(
+                        MockMvcRequestBuilders
+                                .patch("/customer/update/1")
+                                .content(this.objectMapper.writeValueAsString(customer))
+                                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void updateCustomer_21() throws Exception {
+        Customer customer = new Customer();
+        customer.setCustomerId("1");
+        customer.setFullName("ngoc cuong");
+        customer.setDateOfBirth("1999-10-17");
+        customer.setEmail("cuong@gmail.com");
+        customer.setAddress("da nang");
+        customer.setPhone("098765432");
+
+        this.mockMvc
+                .perform(
+                        MockMvcRequestBuilders
+                                .patch("/customer/update/1")
+                                .content(this.objectMapper.writeValueAsString(customer))
+                                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+//    @Test
+//    public void updateCustomer_22() throws Exception {
+//        Customer customer = new Customer();
+//        customer.setCustomerId("1");
+//        customer.setFullName("ngoc cuong");
+//        customer.setDateOfBirth("1999-10-17");
+//        customer.setEmail("cuong@gmail.com");
+//        customer.setAddress("da nang");
+//        customer.setPhone("098765432");
+//
+//        this.mockMvc
+//                .perform(
+//                        MockMvcRequestBuilders
+//                                .patch("/customer/update/1")
+//                                .content(this.objectMapper.writeValueAsString(customer))
+//                                .contentType(MediaType.APPLICATION_JSON_VALUE))
+//                .andDo(print())
+//                .andExpect(status().is4xxClientError());
+//    }
+//
+//    @Test
+//    public void updateCustomer_23() throws Exception {
+//        Customer customer = new Customer();
+//        customer.setCustomerId("1");
+//        customer.setFullName("ngoc cuong");
+//        customer.setDateOfBirth("1999-10-17");
+//        customer.setEmail("cuong@gmail.com");
+//        customer.setAddress("da nang");
+//        customer.setPhone("098765432");
+//
+//        this.mockMvc
+//                .perform(
+//                        MockMvcRequestBuilders
+//                                .patch("/customer/update/1")
+//                                .content(this.objectMapper.writeValueAsString(customer))
+//                                .contentType(MediaType.APPLICATION_JSON_VALUE))
+//                .andDo(print())
+//                .andExpect(status().is4xxClientError());
+//    }
+
+    @Test
+    public void updateCustomer_24() throws Exception {
+        Customer customer = new Customer();
+        customer.setCustomerId("3");
+        customer.setFullName("ngoc cuong");
+        customer.setDateOfBirth("1999-10-17");
+        customer.setEmail("cuong@gmail.com");
+        customer.setAddress("hue");
+        customer.setPhone("098765432");
+        customer.setStatus(true);
+
+        this.mockMvc
+                .perform(
+                        MockMvcRequestBuilders
+                                .patch("/customer/update/3")
+                                .content(this.objectMapper.writeValueAsString(customer))
+                                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is2xxSuccessful());
     }
 }
