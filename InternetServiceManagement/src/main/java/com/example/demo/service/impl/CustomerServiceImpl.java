@@ -43,6 +43,7 @@ public class CustomerServiceImpl implements CustomerService {
         if (customer != null && account != null) {
             if (customerRequest.getPassword().equals(customerRequest.getPasswordRetype())) {
                 customer = toEntity(customerRequest);
+                customer.setCustomerId(id);
                 account.setPassword(customerRequest.getPassword());
                 customer.setAccount(account);
                 account.setCustomer(customer);
@@ -93,8 +94,8 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setEmail(customerRequest.getEmail());
         customer.setAddress(customerRequest.getProvince()
                 + "," + customerRequest.getDistrict() + "," + customerRequest.getCommune());
-        customer.setPhone(customer.getPhone());
-        customer.setStatus(customer.getStatus());
+        customer.setPhone(customerRequest.getPhone());
+        customer.setStatus(customerRequest.getStatus());
 //        Account account = new Account();
 //        if (!accountRepository.findByUserName(customerRequest.getUsername()).isPresent()){
 //            account.setUserName(customerRequest.getUsername());
