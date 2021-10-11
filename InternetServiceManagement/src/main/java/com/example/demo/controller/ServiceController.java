@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Service;
 import com.example.demo.service.ServiceService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
