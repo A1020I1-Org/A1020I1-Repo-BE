@@ -2,7 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Service;
 import com.example.demo.service.ServiceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -15,17 +20,8 @@ import java.util.List;
 @CrossOrigin("http://localhost:4200")
 public class ServiceController {
 
-    private final ServiceService serviceService;
-
-    public ServiceController(ServiceService serviceService) {
-        this.serviceService = serviceService;
-    }
-
-    //of thành
-    @GetMapping("/test-list")
-    public ResponseEntity<List<Service>> get() {
-        return new ResponseEntity<>(this.serviceService.findAllService(), HttpStatus.OK);
-    }
+    @Autowired
+    private ServiceService serviceService;
 
     @PostMapping("/create")
     public ResponseEntity<Service> post(@Valid @RequestBody Service service, BindingResult bindingResult) {
@@ -48,5 +44,50 @@ public class ServiceController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
 
+    }
+
+    @GetMapping(value = "/list")
+    public ResponseEntity<List<Service>> listAllService() {
+        List<Service> serviceList = serviceService.findAllService();
+        if (serviceList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(serviceList, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/list/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Service> getService(@PathVariable("id") String serviceId) {
+        System.out.println("Fetching Service with serviceId" + serviceId);
+        Service service = serviceService.findServiceById(serviceId);
+        if (service == null) {
+            System.out.println("Service with serviceId" + serviceId + "not found");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(service, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/list/{id}")
+    public ResponseEntity<Service> deleteService(@PathVariable("id") String serviceId) {
+        System.out.println("Fetching and Deleting Service with service id" + serviceId);
+        Service service = serviceService.findServiceById(serviceId);
+
+        if (service == null) {
+            System.out.println("Unable to delete. Service with serviceId" + serviceId + "not found");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        serviceService.deleteService(serviceId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/search")
+    public ResponseEntity<Page<Service>> searchService(@RequestParam("searchName") String searchName,
+                                                       @PageableDefault(3) Pageable pageable) {
+        Page<Service> searchService = serviceService.search(pageable, searchName);
+        System.out.println(searchService);
+        if (searchService == null){
+            System.out.println("Not found");
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(searchService,HttpStatus.OK);
     }
 }
