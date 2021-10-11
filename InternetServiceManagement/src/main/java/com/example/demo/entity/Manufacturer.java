@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -10,6 +12,7 @@ public class Manufacturer {
     private int manufacturerId;
     private String manufacturerName;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "manufacturer",cascade = CascadeType.ALL)
     private Set<Computer> computers;
 

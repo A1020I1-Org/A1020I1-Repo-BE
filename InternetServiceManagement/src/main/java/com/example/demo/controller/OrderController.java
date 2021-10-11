@@ -31,6 +31,15 @@ public class OrderController {
         return new ResponseEntity<>(service, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/order-service/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<OrderService> getServiceOrderById(@PathVariable("id") Integer id) {
+        OrderService orderService = orderServiceService.findById(id);
+        if (orderService == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(orderService, HttpStatus.OK);
+    }
+
     @PostMapping(value = "/create-order-service")
     public ResponseEntity<Void> createOrderService(@RequestBody OrderService orderService, UriComponentsBuilder ucBuilder) {
         orderServiceService.save(orderService);

@@ -1,5 +1,9 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,24 +12,26 @@ public class OrderService {
 
     @Id
     private Integer id;
-
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-
-    @ManyToOne
-    @JoinColumn(name = "service_id")
-    private Service service;
-
-    @ManyToOne
-    @JoinColumn(name = "pay_id")
-    private Pay pay;
-
     private int quantity;
     private String unit;
     private int totalMoney;
     private String oder_date;
     private boolean status;
+
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "service_id")
+    private Service service;
+
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "pay_id")
+    private Pay pay;
 
     public OrderService() {
     }

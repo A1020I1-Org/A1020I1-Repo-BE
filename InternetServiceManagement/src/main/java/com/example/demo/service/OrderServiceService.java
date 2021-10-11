@@ -4,4 +4,6 @@ import com.example.demo.entity.OrderService;
 
 public interface OrderServiceService {
     void save(OrderService orderService);
+
+    OrderService findById(Integer id);
 }
