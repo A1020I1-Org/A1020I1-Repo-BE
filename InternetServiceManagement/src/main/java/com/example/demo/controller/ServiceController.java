@@ -12,12 +12,19 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/service")
+@CrossOrigin("http://localhost:4200")
 public class ServiceController {
 
     private final ServiceService serviceService;
 
     public ServiceController(ServiceService serviceService) {
         this.serviceService = serviceService;
+    }
+
+    // of thanh test
+    @GetMapping("/list")
+    public ResponseEntity<List<Service>> get(){
+        return new ResponseEntity<>(this.serviceService.findAllService(), HttpStatus.OK);
     }
 
     @PostMapping("/create")
