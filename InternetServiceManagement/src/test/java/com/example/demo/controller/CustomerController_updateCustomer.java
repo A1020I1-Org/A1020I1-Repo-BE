@@ -129,18 +129,18 @@ public class CustomerController_updateCustomer {
     @Test
     public void updateCustomer_24() throws Exception {
         Customer customer = new Customer();
-        customer.setCustomerId("3");
+        customer.setCustomerId("1");
         customer.setFullName("ngoc cuong");
         customer.setDateOfBirth("1999-10-17");
         customer.setEmail("cuong@gmail.com");
-        customer.setAddress("hue");
+        customer.setAddress("da nang");
         customer.setPhone("098765432");
         customer.setStatus(true);
 
         this.mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .patch("/customer/update/3")
+                                .patch("/customer/update/1")
                                 .content(this.objectMapper.writeValueAsString(customer))
                                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())

@@ -10,12 +10,10 @@ public class Order {
     private Integer id;
 
     @ManyToOne
-    @MapsId("customerId")
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @ManyToOne
-    @MapsId("computerId")
     @JoinColumn(name = "computer_id")
     private Computer computer;
 
