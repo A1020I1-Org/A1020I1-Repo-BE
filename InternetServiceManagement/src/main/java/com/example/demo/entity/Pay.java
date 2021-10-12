@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.util.Set;
 
@@ -10,16 +12,19 @@ public class Pay {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
-    private Integer id;
-    private Integer totalPayment;
+
+    private int id;
+    private int totalPayment;
     private boolean status;
 
     @OneToMany(mappedBy = "pay", cascade = CascadeType.ALL)
+    @JsonIgnore
     Set<OrderService> orderServices;
 
-
     @OneToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    @JoinColumn(name = "order_id")
+    @JsonManagedReference
+
     private Order order;
 
     public Pay() {
