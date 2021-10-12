@@ -1,19 +1,18 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Employee;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface EmployeeService {
-    Page<Employee> getAllEmployee(Pageable pageable);
+    List<Employee> getAllEmployee();
 
     Employee findById(String id);
 
-    void deleteEmployee(String id);
+    void saveEmployee(Employee employee);
 
-    Page<Employee> searchEmployee(String id, String dateStart,
-                                  String dateEnd, String workStart, String workEnd,
-                                  String address, String positionName, Pageable pageable);
+    void deleteEmployee(String id);
+    void updateEmployee(Employee employee);
 }

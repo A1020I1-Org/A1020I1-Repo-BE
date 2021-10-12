@@ -12,7 +12,12 @@ public class AccountServiceImpl implements AccountService {
     AccountRepository accountRepository;
 
     @Override
-    public Account findByUserName(String userName) {
-        return accountRepository.findAccountByUserName(userName);
+    public boolean checkUserName(String userName) {
+        return accountRepository.existsById(userName);
+    }
+
+    @Override
+    public void save(Account account) {
+        accountRepository.save(account);
     }
 }
