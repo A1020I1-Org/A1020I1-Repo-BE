@@ -14,4 +14,10 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer findByAccount(String account) {
         return customerRepository.findByAccount_UserName(account);
     }
+    @Autowired
+    private CustomerRepository customerRepository;
+    @Override
+    public Customer findById(Integer id) {
+        return customerRepository.findById(id).orElse(null);
+    }
 }
