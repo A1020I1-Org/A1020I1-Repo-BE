@@ -12,7 +12,7 @@ public interface ServiceService {
 
     Service findById(String serviceId);
 
-    List<Service> findAllService();
+    Page<Service> findAllService(Pageable pageable);
 
     Service findServiceById(String serviceId);
 
