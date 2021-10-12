@@ -30,7 +30,6 @@ public class Employee {
     public String getEmployeeId() {
         return employeeId;
     }
-
     public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
     }
