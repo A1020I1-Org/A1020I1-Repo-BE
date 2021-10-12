@@ -14,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Map;
 
 
@@ -114,16 +113,6 @@ public class PaymentController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(payPalClient.completePayment(request),HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/rate",method = RequestMethod.GET)
-    public ResponseEntity <Double> getRate() throws Exception {
-        Double usd = payService.currencyExchange(100000);
-
-        if (usd==null){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(usd,HttpStatus.OK);
     }
 }
 
