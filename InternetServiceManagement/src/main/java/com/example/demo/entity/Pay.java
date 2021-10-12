@@ -1,47 +1,43 @@
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 
 @Entity
-@Table(name = "pay")
 public class Pay {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
-    private int id;
-    private int totalPayment;
+    private int payId;
+    private double totalPayment;
     private boolean status;
 
-    @OneToMany(mappedBy = "pay", cascade = CascadeType.ALL)
-    @JsonIgnore
-    Set<OrderService> orderServices;
+    @OneToOne
+    @JoinColumn(name = "order_service_total_id")
+    private OrderServiceToTal orderServiceToTal;
 
     @OneToOne
     @JoinColumn(name = "order_id")
-    @JsonManagedReference
     private Order order;
 
     public Pay() {
     }
 
-    public int getId() {
-        return id;
+    public int getPayId() {
+        return payId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPayId(int payId) {
+        this.payId = payId;
     }
 
-    public int getTotalPayment() {
+    public double getTotalPayment() {
         return totalPayment;
     }
 
-    public void setTotalPayment(int totalPayment) {
+    public void setTotalPayment(double totalPayment) {
         this.totalPayment = totalPayment;
     }
 
@@ -53,20 +49,4 @@ public class Pay {
         this.status = status;
     }
 
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Set<OrderService> getOrderServices() {
-        return orderServices;
-    }
-
-    public void setOrderServices(Set<OrderService> orderServices) {
-        this.orderServices = orderServices;
-    }
 }
