@@ -8,7 +8,7 @@ import java.util.Set;
 @Entity
 public class Customer {
     @Id
-    private String customerId;
+    private int customerId;
     private String fullName;
     private String dateOfBirth;
     private String email;
@@ -33,11 +33,11 @@ public class Customer {
     public Customer() {
     }
 
-    public String getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
