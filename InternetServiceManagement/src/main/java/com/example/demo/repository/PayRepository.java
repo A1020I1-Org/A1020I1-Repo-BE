@@ -8,7 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface PayRepository extends JpaRepository<Pay,Integer> {
-    @Query("SELECT p FROM Pay p WHERE p.order.customer.account.userName like :searchName or p.order.customer.email like :searchName")
+    @Query("SELECT p FROM Pay p WHERE p.order.customer.account.userName like %:searchName% or p.order.customer.email like %:searchName%")
     Page<Pay> search(Pageable pageable, @Param("searchName") String searchName);
+
 
 }

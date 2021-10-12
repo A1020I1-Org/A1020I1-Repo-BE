@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -13,6 +15,7 @@ public class Service {
     private int quantity;
     private int prices;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
 
