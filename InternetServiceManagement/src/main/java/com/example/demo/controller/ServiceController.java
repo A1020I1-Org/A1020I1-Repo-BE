@@ -2,10 +2,18 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Service;
 import com.example.demo.service.ServiceService;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.springframework.http.HttpStatus;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -25,17 +33,14 @@ public class ServiceController {
         this.serviceService = serviceService;
     }
 
-    // of thanh test
-    @GetMapping("/list")
-    public ResponseEntity<List<Service>> get(){
-        return new ResponseEntity<>(this.serviceService.findAllService(), HttpStatus.OK);
+    @GetMapping(value = "/list")
+    public ResponseEntity<Page<Service>> listAllService(@PageableDefault(size = 4) Pageable pageable) {
+        Page<Service> serviceList = serviceService.findAllService(pageable);
+        if (serviceList == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(serviceList, HttpStatus.OK);
     }
-
-    @GetMapping("/page")
-    public ResponseEntity<Page<Service>> page(@PageableDefault(value = 3) Pageable pageable){
-        return new ResponseEntity<>(this.serviceService.pageService(pageable), HttpStatus.OK);
-    }
-    // of thanh test
 
     @PostMapping("/create")
     public ResponseEntity<Service> post(@Valid @RequestBody Service service, BindingResult bindingResult) {
@@ -57,6 +62,27 @@ public class ServiceController {
             this.serviceService.save(service);
             return new ResponseEntity<>(HttpStatus.OK);
         }
+}
 
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<Service> deleteService(@PathVariable("id") String serviceId) {
+        System.out.println("Fetching and Deleting Service with service id" + serviceId);
+        Service service = serviceService.findServiceById(serviceId);
+
+        if (service == null) {
+            System.out.println("Unable to delete. Service with serviceId" + serviceId + "not found");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+
+    @GetMapping(value = "/search")
+    public ResponseEntity<Page<Service>> searchService(@RequestParam("searchName") String searchName,
+                                                 @PageableDefault(size = 3) Pageable pageable) {
+        Page<Service> searchService = serviceService.search(pageable, searchName);
+        System.out.println(searchService);
+       if (searchService == null){
+           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+       }
+        return new ResponseEntity<>(searchService,HttpStatus.OK);
     }
 }
