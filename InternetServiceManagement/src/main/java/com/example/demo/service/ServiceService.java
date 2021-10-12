@@ -5,7 +5,8 @@ import java.util.List;
 import com.example.demo.entity.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface ServiceService {
 
@@ -13,7 +14,7 @@ public interface ServiceService {
 
     Service findById(String serviceId);
 
-    List<Service> findAllService();
+    Page<Service> findAllService(Pageable pageable);
 
     Service findServiceById(String serviceId);
 
