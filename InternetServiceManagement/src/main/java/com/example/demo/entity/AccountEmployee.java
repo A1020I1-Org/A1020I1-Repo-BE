@@ -1,37 +1,48 @@
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.*;
 
-import javax.persistence.*;
-
-
-@Entity
-public class Employee {
-    @Id
+public class AccountEmployee {
+    @NotEmpty
+    @Pattern(regexp = "NV-\\d{4}")
     private String employeeId;
+    @NotEmpty
+    @Size(min = 5, max = 10)
     private String fullName;
+    @NotEmpty
     private String dateOfBirth;
+    @NotEmpty
+    @Size(max = 20)
+    @Pattern(regexp = "^[A-Za-z0-9]+@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$")
     private String email;
+    @NotEmpty
     private String address;
+    @NotEmpty
+//    @Pattern(regexp = "^\\+090\\d{9,10}$")
     private String phone;
+    @NotNull
     private String level;
+    @NotEmpty
     private String startWorkDate;
+    @NotNull
+    @Min(0)
+    @Max(100)
     private int yearOfExp;
     private String avtUrl;
-    @JsonBackReference
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userName",referencedColumnName = "userName")
-    private Account account;
-    @JsonBackReference
-    @ManyToOne(targetEntity = Position.class)
-    @JoinColumn(name = "positionId", referencedColumnName = "positionId")
-    private Position position;
+    private int idPosition;
+    @NotBlank(message = "User name must not blank.")
+    @Size(min = 5, max = 15)
+    private String userName;
+    @Size(min = 5, max = 15)
+    private String password;
 
-    public Employee() {
+    public AccountEmployee() {
     }
 
-    public Employee(String employeeId, String fullName, String dateOfBirth, String email, String address, String phone, String level, String startWorkDate, int yearOfExp, String avtUrl, Account account, Position position) {
+    public AccountEmployee(String employeeId, String fullName, String dateOfBirth, String email, String address, String phone, String level, String startWorkDate, int yearOfExp, String avtUrl, int idPosition, String userName, String password) {
         this.employeeId = employeeId;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
@@ -42,8 +53,9 @@ public class Employee {
         this.startWorkDate = startWorkDate;
         this.yearOfExp = yearOfExp;
         this.avtUrl = avtUrl;
-        this.account = account;
-        this.position = position;
+        this.idPosition = idPosition;
+        this.userName = userName;
+        this.password = password;
     }
 
     public String getEmployeeId() {
@@ -126,19 +138,27 @@ public class Employee {
         this.avtUrl = avtUrl;
     }
 
-    public Account getAccount() {
-        return account;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public Position getPosition() {
-        return position;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getIdPosition() {
+        return idPosition;
+    }
+
+    public void setIdPosition(int idPosition) {
+        this.idPosition = idPosition;
     }
 }

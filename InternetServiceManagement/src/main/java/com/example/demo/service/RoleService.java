@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
-import java.util.List;
 
+import com.example.demo.entity.Role;
+import org.springframework.stereotype.Service;
+
+@Service
 public interface RoleService {
-    List<Role> findAllRole();
+    Role findById(int id);
 }
