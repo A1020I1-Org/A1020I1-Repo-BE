@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+
 import com.example.demo.entity.Employee;
 import com.example.demo.entity.Position;
 import com.example.demo.service.EmployeeService;
@@ -11,11 +12,19 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import com.example.demo.entity.Customer;
+import com.example.demo.repository.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/employee")
 public class EmployeeController {
 
     @Autowired
