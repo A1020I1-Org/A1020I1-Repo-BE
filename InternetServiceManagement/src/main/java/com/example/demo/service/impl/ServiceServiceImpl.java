@@ -7,13 +7,21 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class ServiceServiceImpl implements ServiceService {
 
     @Autowired
     ServiceRepository serviceRepository;
-  
+
+    // ThanhNHM test
+    public List<com.example.demo.entity.Service> listServiceTest() {
+        return this.serviceRepository.findAll();
+    }
+    // ThanhNHM test
+
     @Override
     public void save(com.example.demo.entity.Service service) {
         this.serviceRepository.save(service);
@@ -44,9 +52,4 @@ public class ServiceServiceImpl implements ServiceService {
         return serviceRepository.search(pageable,searchName);
     }
 
-    // thanh test
-    @Override
-    public Page<com.example.demo.entity.Service> pageService(Pageable pageable) {
-        return this.serviceRepository.findAll(pageable);
-    }
 }

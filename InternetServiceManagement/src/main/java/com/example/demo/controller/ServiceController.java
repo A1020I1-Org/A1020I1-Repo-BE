@@ -33,6 +33,13 @@ public class ServiceController {
         this.serviceService = serviceService;
     }
 
+    // ThanhNHM test
+    @GetMapping("/list-test")
+    public ResponseEntity<List<Service>> get(){
+        return new ResponseEntity<>(this.serviceService.listServiceTest(), HttpStatus.OK);
+    }
+    // ThanhNHM test
+
     @GetMapping(value = "/list")
     public ResponseEntity<Page<Service>> listAllService(@PageableDefault(size = 4) Pageable pageable) {
         Page<Service> serviceList = serviceService.findAllService(pageable);
@@ -44,9 +51,9 @@ public class ServiceController {
 
     @PostMapping("/create")
     public ResponseEntity<Service> post(@Valid @RequestBody Service service, BindingResult bindingResult) {
-        if (bindingResult.hasFieldErrors()){
+        if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-        }else {
+        } else {
             this.serviceService.save(service);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
@@ -55,14 +62,14 @@ public class ServiceController {
     @PatchMapping("/update/{id}")
     public ResponseEntity<Service> update(@Valid @RequestBody Service service,
                                           BindingResult bindingResult,
-                                          @PathVariable String id){
-        if (bindingResult.hasFieldErrors()){
+                                          @PathVariable String id) {
+        if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-        }else {
+        } else {
             this.serviceService.save(service);
             return new ResponseEntity<>(HttpStatus.OK);
         }
-}
+    }
 
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Service> deleteService(@PathVariable("id") String serviceId) {
@@ -74,15 +81,20 @@ public class ServiceController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
+        // thanhNHM adding
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
     @GetMapping(value = "/search")
-    public ResponseEntity<Page<Service>> searchService(@RequestParam("searchName") String searchName,
-                                                 @PageableDefault(size = 3) Pageable pageable) {
+    public ResponseEntity<Page<Service>> searchService (@RequestParam("searchName") String searchName,
+                                                        @PageableDefault(size = 3) Pageable pageable){
         Page<Service> searchService = serviceService.search(pageable, searchName);
         System.out.println(searchService);
-       if (searchService == null){
-           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-       }
-        return new ResponseEntity<>(searchService,HttpStatus.OK);
+        if (searchService == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(searchService, HttpStatus.OK);
     }
+
 }

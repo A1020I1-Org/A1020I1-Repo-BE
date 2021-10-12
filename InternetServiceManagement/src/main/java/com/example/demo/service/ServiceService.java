@@ -9,19 +9,20 @@ import org.springframework.data.repository.query.Param;
 
 public interface ServiceService {
 
-    // thanh test
-    Page<Service> pageService(Pageable pageable);
-
     void save(Service service);
 
     Service findById(String serviceId);
 
-    List<Service> findAllService();
+    Page<Service> findAllService(Pageable pageable);
 
     Service findServiceById(String serviceId);
 
-    Service deleteService (String serviceId);
+    void deleteService (String serviceId);
 
     Page<Service> search(Pageable pageable, String searchName);
+
+    // ThanhNHM test
+    List<Service> listServiceTest();
+    // ThanhNHM test
 }
 
