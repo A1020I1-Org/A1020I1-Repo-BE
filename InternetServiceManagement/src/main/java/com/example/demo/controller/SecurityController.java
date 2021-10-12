@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.config.JwtTokenUtil;
-import com.example.demo.entity.Account;
-import com.example.demo.entity.Customer;
 import com.example.demo.jwt.JwtResponse;
 import com.example.demo.jwt.LoginRequest;
 import com.example.demo.sercurity.AccountDetailServiceImpl;
