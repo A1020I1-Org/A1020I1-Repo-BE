@@ -9,6 +9,9 @@ import org.springframework.data.repository.query.Param;
 
 public interface ServiceService {
 
+    // thanh test
+    Page<Service> pageService(Pageable pageable);
+
     void save(Service service);
 
     Service findById(String serviceId);

@@ -3,6 +3,9 @@ package com.example.demo.controller;
 import com.example.demo.entity.Service;
 import com.example.demo.service.ServiceService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -27,6 +30,12 @@ public class ServiceController {
     public ResponseEntity<List<Service>> get(){
         return new ResponseEntity<>(this.serviceService.findAllService(), HttpStatus.OK);
     }
+
+    @GetMapping("/page")
+    public ResponseEntity<Page<Service>> page(@PageableDefault(value = 3) Pageable pageable){
+        return new ResponseEntity<>(this.serviceService.pageService(pageable), HttpStatus.OK);
+    }
+    // of thanh test
 
     @PostMapping("/create")
     public ResponseEntity<Service> post(@Valid @RequestBody Service service, BindingResult bindingResult) {

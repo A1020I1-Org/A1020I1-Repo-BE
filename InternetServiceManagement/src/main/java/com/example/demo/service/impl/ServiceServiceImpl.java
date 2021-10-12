@@ -45,4 +45,10 @@ public class ServiceServiceImpl implements ServiceService {
     public Page<com.example.demo.entity.Service> search(Pageable pageable, String searchName) {
         return serviceRepository.search(pageable,searchName);
     }
+
+    // thanh test
+    @Override
+    public Page<com.example.demo.entity.Service> pageService(Pageable pageable) {
+        return this.serviceRepository.findAll(pageable);
+    }
 }
