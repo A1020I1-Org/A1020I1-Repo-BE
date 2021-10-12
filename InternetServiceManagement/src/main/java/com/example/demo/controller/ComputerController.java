@@ -10,8 +10,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/computer")
+@CrossOrigin("http://localhost:4200")
 public class ComputerController {
 
     @Autowired
@@ -26,7 +29,14 @@ public class ComputerController {
         }
         return new ResponseEntity<>(computerList, HttpStatus.OK);
     }
-
+    @GetMapping("/getInforComputer/{id}")
+    public ResponseEntity<Computer> getInforComputer(@PathVariable String id){
+        Computer computer = computerService.findById(id);
+        if (computer==null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(computer, HttpStatus.OK);
+    }
     @DeleteMapping("/deleteComputer/{id}")
     public ResponseEntity<Computer> deleteComputer(@PathVariable String id) {
         Computer computer = computerService.findById(id);

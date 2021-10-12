@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -11,6 +13,7 @@ public class Status {
     private String statusName;
 
     @OneToMany(mappedBy = "status",cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Computer> computers;
 
     public Status() {
