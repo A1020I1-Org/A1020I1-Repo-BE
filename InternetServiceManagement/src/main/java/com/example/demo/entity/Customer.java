@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -8,7 +8,7 @@ import java.util.Set;
 @Entity
 public class Customer {
     @Id
-    private String customerId;
+    private int customerId;
     private String fullName;
     private String dateOfBirth;
     private String email;
@@ -17,32 +17,27 @@ public class Customer {
     private boolean status;
     private String idCard;
 
-    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userName",referencedColumnName = "userName")
+    @JsonManagedReference
     private Account account;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonManagedReference
     Set<OrderService> orderServices;
 
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-    private Set<Pay> pays;
-
-    @JsonIgnore
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
+    @JsonManagedReference
     Set<Order> orders;
 
     public Customer() {
     }
 
-    public String getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
