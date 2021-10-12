@@ -25,10 +25,6 @@ public class Order {
     private Computer computer;
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private Computer computer;
-
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Pay pay;
 
     private String startTime;

@@ -1,10 +1,7 @@
 package com.example.demo.entity;
 
-<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-=======
->>>>>>> origin/dev
 import javax.persistence.*;
 
 @Entity
@@ -30,11 +27,7 @@ public class OrderService {
     @JoinColumn(name = "pay_id")
     @JsonBackReference
     private Pay pay;
-    private Service service;
 
-    @ManyToOne
-    @JoinColumn(name = "order_service_total_id")
-    private OrderServiceToTal orderServiceToTal;
 
     private int quantity;
     private int unit;
@@ -115,11 +108,5 @@ public class OrderService {
 
     public void setStatus(boolean status) {
         this.status = status;
-    public OrderServiceToTal getOrderServiceToTal() {
-        return orderServiceToTal;
-    }
-
-    public void setOrderServiceToTal(OrderServiceToTal orderServiceToTal) {
-        this.orderServiceToTal = orderServiceToTal;
     }
 }
