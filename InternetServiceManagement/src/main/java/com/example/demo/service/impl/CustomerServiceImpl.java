@@ -43,6 +43,7 @@ public class CustomerServiceImpl implements CustomerService {
             if (customerAccount.getPassword().equals(customerAccount.getPasswordRetype())) {
                 customer = toEntity(customerAccount);
                 customer.setCustomerId(id);
+
                 account.setPassword(customerAccount.getPassword());
                 customer.setAccount(account);
                 account.setCustomer(customer);
