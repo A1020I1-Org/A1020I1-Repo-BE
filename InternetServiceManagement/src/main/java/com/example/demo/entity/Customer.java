@@ -1,5 +1,8 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -14,13 +17,16 @@ public class Customer {
     private String phone;
     private boolean status;
 
+    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userName",referencedColumnName = "userName")
     private Account account;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
     Set<Order> orders;
 
@@ -86,7 +92,7 @@ public class Customer {
         this.phone = phone;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 

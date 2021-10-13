@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,14 +11,17 @@ public class OrderService {
     @Id
     private Integer id;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "service_id")
     private Service service;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "pay_id")
     private Pay pay;

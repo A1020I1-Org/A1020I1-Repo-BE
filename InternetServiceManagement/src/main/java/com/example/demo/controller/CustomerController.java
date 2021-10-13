@@ -1,10 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Customer;
+import com.example.demo.entity.CustomerAccount;
 import com.example.demo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -24,11 +27,19 @@ public class CustomerController {
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<Customer> update(@RequestBody Customer customer, @PathVariable String id) {
-        if (this.customerService.findById(id) == null){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Customer> update(@Validated @RequestBody CustomerAccount customerAccount, @PathVariable String id, BindingResult bindingResult) {
+        new CustomerAccount().validate(customerAccount, bindingResult);
+        if (!bindingResult.hasErrors() && id != null) {
+            if (customerService.findById(id) != null) {
+                customerService.updateCustomer(customerAccount, id);
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
         }
-        this.customerService.save(customer);
-        return new ResponseEntity<>(customerService.findById(id), HttpStatus.OK);
+        else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }
