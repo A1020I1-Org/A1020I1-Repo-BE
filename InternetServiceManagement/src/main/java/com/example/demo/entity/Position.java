@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -11,7 +12,9 @@ public class Position {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int positionId;
     private String positionName;
+
     @JsonManagedReference
+
     @OneToMany(mappedBy = "position",cascade = CascadeType.ALL)
     private Set<Employee> employees;
 

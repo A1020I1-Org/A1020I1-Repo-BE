@@ -1,6 +1,15 @@
 package com.example.demo.controller;
 
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(value = "/pay")
+public class PaymentController {
+}
+
+
 import com.example.demo.entity.PayPalClient;
 import com.example.demo.entity.*;
 import com.example.demo.service.CustomerService;

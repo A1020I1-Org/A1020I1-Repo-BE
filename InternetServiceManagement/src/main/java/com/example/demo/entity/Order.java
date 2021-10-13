@@ -1,7 +1,9 @@
 package com.example.demo.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import javax.persistence.*;
 
@@ -15,12 +17,17 @@ public class Order {
     @ManyToOne
     @MapsId("customerId")
     @JoinColumn(name = "customer_id")
+
     @JsonIgnore
+
     private Customer customer;
 
     @ManyToOne
     @MapsId("computerId")
     @JoinColumn(name = "computer_id")
+    private Computer computer;
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     @JsonIgnore
     private Computer computer;
 

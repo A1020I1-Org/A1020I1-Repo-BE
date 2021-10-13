@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -14,6 +15,9 @@ public class Account {
 
     @OneToOne(mappedBy = "account" ,cascade = CascadeType.ALL)
     private Customer customer;
+
+    @OneToOne(mappedBy = "account" ,cascade = CascadeType.ALL)
+    private Employee employee;
   
     @JsonManagedReference
     @OneToOne(mappedBy = "account" ,cascade = CascadeType.ALL)
@@ -27,11 +31,11 @@ public class Account {
     }
 
 
+
     public Account(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
-
 
     public String getUserName() {
         return userName;

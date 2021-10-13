@@ -20,6 +20,11 @@ public class OrderService {
 
     @ManyToOne
     @JoinColumn(name = "service_id")
+    private Service service;
+
+    @ManyToOne
+    @JoinColumn(name = "order_service_total_id")
+    private OrderServiceToTal orderServiceToTal;
     @JsonBackReference
     private Service service;
 
@@ -93,6 +98,12 @@ public class OrderService {
         this.oder_date = oder_date;
     }
 
+    public OrderServiceToTal getOrderServiceToTal() {
+        return orderServiceToTal;
+    }
+
+    public void setOrderServiceToTal(OrderServiceToTal orderServiceToTal) {
+        this.orderServiceToTal = orderServiceToTal;
     public Pay getPay() {
         return pay;
     }

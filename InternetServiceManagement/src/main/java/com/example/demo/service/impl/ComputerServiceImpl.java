@@ -12,6 +12,13 @@ import java.util.List;
 
 @Service
 public class ComputerServiceImpl implements ComputerService {
+
+
+    @Autowired
+    private ComputerRepository computerRepository;
+
+    @Override
+    public Page<Computer> findAll(Pageable pageable) {
     @Autowired
     ComputerRepository computerRepository;
 
@@ -22,6 +29,20 @@ public class ComputerServiceImpl implements ComputerService {
     }
 
     @Override
+    public List<Computer> findAll() {
+        return computerRepository.findAll();
+    }
+
+    @Override
+    public Computer findById(String id) {
+        return computerRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void save(Computer computer) {
+        computerRepository.save(computer);
+    }
+
     public Computer findById(String id) {
         return computerRepository.findById(id).orElse(null);
     }

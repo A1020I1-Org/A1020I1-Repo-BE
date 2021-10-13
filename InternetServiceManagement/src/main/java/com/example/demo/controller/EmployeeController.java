@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.*;
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/employee")
 public class EmployeeController {
+
     @Autowired
     private EmployeeService employeeService;
     @Autowired
