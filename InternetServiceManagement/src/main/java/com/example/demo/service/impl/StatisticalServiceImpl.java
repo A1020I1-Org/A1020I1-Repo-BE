@@ -72,7 +72,7 @@ public class StatisticalServiceImpl implements StatisticalService {
             return null;
         }
         if((startDate.getMonth() == endDate.getMonth()) && (startDate.getYear() == endDate.getYear())){
-            this.calculateTotalMoney(startDate, endDate);
+            listDataForMonth.add(this.calculateTotalMoney(startDate, endDate));
         }else{
             while(true){
                 yearMonth = YearMonth.of(startDate.getMonth()+1900, startDate.getMonth()+1);
