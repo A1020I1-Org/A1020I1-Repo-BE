@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -26,6 +27,15 @@ public class Computer {
     Set<Order> orders;
 
     @NotBlank(message = "Hãng sản xuất không được để trống")
+    private String computerId;
+    private String computerLocation;
+    private String computerStartUsedDate;
+    private String computerWarrantyPeriod;
+    private String computerConfiguration;
+
+    @OneToMany(mappedBy = "computer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
+    Set<Order> orders;
+
     @ManyToOne(targetEntity = Manufacturer.class)
     @JoinColumn(name = "manufacturerId", referencedColumnName = "manufacturerId")
     private Manufacturer manufacturer;
@@ -36,6 +46,8 @@ public class Computer {
     private Status status;
 
     @NotBlank(message = "Loại phải là 1, 2, 3")
+    private Status status;
+
     @ManyToOne(targetEntity = Type.class)
     @JoinColumn(name = "typeId", referencedColumnName = "typeId")
     private Type type;
@@ -52,6 +64,18 @@ public class Computer {
     }
 
 
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "computer_game",
+            joinColumns = @JoinColumn(name = "computerId"),
+            inverseJoinColumns = @JoinColumn(name = "gameId")
+    )
+    private Set<Game> games;
+
+    public Computer() {
+    }
+  
     public String getComputerId() {
         return computerId;
     }
@@ -132,4 +156,11 @@ public class Computer {
 //        this.games = games;
 //    }
 
+    public Set<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(Set<Game> games) {
+        this.games = games;
+    }
 }

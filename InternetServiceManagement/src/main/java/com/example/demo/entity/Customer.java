@@ -1,5 +1,8 @@
 package com.example.demo.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -17,12 +20,23 @@ public class Customer {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userName",referencedColumnName = "userName")
+
     private Account account;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
 
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
+
+    @JsonManagedReference
+    private Account account;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    Set<OrderService> orderServices;
+
+    @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
+    @JsonManagedReference
     Set<Order> orders;
 
     public Customer() {
