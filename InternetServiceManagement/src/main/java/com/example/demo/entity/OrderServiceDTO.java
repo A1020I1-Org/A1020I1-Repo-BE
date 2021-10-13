@@ -1,41 +1,21 @@
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+public class OrderServiceDTO {
 
-
-import javax.persistence.*;
-
-@Entity
-@Table(name = "order_service")
-public class OrderService {
-
-    @Id
     private String id;
     private int quantity;
     private String unit;
     private int totalMoney;
     private String oderDate;
     private boolean status;
+    private String customer;
+    private String service;
+    private Integer pay;
 
-    @JsonManagedReference
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-
-    @JsonManagedReference
-    @ManyToOne
-    @JoinColumn(name = "service_id")
-    private Service service;
-
-    @JsonManagedReference
-    @ManyToOne
-    @JoinColumn(name = "pay_id")
-    private Pay pay;
-
-    public OrderService() {
+    public OrderServiceDTO() {
     }
 
-    public OrderService(String id, int quantity, String unit, int totalMoney, String oderDate, boolean status, Customer customer, Service service, Pay pay) {
+    public OrderServiceDTO(String id, int quantity, String unit, int totalMoney, String oderDate, boolean status, String customer, String service, Integer pay) {
         this.id = id;
         this.quantity = quantity;
         this.unit = unit;
@@ -53,22 +33,6 @@ public class OrderService {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Service getService() {
-        return service;
-    }
-
-    public void setService(Service service) {
-        this.service = service;
     }
 
     public int getQuantity() {
@@ -103,19 +67,35 @@ public class OrderService {
         this.oderDate = oderDate;
     }
 
-    public Pay getPay() {
-        return pay;
-    }
-
-    public void setPay(Pay pay) {
-        this.pay = pay;
-    }
-
     public boolean getStatus() {
         return status;
     }
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public String getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
+    }
+
+    public String getService() {
+        return service;
+    }
+
+    public void setService(String service) {
+        this.service = service;
+    }
+
+    public Integer getPay() {
+        return pay;
+    }
+
+    public void setPay(Integer pay) {
+        this.pay = pay;
     }
 }
