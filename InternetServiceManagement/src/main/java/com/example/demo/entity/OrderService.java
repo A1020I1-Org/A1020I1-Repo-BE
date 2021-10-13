@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -14,14 +16,17 @@ public class OrderService {
     @ManyToOne
     @MapsId("customerId")
     @JoinColumn(name = "customer_id")
+    @JsonBackReference
     private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "service_id")
+    @JsonBackReference
     private Service service;
 
     @ManyToOne
     @JoinColumn(name = "pay_id")
+    @JsonBackReference
     private Pay pay;
 
     private int quantity;
