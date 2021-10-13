@@ -45,12 +45,12 @@ public class OrderController_getServiceById {
     @Test
     public void getServiceById_4() throws Exception {
         this.mockMvc
-                .perform(MockMvcRequestBuilders.get("/order/service/{id}", 2))
+                .perform(MockMvcRequestBuilders.get("/order/service/{id}", 1))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("$.serviceName").value("mi tom"))
-                .andExpect(jsonPath("$.quantity").value(15))
-                .andExpect(jsonPath("$.unit").value("goi"))
-                .andExpect(jsonPath("$.prices").value(10000));
+                .andExpect(jsonPath("$.serviceName").value("bia"))
+                .andExpect(jsonPath("$.quantity").value(20))
+                .andExpect(jsonPath("$.unit").value("lon"))
+                .andExpect(jsonPath("$.prices").value(20000));
     }
 }

@@ -43,9 +43,7 @@ public class OrderController {
     @PostMapping(value = "/create-order-service")
     public ResponseEntity<Void> createOrderService(@RequestBody OrderService orderService, UriComponentsBuilder ucBuilder) {
         orderServiceService.save(orderService);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/service/{id}").buildAndExpand(orderService.getId()).toUri());
-        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 
