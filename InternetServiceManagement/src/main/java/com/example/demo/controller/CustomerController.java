@@ -50,7 +50,7 @@ public class CustomerController {
         }
 
 //        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-//        String pass = bCryptPasswordEncoder.encode(employeeUser.getPassWord());
+//        String pass = bCryptPasswordEncoder.encode(accountCustomer.getPassWord());
         Account account = new Account(accountCustomer.getUserName(), accountCustomer.getPassword());
         accountService.save(account);
         AccountRoleKey accountRoleKey = new AccountRoleKey(account.getUserName(),1);
