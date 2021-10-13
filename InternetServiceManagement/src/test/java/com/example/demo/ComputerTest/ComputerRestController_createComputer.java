@@ -170,7 +170,7 @@ public class ComputerRestController_createComputer {
     @Test
     public void createComputer_18() throws Exception{
         Computer computer = new Computer();
-        computer.setComputerId("CP0001");
+        computer.setComputerId("CP0002");
         computer.setComputerLocation("A0001");
         computer.setComputerStartUsedDate("10/10/2021");
         computer.setComputerWarrantyPeriod("12 tháng");

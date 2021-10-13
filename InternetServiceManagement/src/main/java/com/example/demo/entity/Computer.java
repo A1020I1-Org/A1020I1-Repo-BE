@@ -1,8 +1,6 @@
 package com.example.demo.entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -10,9 +8,8 @@ import javax.validation.constraints.Pattern;
 import java.util.Set;
 
 @Entity
-public class Computer implements Validator {
+public class Computer {
     @Id
-//    @Pattern(value = "CP[\\d]{4}$",message = "")
     @Pattern(regexp = "^CP[\\d]{4}$", message = "Mã máy tính phải đúng định dạng CPXXXX (X từ 0-9)")
     private String computerId;
     @Pattern(regexp = "^[A-Z]{1}[\\d]{4}$", message = "Vị trí phải đúng định dạng CPXXXX (X từ 0-9)")
@@ -43,13 +40,13 @@ public class Computer implements Validator {
     @JoinColumn(name = "typeId", referencedColumnName = "typeId")
     private Type type;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "computer_game",
-            joinColumns = @JoinColumn(name = "computerId"),
-            inverseJoinColumns = @JoinColumn(name = "gameId")
-    )
-    private Set<Game> games;
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "computer_game",
+//            joinColumns = @JoinColumn(name = "computerId"),
+//            inverseJoinColumns = @JoinColumn(name = "gameId")
+//    )
+//    private Set<Game> games;
 
     public Computer() {
     }
@@ -127,22 +124,12 @@ public class Computer implements Validator {
         this.type = type;
     }
 
-    public Set<Game> getGames() {
-        return games;
-    }
+//    public Set<Game> getGames() {
+//        return games;
+//    }
+//
+//    public void setGames(Set<Game> games) {
+//        this.games = games;
+//    }
 
-    public void setGames(Set<Game> games) {
-        this.games = games;
-    }
-
-
-    @Override
-    public boolean supports(Class<?> clazz) {
-        return false;
-    }
-
-    @Override
-    public void validate(Object target, Errors errors) {
-
-    }
 }

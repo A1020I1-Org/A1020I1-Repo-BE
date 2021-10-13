@@ -3,56 +3,39 @@ package com.example.demo.controller;
 import com.example.demo.entity.Computer;
 import com.example.demo.service.ComputerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/computer")
+@CrossOrigin("http://localhost:4200")
 public class ComputerController {
 
     @Autowired
     private ComputerService computerService;
 
-    @GetMapping("/create")
-    public String addComputer(Model model) {
-        model.addAttribute("computer", computerService.findAll());
-        return "computer/create";
-    }
-
-    @PostMapping("/save")
-    public String saveComputer(@Validated @ModelAttribute Computer computer, BindingResult bindingResult, Model model,
-                               RedirectAttributes redirectAttributes) {
-
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("computer", computerService.findAll());
+    @PostMapping("/create")
+    public ResponseEntity<Computer> post(@Valid @RequestBody Computer computer, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         } else {
-            computerService.save(computer);
-            redirectAttributes.addFlashAttribute("message", "Thêm mới máy tính " + computer.getComputerId() + " thành công.");
-            model.addAttribute("computer", computer);
+            this.computerService.save(computer);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         }
-        return "redirect:/computer";
     }
 
-    @GetMapping("/edit/{id}")
-    public String editCustomer(@PathVariable String id, Model model) {
-        model.addAttribute("computer", computerService.findAll());
-        model.addAttribute("customer", computerService.findById(id));
-        return "computer/edit";
-    }
-
-    @PostMapping("/update")
-    public String updateCustomer(@Validated @ModelAttribute Computer computer, BindingResult bindingResult,
-                                 Model model, RedirectAttributes redirect) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("customerTypes", computerService.findAll());
-            return "computer/create";
+    @RequestMapping("/update/{id}")
+    public ResponseEntity<Computer> update(@Valid @RequestBody Computer computer, @PathVariable String id) {
+        this.computerService.findById(id);
+        if (this.computerService.findById(id) == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         } else {
-            computerService.save(computer);
-            redirect.addFlashAttribute("message", "Cập nhật máy tính " + computer.getComputerId() + " thành công.!");
-            return "computer/list";
+            this.computerService.save(computer);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         }
     }
 }

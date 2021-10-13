@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.5.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id "org.sonarqube" version "3.0"
 }
 
 group = 'com.example'
@@ -15,16 +16,25 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+//    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
+//    testImplementation 'org.springframework.security:spring-security-test'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.4'
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+}
+
+sonarqube {
+    properties {
+        property 'sonar.host.url', 'http://18.117.194.147:9000'
+        property 'sonar.login', 'f4570cffe1dd5bf39ecbeed0ef04eef921709b5a'
+        property 'sonar.projectKey', 'A1020I1_ReviewCode_ThuanDV'
+        property 'sonar.projectName', 'A1020I1_ReviewCode_ThuanDV'
+    }
 }
 
 test {
