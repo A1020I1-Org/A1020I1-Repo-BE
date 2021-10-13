@@ -2,7 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.entity.Account;
 import com.example.demo.entity.Customer;
-import com.example.demo.entity.CustomerAccount;
+import com.example.demo.entity.CustomerDTO;
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.repository.CustomerRepository;
 import com.example.demo.service.CustomerService;
@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -36,7 +37,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void updateCustomer(CustomerAccount customerAccount, String id) {
+    public void updateCustomer(CustomerDTO customerAccount, String id) {
         Customer customer = customerRepository.findById(id).orElse(null);
         Account account = accountRepository.findByUserName(customerAccount.getUsername()).orElse(null);
         if (customer != null && account != null) {
@@ -53,38 +54,39 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
-    private CustomerAccount toRequest(Customer customer){
-        CustomerAccount customerAccount = new CustomerAccount();
-        customerAccount.setCustomerId(customer.getCustomerId());
-        customerAccount.setFullName(customer.getFullName());
-        customerAccount.setDateOfBirth(customer.getDateOfBirth());
-        customerAccount.setEmail(customer.getEmail());
+    private CustomerDTO toDTO(Customer customer){
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setCustomerId(customer.getCustomerId());
+        customerDTO.setFullName(customer.getFullName());
+        customerDTO.setDateOfBirth(customer.getDateOfBirth());
+        customerDTO.setEmail(customer.getEmail());
         String[] address = customer.getAddress().split(",");
-        customerAccount.setProvince(address[0]);
-        customerAccount.setDistrict(address[1]);
-        customerAccount.setCommune(address[2]);
-        customerAccount.setPhone(customer.getPhone());
-        customerAccount.setUsername(customer.getAccount().getUserName());
-        customerAccount.setPassword(customer.getAccount().getPassword());
-        customerAccount.setPasswordRetype(customer.getAccount().getPassword());
-        customerAccount.setStatus(customer.getStatus());
-        return customerAccount;
+        customerDTO.setProvince(address[0]);
+        customerDTO.setDistrict(address[1]);
+        customerDTO.setCommune(address[2]);
+        customerDTO.setPhone(customer.getPhone());
+        customerDTO.setUsername(customer.getAccount().getUserName());
+        customerDTO.setPassword(customer.getAccount().getPassword());
+        customerDTO.setPasswordRetype(customer.getAccount().getPassword());
+        customerDTO.setStatus(customer.getStatus());
+        return customerDTO;
     }
 
-    private Customer toEntity(CustomerAccount customerAccount){
+    private Customer toEntity(CustomerDTO customerDTO){
         Customer customer = new Customer();
-        if (customerAccount.getCustomerId() != null) {
-            if (customerRepository.findById(customerAccount.getCustomerId()).isPresent()) {
-                customer = customerRepository.findById(customerAccount.getCustomerId()).get();
+        if (customerDTO.getCustomerId() != null) {
+            Optional<Customer> test = customerRepository.findById(customerDTO.getCustomerId());
+            if (test.isPresent()) {
+                customer = test.get();
             }
         }
-        customer.setFullName(customerAccount.getFullName());
-        customer.setDateOfBirth(customerAccount.getDateOfBirth());
-        customer.setEmail(customerAccount.getEmail());
-        customer.setAddress(customerAccount.getProvince()
-                + "," + customerAccount.getDistrict() + "," + customerAccount.getCommune());
-        customer.setPhone(customerAccount.getPhone());
-        customer.setStatus(customerAccount.getStatus());
+        customer.setFullName(customerDTO.getFullName());
+        customer.setDateOfBirth(customerDTO.getDateOfBirth());
+        customer.setEmail(customerDTO.getEmail());
+        customer.setAddress(customerDTO.getProvince()
+                + "," + customerDTO.getDistrict() + "," + customerDTO.getCommune());
+        customer.setPhone(customerDTO.getPhone());
+        customer.setStatus(customerDTO.getStatus());
 //        Account account = new Account();
 //        if (!accountRepository.findByUserName(customerRequest.getUsername()).isPresent()){
 //            account.setUserName(customerRequest.getUsername());

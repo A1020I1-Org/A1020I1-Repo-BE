@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Customer;
-import com.example.demo.entity.CustomerAccount;
+import com.example.demo.entity.CustomerDTO;
 import com.example.demo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,11 +27,11 @@ public class CustomerController {
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<Customer> update(@Validated @RequestBody CustomerAccount customerAccount, @PathVariable String id, BindingResult bindingResult) {
-        new CustomerAccount().validate(customerAccount, bindingResult);
+    public ResponseEntity<Customer> update(@Validated @RequestBody CustomerDTO customerDTO, @PathVariable String id, BindingResult bindingResult) {
+        new CustomerDTO().validate(customerDTO, bindingResult);
         if (!bindingResult.hasErrors() && id != null) {
             if (customerService.findById(id) != null) {
-                customerService.updateCustomer(customerAccount, id);
+                customerService.updateCustomer(customerDTO, id);
                 return new ResponseEntity<>(HttpStatus.OK);
             }
             else {

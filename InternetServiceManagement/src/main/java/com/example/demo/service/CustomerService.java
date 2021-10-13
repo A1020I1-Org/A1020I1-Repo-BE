@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Customer;
-import com.example.demo.entity.CustomerAccount;
+import com.example.demo.entity.CustomerDTO;
 
 import java.util.List;
 
@@ -12,6 +12,6 @@ public interface CustomerService {
 
     List<Customer> findAll();
 
-    void updateCustomer(CustomerAccount customerAccount, String id);
+    void updateCustomer(CustomerDTO customerAccount, String id);
 
 }

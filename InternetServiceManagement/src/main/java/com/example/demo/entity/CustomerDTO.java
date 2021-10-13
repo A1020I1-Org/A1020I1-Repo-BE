@@ -10,7 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class CustomerAccount implements Validator {
+public class CustomerDTO implements Validator {
     private String customerId;
 
     @NotBlank(message = "Name can't be blank.")
@@ -19,7 +19,6 @@ public class CustomerAccount implements Validator {
     private String dateOfBirth;
     @Email(message = "Email must follow format abc@abc.com")
     private String email;
-    //    private String address;
     private String province;
     private String district;
     private String commune;
@@ -35,7 +34,7 @@ public class CustomerAccount implements Validator {
     private String password;
     private String passwordRetype;
 
-    public CustomerAccount() {
+    public CustomerDTO() {
     }
 
     public String getCustomerId() {
@@ -136,11 +135,11 @@ public class CustomerAccount implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return CustomerAccount.class.isAssignableFrom(clazz);    }
+        return CustomerDTO.class.isAssignableFrom(clazz);    }
 
     @Override
     public void validate(Object target, Errors errors) {
-        CustomerAccount customer = (CustomerAccount) target;
+        CustomerDTO customer = (CustomerDTO) target;
         if (customer.getDateOfBirth().equals("")) {
             errors.rejectValue("dateOfBirth", "customer.age.at.least.16");
         } else {
