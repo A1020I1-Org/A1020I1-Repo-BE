@@ -160,7 +160,7 @@ public class CustomerRestController_CreateCustomer {
         customer.setDistrict("Thanh Binh");
         customer.setCommune("50");
         customer.setPhone("0901630920");
-        customer.setUsername("testing123");
+        customer.setUsername("testtest123456");
         customer.setPassword("Khoadvd48!");
         customer.setPasswordRetype("Khoadvd48!");
         customer.setStatus(true);

@@ -9,6 +9,8 @@ import com.example.demo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
@@ -85,8 +87,9 @@ public class CustomerServiceImpl implements CustomerService {
     private Customer toEntity(CustomerRequest customerRequest){
         Customer customer = new Customer();
         if (customerRequest.getCustomerId() != null) {
-            if (customerRepository.findById(customerRequest.getCustomerId()).isPresent()) {
-                customer = customerRepository.findById(customerRequest.getCustomerId()).get();
+            Optional<Customer> test = customerRepository.findById(customerRequest.getCustomerId());
+            if (test.isPresent()) {
+                customer = test.get();
             }
         }
         customer.setFullName(customerRequest.getFullName());

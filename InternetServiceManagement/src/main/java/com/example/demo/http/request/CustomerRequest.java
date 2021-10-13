@@ -1,6 +1,5 @@
 package com.example.demo.http.request;
 
-import com.example.demo.entity.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,6 @@ import org.springframework.validation.Validator;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,7 +27,6 @@ public class CustomerRequest implements Validator {
     private String dateOfBirth;
     @Email(message = "Email must follow format abc@abc.com")
     private String email;
-//    private String address;
     private String province;
     private String district;
     private String commune;
@@ -37,7 +34,6 @@ public class CustomerRequest implements Validator {
             message = "Phone number must contain 9 or 12 digits.")
     private String phone;
     private Boolean status;
-//    private String idCard;
     @NotBlank(message = "Username can't be blank.")
     private String username;
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$",
