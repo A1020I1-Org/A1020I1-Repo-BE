@@ -4,6 +4,8 @@ import com.example.demo.entity.Customer;
 import com.example.demo.repository.CustomerRepository;
 import com.example.demo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,18 +15,29 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     CustomerRepository customerRepository;
 
+    @Autowired
+    CustomerService customerService;
+    /*
     @Override
-    public List<Customer> getAllCustomer() {
-        return (List<Customer>) customerRepository.findAll();
+    public  List<Customer> getListCustomer() {
+        return customerRepository.getListCustomer();
+    }
+    */
+
+    @Override
+    public Page<Customer> getAllCustomer(Pageable pageable) {
+        return  customerService.getAllCustomer(pageable);
     }
 
     @Override
-    public void saveCustomer(Customer customer) {
-        customerRepository.save(customer);
+    public Page<Customer> searchCustomer(Pageable pageable, String username, String status, String address, String dateBirthFrom, String dateBirthTo) {
+        return customerRepository.searchCustomer(pageable, username, dateBirthFrom, dateBirthTo, status, address);
     }
 
+
     @Override
-    public void deletedCustomer(Integer id) {
-        customerRepository.deleteById(id);
+    public void deleteCustomer(Integer customerId) {
+        customerRepository.deleteById(customerId);
     }
+
 }
