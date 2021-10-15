@@ -12,7 +12,7 @@ import java.util.Set;
 public class Pay {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int payId;
+    private Integer payId;
     private int totalPayment;
     private boolean status;
 
@@ -28,11 +28,11 @@ public class Pay {
     public Pay() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return payId;
     }
 
-    public void setId(int payId) {
+    public void setId(Integer payId) {
         this.payId = payId;
     }
 

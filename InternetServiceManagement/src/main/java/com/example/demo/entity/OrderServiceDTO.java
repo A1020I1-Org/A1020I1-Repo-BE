@@ -2,7 +2,7 @@ package com.example.demo.entity;
 
 public class OrderServiceDTO {
 
-    private String id;
+    private Integer id;
     private int quantity;
     private String unit;
     private int totalMoney;
@@ -15,7 +15,7 @@ public class OrderServiceDTO {
     public OrderServiceDTO() {
     }
 
-    public OrderServiceDTO(String id, int quantity, String unit, int totalMoney, String oderDate, boolean status, String customer, String service, Integer pay) {
+    public OrderServiceDTO(Integer id, int quantity, String unit, int totalMoney, String oderDate, boolean status, String customer, String service, Integer pay) {
         this.id = id;
         this.quantity = quantity;
         this.unit = unit;
@@ -27,11 +27,11 @@ public class OrderServiceDTO {
         this.pay = pay;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

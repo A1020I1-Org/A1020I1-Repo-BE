@@ -26,7 +26,7 @@ public class OrderController_createOrderService {
     @Test
     public void createService_13() throws Exception {
         OrderServiceDTO orderServiceDTO = new OrderServiceDTO();
-        orderServiceDTO.setId("1");
+        orderServiceDTO.setId(null);
         orderServiceDTO.setQuantity(2);
         orderServiceDTO.setUnit("lon");
         orderServiceDTO.setTotalMoney(40000);
@@ -49,7 +49,7 @@ public class OrderController_createOrderService {
     @Test
     public void createService_14() throws Exception {
         OrderServiceDTO orderServiceDTO = new OrderServiceDTO();
-        orderServiceDTO.setId("1");
+        orderServiceDTO.setId(null);
         orderServiceDTO.setQuantity(2);
         orderServiceDTO.setUnit("lon");
         orderServiceDTO.setTotalMoney(40000);
@@ -72,7 +72,7 @@ public class OrderController_createOrderService {
     @Test
     public void createService_15() throws Exception {
         OrderServiceDTO orderServiceDTO = new OrderServiceDTO();
-        orderServiceDTO.setId("1");
+        orderServiceDTO.setId(null);
         orderServiceDTO.setQuantity(2);
         orderServiceDTO.setUnit("lon");
         orderServiceDTO.setTotalMoney(40000);
@@ -96,7 +96,7 @@ public class OrderController_createOrderService {
     @Test
     public void createService_16() throws Exception {
         OrderServiceDTO orderServiceDTO = new OrderServiceDTO();
-        orderServiceDTO.setId("1");
+        orderServiceDTO.setId(null);
         orderServiceDTO.setQuantity(2);
         orderServiceDTO.setUnit("lon");
         orderServiceDTO.setTotalMoney(40000);
@@ -119,7 +119,7 @@ public class OrderController_createOrderService {
 //    @Test
 //    public void createService_17() throws Exception {
 //        OrderServiceDTO orderServiceDTO = new OrderServiceDTO();
-//        orderServiceDTO.setId("1");
+//        orderServiceDTO.setId(null);
 //        orderServiceDTO.setQuantity(2);
 //        orderServiceDTO.setUnit("lon");
 //        orderServiceDTO.setTotalMoney(40000);
@@ -142,10 +142,10 @@ public class OrderController_createOrderService {
     @Test
     public void createService_18() throws Exception {
         OrderServiceDTO orderServiceDTO = new OrderServiceDTO();
-        orderServiceDTO.setId(null);
-        orderServiceDTO.setQuantity(2);
+        orderServiceDTO.setId(1);
+        orderServiceDTO.setQuantity(1);
         orderServiceDTO.setUnit("lon");
-        orderServiceDTO.setTotalMoney(40000);
+        orderServiceDTO.setTotalMoney(20000);
         orderServiceDTO.setOderDate("2021-10-10");
         orderServiceDTO.setStatus(true);
         orderServiceDTO.setCustomer("1");

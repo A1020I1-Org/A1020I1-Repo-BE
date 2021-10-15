@@ -31,7 +31,7 @@ public class OrderController {
     }
 
     @GetMapping(value = "/order-service/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<OrderService> getServiceOrderById(@PathVariable("id") String id) {
+    public ResponseEntity<OrderService> getServiceOrderById(@PathVariable("id") Integer id) {
         OrderService orderService = orderServiceService.findById(id);
         if (orderService == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -40,7 +40,7 @@ public class OrderController {
     }
 
     @PostMapping(value = "/create-order-service")
-    public ResponseEntity<Void> createOrderService(@RequestBody OrderServiceDTO orderServiceDTO) {
+    public ResponseEntity<OrderServiceDTO> createOrderService(@RequestBody OrderServiceDTO orderServiceDTO) {
         orderServiceService.createOrderService(orderServiceDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

@@ -10,7 +10,8 @@ import javax.persistence.*;
 public class OrderService {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private int quantity;
     private String unit;
     private int totalMoney;
@@ -35,7 +36,7 @@ public class OrderService {
     public OrderService() {
     }
 
-    public OrderService(String id, int quantity, String unit, int totalMoney, String oderDate, boolean status, Customer customer, Service service, Pay pay) {
+    public OrderService(Integer id, int quantity, String unit, int totalMoney, String oderDate, boolean status, Customer customer, Service service, Pay pay) {
         this.id = id;
         this.quantity = quantity;
         this.unit = unit;
@@ -47,11 +48,11 @@ public class OrderService {
         this.pay = pay;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

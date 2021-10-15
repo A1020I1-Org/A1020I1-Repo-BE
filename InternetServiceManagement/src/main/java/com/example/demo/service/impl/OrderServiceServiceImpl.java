@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.*;
+import com.example.demo.repository.CustomerRepository;
 import com.example.demo.repository.OrderServiceRepository;
 import com.example.demo.repository.SerivceRepository;
 import com.example.demo.service.OrderServiceService;
@@ -17,14 +18,27 @@ public class OrderServiceServiceImpl implements OrderServiceService {
     @Autowired
     private SerivceRepository serivceRepository;
 
+    @Autowired
+    private CustomerRepository customerRepository;
+
     @Override
-    public OrderService findById(String id) {
+    public OrderService findById(Integer id) {
         return orderServiceRepository.findById(id).orElse(null);
     }
 
     @Override
     public void createOrderService(OrderServiceDTO orderServiceDTO) {
         OrderService orderService = toEntity(orderServiceDTO);
+//        Customer customer = new Customer();
+//        Pay pay = new Pay();
+//        pay.setId(orderServiceDTO.getPay());
+//
+//        com.example.demo.entity.Service service = new com.example.demo.entity.Service();
+//
+//        orderService.setCustomer(customer);
+//        orderService.setPay(pay);
+//        orderService.setService(service);
+
         orderServiceRepository.save(orderService);
     }
 
