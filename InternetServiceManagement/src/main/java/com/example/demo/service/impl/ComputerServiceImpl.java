@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.Computer;
+import com.example.demo.entity.Type;
 import com.example.demo.repository.ComputerRepository;
 import com.example.demo.service.ComputerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,10 @@ public class ComputerServiceImpl implements ComputerService {
 
     @Override
     public Page<Computer> search(String id, String computerLocation, String computerStartUsedFrom, String computerStartUsedTo, String type, String status, Pageable pageable) {
-        return computerRepository.searchComputer(id, computerLocation, computerStartUsedFrom, computerStartUsedTo, type, status, pageable);
+        return computerRepository.advancedSearchComputer(id, computerLocation, computerStartUsedFrom, computerStartUsedTo, type, status, pageable);
     }
+
+
 
 
 }
