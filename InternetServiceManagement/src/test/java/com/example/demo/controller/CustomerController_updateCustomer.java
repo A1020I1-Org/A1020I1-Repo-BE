@@ -25,7 +25,7 @@ public class CustomerController_updateCustomer {
     private ObjectMapper objectMapper;
 
     @Test
-    public void updateCustomer_19() throws Exception {
+    public void updateCustomer_13() throws Exception {
         CustomerDTO customer = new CustomerDTO();
         customer.setCustomerId("1");
         customer.setFullName(null);
@@ -44,7 +44,7 @@ public class CustomerController_updateCustomer {
         this.mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .patch("/customer/update/1")
+                                .post("/customer/update/1")
                                 .content(this.objectMapper.writeValueAsString(customer))
                                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -52,7 +52,7 @@ public class CustomerController_updateCustomer {
     }
 
     @Test
-    public void updateCustomer_20() throws Exception {
+    public void updateCustomer_14() throws Exception {
         CustomerDTO customer = new CustomerDTO();
         customer.setCustomerId("1");
         customer.setFullName("");
@@ -71,7 +71,7 @@ public class CustomerController_updateCustomer {
         this.mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .patch("/customer/update/1")
+                                .post("/customer/update/1")
                                 .content(this.objectMapper.writeValueAsString(customer))
                                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -79,7 +79,7 @@ public class CustomerController_updateCustomer {
     }
 
     @Test
-    public void updateCustomer_21() throws Exception {
+    public void updateCustomer_15() throws Exception {
         CustomerDTO customer = new CustomerDTO();
         customer.setCustomerId("1");
         customer.setFullName("Ngoc Cuong");
@@ -98,7 +98,7 @@ public class CustomerController_updateCustomer {
         this.mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .patch("/customer/update/1")
+                                .post("/customer/update/1")
                                 .content(this.objectMapper.writeValueAsString(customer))
                                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -106,7 +106,7 @@ public class CustomerController_updateCustomer {
     }
 
     @Test
-    public void updateCustomer_22() throws Exception {
+    public void updateCustomer_16() throws Exception {
         CustomerDTO customer = new CustomerDTO();
         customer.setCustomerId("1");
         customer.setFullName("Ngoc Cuong");
@@ -124,7 +124,7 @@ public class CustomerController_updateCustomer {
         this.mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .patch("/customer/update/1")
+                                .post("/customer/update/1")
                                 .content(this.objectMapper.writeValueAsString(customer))
                                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -132,7 +132,7 @@ public class CustomerController_updateCustomer {
     }
 
     @Test
-    public void updateCustomer_23() throws Exception {
+    public void updateCustomer_17() throws Exception {
         CustomerDTO customer = new CustomerDTO();
         customer.setCustomerId("1");
         customer.setFullName("Ngoc Cuong");
@@ -150,7 +150,7 @@ public class CustomerController_updateCustomer {
         this.mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .patch("/customer/update/1")
+                                .post("/customer/update/1")
                                 .content(this.objectMapper.writeValueAsString(customer))
                                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -158,7 +158,7 @@ public class CustomerController_updateCustomer {
     }
 
     @Test
-    public void updateCustomer_24() throws Exception {
+    public void updateCustomer_18() throws Exception {
         CustomerDTO customer = new CustomerDTO();
         customer.setCustomerId("1");
         customer.setFullName("Ngoc Cuong");
@@ -176,7 +176,7 @@ public class CustomerController_updateCustomer {
         this.mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .patch("/customer/update/1")
+                                .post("/customer/update/1")
                                 .content(this.objectMapper.writeValueAsString(customer))
                                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())

@@ -50,8 +50,8 @@ public class CustomerController_getInfoCustomer {
                 .andExpect(jsonPath("$.fullName").value("ngoc cuong"))
                 .andExpect(jsonPath("$.dateOfBirth").value("1999-10-17"))
                 .andExpect(jsonPath("$.email").value("cuong@gmail.com"))
-                .andExpect(jsonPath("$.address").value("da nang"))
-                .andExpect(jsonPath("$.phone").value("098765432"))
+                .andExpect(jsonPath("$.address").value("hue"))
+                .andExpect(jsonPath("$.phone").value("01324578"))
                 .andExpect(jsonPath("$.status").value(true));
     }
 }
