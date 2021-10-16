@@ -42,8 +42,8 @@ public class ServiceController {
     @GetMapping(value = "/list")
     public ResponseEntity<Page<Service>> listAllService(@PageableDefault(size = 4) Pageable pageable) {
         Page<Service> serviceList = serviceService.findAllService(pageable);
-        if (serviceList == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        if (serviceList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(serviceList, HttpStatus.OK);
     }
