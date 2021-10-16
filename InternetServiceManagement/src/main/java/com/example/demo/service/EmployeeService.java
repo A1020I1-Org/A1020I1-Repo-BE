@@ -13,7 +13,7 @@ public interface EmployeeService {
 
     void deleteEmployee(String id);
 
-    Page<Employee> searchEmployee(String id, String dateStart,
+    Page<Employee> searchEmployee(String idEmp, String dateStart,
                                   String dateEnd, String workStart, String workEnd,
-                                  String address, String positionName, Pageable pageable);
+                                  String address, String positionId, Pageable pageable);
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping(value = "/employee")
 public class EmployeeController {
@@ -24,29 +25,35 @@ public class EmployeeController {
     @Autowired
     PositionService positionService;
 
-    @ModelAttribute("positions")
-    public List<Position> showAllPosition() {
-        return positionService.findAll();
+    @RequestMapping(value = "/listPosition", method = RequestMethod.GET)
+    public ResponseEntity<List<Position>> getAllPosition() {
+        List<Position> positionList = positionService.findAll();
+        if (positionList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(positionList, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/listEmployee", method = RequestMethod.GET)
-    public ResponseEntity<Page<Employee>> getAllEmployee(@PageableDefault(size = 4) Pageable pageable) {
+    public ResponseEntity<Page<Employee>> getAllEmployee(@PageableDefault(size = 5) Pageable pageable) {
         Page<Employee> employeeList = employeeService.getAllEmployee(pageable);
         if (employeeList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(employeeList, HttpStatus.OK);
     }
+
     @RequestMapping(value = "/searchEmployee", method = RequestMethod.GET)
-    public ResponseEntity<Page<Employee>> searchEmployee(@RequestParam(value = "id") String id,
-                                                         @RequestParam(value = "dateStart") String dateStart,
-                                                         @RequestParam(value = "dateEnd") String dateEnd,
-                                                         @RequestParam(value = "workStart") String workStart,
-                                                         @RequestParam(value = "workEnd") String workEnd,
-                                                         @RequestParam(value = "address") String address,
-                                                         @RequestParam(value = "positionName") String positionName,
-                                                         @PageableDefault(size = 4) Pageable pageable) {
-        Page<Employee> employeeList = employeeService.searchEmployee(id,dateStart,dateEnd,workStart,workEnd,address,positionName,pageable);
+    public ResponseEntity<Page<Employee>> searchEmployee(@RequestParam String idEmp,
+                                                         @RequestParam String dateStart,
+                                                         @RequestParam String dateEnd,
+                                                         @RequestParam String workStart,
+                                                         @RequestParam String workEnd,
+                                                         @RequestParam String address,
+                                                         @RequestParam String positionId,
+                                                         @PageableDefault(size = 5) Pageable pageable) {
+        Page<Employee> employeeList = employeeService.searchEmployee(idEmp,dateStart,dateEnd,workStart
+                ,workEnd,address,positionId,pageable);
         if (employeeList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

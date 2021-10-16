@@ -5,20 +5,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee,String> {
-    @Query( value="select * \n" +
-            "from employee e\n" +
-            "inner join position p on p.position_id= e.position_id\n" +
-            "where e.employee_id like %:id% or e.date_of_birth between :dateStart and :dateEnd " +
-            "or e.start_work_date between :workStart and :workEnd or address =:address or p.position_name =:positionName ",
-            nativeQuery = true)
-    Page<Employee> searchEmployee(@Param("id") String id, @Param("dateStart") String dateStart,
-                                  @Param("dateEnd") String dateEnd,
-                                  @Param("workStart") String workStart, @Param("workEnd") String workEnd,
-                                  @Param("address") String address, @Param("positionName") String positionName,
+    @Query( value="select *\n" +
+            "from employee e \n" +
+            "where (e.employee_id like %?1% or e.employee_id is null) \n" +
+            "and (e.date_of_birth > ?2 and e.date_of_birth < ?3 )\n" +
+            "and ((e.start_work_date between ?4 and ?5 ) )\n" +
+            "and (e.address like %?6% or e.address is null )\n" +
+            "and (e.position_id like %?7% or e.position_id is null ) ",nativeQuery= true)
+    Page<Employee> searchEmployee1(String idEmp,String dateStart,String dateEnd,String workStart,
+                                  String workEnd, String address, String positionId,
                                   Pageable pageable);
 }

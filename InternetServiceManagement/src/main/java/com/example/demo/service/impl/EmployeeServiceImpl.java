@@ -32,8 +32,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Page<Employee> searchEmployee(String id, String dateStart, String dateEnd, String workStart, String workEnd, String address, String positionName, Pageable pageable) {
-        return employeeRepository.searchEmployee(id,dateStart,dateEnd,workStart,workEnd,address,positionName,pageable);
+    public Page<Employee> searchEmployee(String idEmp, String dateStart, String dateEnd,
+                                         String workStart, String workEnd, String address,
+                                         String positionId, Pageable pageable) {
+        return employeeRepository.searchEmployee1(idEmp,dateStart,dateEnd,workStart,workEnd,address,positionId,pageable);
     }
 
 }

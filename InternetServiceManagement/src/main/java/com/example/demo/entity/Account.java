@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -14,6 +16,7 @@ public class Account {
     private Customer customer;
 
     @OneToOne(mappedBy = "account" ,cascade = CascadeType.ALL)
+    @JsonIgnore
     private Employee employee;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
