@@ -19,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/service")
+@CrossOrigin("http://localhost:4200/")
 public class ServiceController {
    @Autowired
     private ServiceService serviceService;
