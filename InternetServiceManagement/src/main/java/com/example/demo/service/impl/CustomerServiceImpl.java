@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -40,4 +41,14 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.deleteById(customerId);
     }
 
+    @Override
+    public Customer getCustomerByUsername(String username) {
+        return  customerRepository.getCustomerByUsername(username);
+    }
+
+    @Override
+    public Optional<Customer> findById(Integer customerId) {
+        return customerService.findById(customerId);
+    }
 }
+
