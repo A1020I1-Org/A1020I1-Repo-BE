@@ -83,4 +83,13 @@ public class EmployeeController {
         employeeService.deleteEmployee(id);
         return new ResponseEntity<Employee>(HttpStatus.OK);
     }
+
+//    @GetMapping(value = "/viewEmployee/{id}")
+//    public ResponseEntity<Employee> detailEmployee(@PathVariable String id) {
+//        Employee employeeObj = this.employeeService.findById(id);
+//        if (employeeObj == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(employeeObj, HttpStatus.OK);
+//    }
 }
