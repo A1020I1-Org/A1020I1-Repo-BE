@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -36,6 +37,11 @@ public class EmployeeServiceImpl implements EmployeeService {
                                          String workStart, String workEnd, String address,
                                          String positionId, Pageable pageable) {
         return employeeRepository.searchEmployee1(idEmp,dateStart,dateEnd,workStart,workEnd,address,positionId,pageable);
+    }
+
+    @Override
+    public List<Employee> findAll() {
+        return employeeRepository.findAll();
     }
 
 }

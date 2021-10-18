@@ -12,7 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin("http://localhost:4200")
 @RestController
@@ -32,6 +34,18 @@ public class EmployeeController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(positionList, HttpStatus.OK);
+    }
+    @RequestMapping(value = "/listAddress", method = RequestMethod.GET)
+    public ResponseEntity<Set<String>> getAllAddress() {
+        List<Employee> employeeList = employeeService.findAll();
+        Set<String> stringSet = new HashSet<>();
+        for (int  i=0;i<employeeList.size();i++){
+            stringSet.add(employeeList.get(i).getAddress());
+        }
+        if (stringSet.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(stringSet, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/listEmployee", method = RequestMethod.GET)
