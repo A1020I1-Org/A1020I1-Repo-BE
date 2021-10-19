@@ -25,7 +25,7 @@ public class SercurityController_login {
     private ObjectMapper objectMapper;
 
     @Test
-    public void login_13() throws Exception {
+     void login_13() throws Exception {
         LoginRequest account = new LoginRequest();
         account.setUsername("admin");
         account.setPassword("null");
@@ -39,7 +39,7 @@ public class SercurityController_login {
     }
 
     @Test
-    public void login_14() throws Exception {
+     void login_14() throws Exception {
         LoginRequest account = new LoginRequest();
         account.setUsername("");
         account.setPassword("123");
@@ -53,7 +53,7 @@ public class SercurityController_login {
     }
 
     @Test
-    public void login_18() throws Exception {
+     void login_18() throws Exception {
         LoginRequest account = new LoginRequest();
         account.setUsername("admin");
         account.setPassword("123");

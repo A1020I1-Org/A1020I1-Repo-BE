@@ -1,36 +1,65 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "order_hour")
-public class Order {
-    @EmbeddedId
-    private OrderKey id;
+public class OrderHour {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @ManyToOne
     @MapsId("customerId")
     @JoinColumn(name = "customer_id")
+    @JsonIgnore
     private Customer customer;
 
     @ManyToOne
     @MapsId("computerId")
     @JoinColumn(name = "computer_id")
+    @JsonIgnore
     private Computer computer;
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private Pay pay;
 
     private String startTime;
     private String endTime;
     private int usageTime;
 
-    public Order() {
+    public OrderHour() {
     }
 
-    public OrderKey getId() {
+    public OrderHour(Customer customer, Computer computer, String startTime) {
+        this.customer = customer;
+        this.computer = computer;
+        this.startTime = startTime;
+    }
+
+    public OrderHour(Customer customer, String startTime) {
+        this.customer = customer;
+        this.startTime = startTime;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(OrderKey id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Pay getPay() {
+        return pay;
+    }
+
+    public void setPay(Pay pay) {
+        this.pay = pay;
     }
 
     public Customer getCustomer() {

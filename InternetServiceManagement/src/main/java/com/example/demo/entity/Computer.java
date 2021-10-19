@@ -7,13 +7,14 @@ import java.util.Set;
 public class Computer {
     @Id
     private String computerId;
+    private String computerIpLocal;
     private String computerLocation;
     private String computerStartUsedDate;
     private String computerWarrantyPeriod;
     private String computerConfiguration;
 
     @OneToMany(mappedBy = "computer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
-    Set<Order> orders;
+    Set<OrderHour> orders;
 
     @ManyToOne(targetEntity = Manufacturer.class)
     @JoinColumn(name = "manufacturerId", referencedColumnName = "manufacturerId")
@@ -36,6 +37,14 @@ public class Computer {
     private Set<Game> games;
 
     public Computer() {
+    }
+
+    public String getComputerIpLocal() {
+        return computerIpLocal;
+    }
+
+    public void setComputerIpLocal(String computerIpLocal) {
+        this.computerIpLocal = computerIpLocal;
     }
 
     public String getComputerId() {
@@ -78,11 +87,11 @@ public class Computer {
         this.computerConfiguration = computerConfiguration;
     }
 
-    public Set<Order> getOrders() {
+    public Set<OrderHour> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Order> orders) {
+    public void setOrders(Set<OrderHour> orders) {
         this.orders = orders;
     }
 

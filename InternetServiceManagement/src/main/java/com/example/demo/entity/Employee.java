@@ -1,11 +1,12 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
 public class Employee {
     @Id
-  
     private String employeeId;
     private String fullName;
     private String dateOfBirth;
@@ -17,6 +18,7 @@ public class Employee {
     private int yearOfExp;
     private long avtUrl;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userName",referencedColumnName = "userName")
     private Account account;
@@ -28,11 +30,13 @@ public class Employee {
     public Employee() {
     }
 
+
     public String getEmployeeId() {
         return employeeId;
     }
 
     public void setEmployeeId(String employeeId) {
+
         this.employeeId = employeeId;
     }
 

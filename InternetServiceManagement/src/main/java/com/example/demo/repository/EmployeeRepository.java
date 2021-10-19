@@ -1,4 +1,8 @@
 package com.example.demo.repository;
 
-public interface EmployeeRepository {
+import com.example.demo.entity.Employee;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EmployeeRepository extends JpaRepository<Employee, String> {
+    Employee findByAccount_UserName(String userName);
 }

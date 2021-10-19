@@ -1,7 +1,6 @@
 package com.example.demo.jwt;
 
 import com.example.demo.entity.Account;
-import com.example.demo.entity.Customer;
 import com.example.demo.entity.Employee;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,43 +9,17 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class JwtResponse {
+public class JwtResponseEmployee {
     private String token;
     private String type = "Bearer";
     private Account account;
-    private Customer customer;
     private Employee employee;
     private List<String> roles;
 
-    public JwtResponse() {
-    }
-
-    public JwtResponse(String token, Account account, List<String> roles) {
-        this.token = token;
-        this.account = account;
-        this.roles = roles;
-    }
-
-    public JwtResponse(String token, Account account, Employee employee, List<String> roles) {
+    public JwtResponseEmployee(String token, Account account, Employee employee, List<String> roles) {
         this.token = token;
         this.account = account;
         this.employee = employee;
-        this.roles = roles;
-    }
-
-    public JwtResponse(String token, Account account, Customer customer, List<String> roles) {
-        this.token = token;
-        this.account = account;
-        this.customer = customer;
-        this.roles = roles;
-    }
-
-    public JwtResponse(String token) {
-        this.token = token;
-    }
-
-    public JwtResponse(String token,  List<String> roles) {
-        this.token = token;
         this.roles = roles;
     }
 
@@ -74,12 +47,12 @@ public class JwtResponse {
         this.account = account;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public List<String> getRoles() {

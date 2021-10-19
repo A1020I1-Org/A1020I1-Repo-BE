@@ -17,7 +17,7 @@ public class Customer {
     private boolean status;
     private String idCard;
 
-    @JsonIgnore
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userName",referencedColumnName = "userName")
     private Account account;
@@ -26,13 +26,8 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-    private Set<Pay> pays;
-
-    @JsonIgnore
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
-    Set<Order> orders;
+    Set<OrderHour> orders;
 
     public Customer() {
     }
@@ -117,19 +112,11 @@ public class Customer {
         this.orderServices = orderServices;
     }
 
-    public Set<Pay> getPays() {
-        return pays;
-    }
-
-    public void setPays(Set<Pay> pays) {
-        this.pays = pays;
-    }
-
-    public Set<Order> getOrders() {
+    public Set<OrderHour> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Order> orders) {
+    public void setOrders(Set<OrderHour> orders) {
         this.orders = orders;
     }
 }

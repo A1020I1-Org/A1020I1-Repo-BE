@@ -77,6 +77,11 @@ public class AccountDetailsImpl implements UserDetails {
     }
 
     @Override
+    public int hashCode() {
+        return 0;
+    }
+
+    @Override
     public boolean isAccountNonExpired() {
         return true;
     }

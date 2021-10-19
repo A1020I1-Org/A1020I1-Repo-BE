@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.5.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id "org.sonarqube" version "3.0"
     id 'java'
 }
 
@@ -12,7 +13,17 @@ repositories {
     mavenCentral()
 }
 
+sonarqube {
+    properties {
+        property 'sonar.host.url', 'http://18.117.194.147:9000/'
+        property 'sonar.login', 'f4570cffe1dd5bf39ecbeed0ef04eef921709b5a'
+        property 'sonar.projectKey', 'A1020I1_ReviewCode_ThangHD'
+        property 'sonar.projectName', 'A1020I1_ReviewCode_ThangHD'
+    }
+}
 dependencies {
+    implementation group: 'com.paypal.sdk', name: 'rest-api-sdk', version: '1.13.1'
+
     implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
