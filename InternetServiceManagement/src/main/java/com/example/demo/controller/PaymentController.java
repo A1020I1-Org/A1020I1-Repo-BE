@@ -1,15 +1,5 @@
 package com.example.demo.controller;
 
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController
-@RequestMapping(value = "/pay")
-public class PaymentController {
-}
-
-
 import com.example.demo.entity.PayPalClient;
 import com.example.demo.entity.*;
 import com.example.demo.service.CustomerService;
@@ -52,7 +42,7 @@ public class PaymentController {
 
     //-------------------Retrieve Payment By Role Customer------------------------------------
     @RequestMapping(value = "/payCustomer/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Pay> getPaymentCustomer(@PathVariable("id") int id) {
+    public ResponseEntity<Pay> getPaymentCustomer(@PathVariable("id") String id) {
         Customer customer = this.customerService.findById(id);
         if (customer == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

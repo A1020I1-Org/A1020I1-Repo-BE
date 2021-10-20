@@ -1,13 +1,5 @@
 package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController
-@RequestMapping(value = "/service")
-public class ServiceController {
-}
-
 import com.example.demo.entity.Service;
 import com.example.demo.service.ServiceService;
 

@@ -21,13 +21,6 @@ public class Employee {
     private String level;
     private String startWorkDate;
     private int yearOfExp;
-
-    private long avtUrl;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userName",referencedColumnName = "userName")
-    private Account account;
-
     private String avtUrl;
     @JsonBackReference
     @OneToOne(cascade = CascadeType.ALL)
@@ -128,19 +121,8 @@ public class Employee {
         this.yearOfExp = yearOfExp;
     }
 
-    public long getAvtUrl() {
-        return avtUrl;
-    }
-
-    public void setAvtUrl(long avtUrl) {
-
     public String getAvtUrl() {
         return avtUrl;
-    }
-
-    public void setAvtUrl(String avtUrl) {
-
-        this.avtUrl = avtUrl;
     }
 
     public Account getAccount() {
@@ -157,5 +139,9 @@ public class Employee {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public void setAvtUrl(String avtUrl) {
+        this.avtUrl = avtUrl;
     }
 }

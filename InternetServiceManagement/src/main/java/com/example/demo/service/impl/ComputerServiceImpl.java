@@ -17,14 +17,9 @@ public class ComputerServiceImpl implements ComputerService {
     @Autowired
     private ComputerRepository computerRepository;
 
+
     @Override
     public Page<Computer> findAll(Pageable pageable) {
-    @Autowired
-    ComputerRepository computerRepository;
-
-
-    @Override
-    public Page<Computer> finAll(Pageable pageable) {
         return computerRepository.findAll(pageable);
     }
 
@@ -33,10 +28,6 @@ public class ComputerServiceImpl implements ComputerService {
         return computerRepository.findAll();
     }
 
-    @Override
-    public Computer findById(String id) {
-        return computerRepository.findById(id).orElse(null);
-    }
 
     @Override
     public void save(Computer computer) {

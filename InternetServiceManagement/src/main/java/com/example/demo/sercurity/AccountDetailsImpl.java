@@ -1,5 +1,6 @@
 package com.example.demo.sercurity;
 
+import com.example.demo.entity.Account;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

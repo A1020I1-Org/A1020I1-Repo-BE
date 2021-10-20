@@ -10,18 +10,7 @@ import java.util.Set;
 @Entity
 public class Service {
     @Id
-<<<<<<< HEAD
-    private String serviceId;
-=======
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int serviceId;
->>>>>>> dev
-    private String serviceName;
-    private String unit;
-    private int quantity;
-    private int prices;
-
     @Pattern(regexp = "^SV\\d{4}$")
     private String serviceId;
     @NotBlank
@@ -47,18 +36,7 @@ public class Service {
         return serviceId;
     }
 
-<<<<<<< HEAD
     public void setServiceId(String serviceId) {
-=======
-    public void setServiceId(int serviceId) {
-
-    public String getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(String serviceId) {
-
->>>>>>> dev
         this.serviceId = serviceId;
     }
 

@@ -26,16 +26,6 @@ public class Computer {
     @OneToMany(mappedBy = "computer", cascade = {CascadeType.ALL, CascadeType.REMOVE})
     Set<Order> orders;
 
-    @NotBlank(message = "Hãng sản xuất không được để trống")
-    private String computerId;
-    private String computerLocation;
-    private String computerStartUsedDate;
-    private String computerWarrantyPeriod;
-    private String computerConfiguration;
-
-    @OneToMany(mappedBy = "computer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
-    Set<Order> orders;
-
     @ManyToOne(targetEntity = Manufacturer.class)
     @JoinColumn(name = "manufacturerId", referencedColumnName = "manufacturerId")
     private Manufacturer manufacturer;
@@ -45,24 +35,10 @@ public class Computer {
     @NotBlank(message = "trạng thái không được để trống")
     private Status status;
 
-    @NotBlank(message = "Loại phải là 1, 2, 3")
-    private Status status;
 
     @ManyToOne(targetEntity = Type.class)
     @JoinColumn(name = "typeId", referencedColumnName = "typeId")
     private Type type;
-
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "computer_game",
-//            joinColumns = @JoinColumn(name = "computerId"),
-//            inverseJoinColumns = @JoinColumn(name = "gameId")
-//    )
-//    private Set<Game> games;
-
-    public Computer() {
-    }
-
 
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -75,7 +51,7 @@ public class Computer {
 
     public Computer() {
     }
-  
+
     public String getComputerId() {
         return computerId;
     }
