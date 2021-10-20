@@ -73,11 +73,11 @@ public class ServiceController {
 
     @GetMapping(value = "/search")
     public ResponseEntity<Page<Service>> searchService(@RequestParam("searchName") String searchName,
-                                                 @PageableDefault(size = 3) Pageable pageable) {
+                                                  Pageable pageable) {
         Page<Service> searchService = serviceService.search(pageable, searchName);
         System.out.println(searchService);
-       if (searchService == null){
-           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+       if (searchService.isEmpty()){
+           return new ResponseEntity<>(HttpStatus.NOT_FOUND);
        }
         return new ResponseEntity<>(searchService,HttpStatus.OK);
     }
