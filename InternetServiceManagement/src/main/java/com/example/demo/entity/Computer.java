@@ -13,7 +13,9 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+
 public class Computer {
+
     @Id
     @Pattern(regexp = "^CP[\\d]{4}$", message = "Mã máy tính phải đúng định dạng CPXXXX (X từ 0-9)")
     private String computerId;
@@ -31,11 +33,13 @@ public class Computer {
     Set<Order> orders;
 
     @NotBlank(message = "Hãng sản xuất không được để trống")
-    private String computerId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int computerId;
     private String computerLocation;
     private String computerStartUsedDate;
     private String computerWarrantyPeriod;
     private String computerConfiguration;
+    private String computerIpLocal;
 
     @JsonBackReference
     @OneToMany(mappedBy = "computer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
@@ -84,11 +88,11 @@ public class Computer {
     public Computer() {
     }
   
-    public String getComputerId() {
+    public int getComputerId() {
         return computerId;
     }
 
-    public void setComputerId(String computerId) {
+    public void setComputerId(int computerId) {
         this.computerId = computerId;
     }
 
@@ -122,6 +126,14 @@ public class Computer {
 
     public void setComputerConfiguration(String computerConfiguration) {
         this.computerConfiguration = computerConfiguration;
+    }
+
+    public String getComputerIpLocal() {
+        return computerIpLocal;
+    }
+
+    public void setComputerIpLocal(String computerIpLocal) {
+        this.computerIpLocal = computerIpLocal;
     }
 
     public Set<Order> getOrders() {
