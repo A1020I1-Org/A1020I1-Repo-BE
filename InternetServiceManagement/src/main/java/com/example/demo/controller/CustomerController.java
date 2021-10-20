@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/customer")
 public class CustomerController {
     private final CustomerService customerService;
@@ -20,11 +21,13 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
+//    @CrossOrigin
     @GetMapping(value = "/{id}")
     public CustomerRequest getCustomer(@PathVariable Integer id){
        return customerService.findById(id);
     }
 
+//    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping(value = "/create")
     public ResponseEntity<CustomerRequest> createCustomer(@Validated @RequestBody CustomerRequest customerRequest, BindingResult bindingResult){
         new CustomerRequest().validate(customerRequest, bindingResult);
@@ -37,6 +40,7 @@ public class CustomerController {
         }
     }
 
+//    @CrossOrigin
     @PutMapping(value = "/edit/{id}")
     public ResponseEntity<CustomerRequest> updateCustomer(@Validated @RequestBody CustomerRequest customerRequest,
                                                    BindingResult bindingResult,
