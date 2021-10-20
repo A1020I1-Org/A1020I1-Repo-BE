@@ -14,10 +14,11 @@ public class Pay {
     private double totalPayment;
     private boolean status;
 
-    @OneToOne
-    @JoinColumn(name = "order_service_total_id")
-    private OrderServiceToTal orderServiceToTal;
-
+    @JsonManagedReference
+    @OneToMany(mappedBy = "pay", cascade = CascadeType.ALL)
+    Set<OrderService> orderServices;
+  
+    @JsonManagedReference
     @OneToOne
     @JoinColumn(name = "order_id")
     private Order order;

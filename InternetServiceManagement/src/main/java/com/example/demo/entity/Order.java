@@ -1,5 +1,9 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+
 import javax.persistence.*;
 
 @Entity
@@ -12,11 +16,14 @@ public class Order {
     @ManyToOne
     @MapsId("customerId")
     @JoinColumn(name = "customer_id")
+    @JsonManagedReference
     private Customer customer;
 
     @ManyToOne
     @MapsId("computerId")
     @JoinColumn(name = "computer_id")
+
+    @JsonManagedReference
     private Computer computer;
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)

@@ -91,7 +91,7 @@ public class PayServiceImpl implements PayService {
         if (customer.getOrders() != null && !customer.getOrders().isEmpty()){
             for (Order order : customer.getOrders()) {
                 if (order.getPay()!=null){
-                    if (!order.getPay().isStatus()) {
+//                    if (!order.getPay().isStatus()) {
                         int totalPayment = 0;
                         int totalMoney = 0;
                         for (OrderService orderService : order.getPay().getOrderServices()) {
@@ -101,7 +101,7 @@ public class PayServiceImpl implements PayService {
                         order.getPay().setTotalPayment(totalPayment);
                         payRepository.save(order.getPay());
                         return order.getPay();
-                    }
+//                    }
                 }
             }
         }
@@ -157,6 +157,9 @@ public class PayServiceImpl implements PayService {
             if (allRates.get(i).getType().equals("USD")) {
                 rateTemp = allRates.get(i);
             }
+        }
+        if (rateTemp==null){
+            return null;
         }
         Double rate = Double.valueOf(rateTemp.getBanck());
         Double result = Double.valueOf(vnd/rate);
