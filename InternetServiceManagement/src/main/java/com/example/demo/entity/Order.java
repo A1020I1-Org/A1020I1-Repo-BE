@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -15,13 +16,13 @@ public class Order {
     @ManyToOne
     @MapsId("customerId")
     @JoinColumn(name = "customer_id")
-    @JsonIgnore
+    @JsonManagedReference
     private Customer customer;
 
     @ManyToOne
     @MapsId("computerId")
     @JoinColumn(name = "computer_id")
-    @JsonIgnore
+    @JsonManagedReference
     private Computer computer;
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)

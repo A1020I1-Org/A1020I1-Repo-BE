@@ -13,12 +13,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
+
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import java.net.URI;
 import java.util.Map;
 
 
 @RestController
+@CrossOrigin("http://localhost:4200")
 @RequestMapping(value = "/payment")
 public class PaymentController {
 
@@ -33,7 +36,7 @@ public class PaymentController {
     }
 
     //-------------------Retrieve All Payment By Role Employee/Admin--------------------
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @GetMapping(value = "/list")
     public ResponseEntity<Page<Pay>> getListPayment(@PageableDefault(3) Pageable pageable) {
         Page<Pay> pays = payService.getListPayment(pageable);
         if (pays.isEmpty()) {
@@ -43,7 +46,7 @@ public class PaymentController {
     }
 
     //-------------------Retrieve Payment By Role Customer------------------------------------
-    @RequestMapping(value = "/payCustomer/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/payCustomer/{id}")
     public ResponseEntity<Pay> getPaymentCustomer(@PathVariable("id") int id) {
         Customer customer = this.customerService.findById(id);
         if (customer == null) {
@@ -68,7 +71,7 @@ public class PaymentController {
     }
 
     //-------------------Retrieve Single Payment--------------------------------------------
-    @RequestMapping(value = "/pay/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/pay/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Pay> getInfoPay(@PathVariable("id") int id) {
         Pay pay = payService.findById(id);
         if (pay == null) {
@@ -78,7 +81,7 @@ public class PaymentController {
     }
 
     //------------------- Pay Payment--------------------------------------------------------
-    @RequestMapping(value = "/pay", method = RequestMethod.POST)
+    @PostMapping(value = "/pay")
     public ResponseEntity<Void> pay(@RequestParam("id") int id) {
         if (payService.pay(id)) {
             return new ResponseEntity<>(HttpStatus.OK);
@@ -87,7 +90,7 @@ public class PaymentController {
     }
 
     //------------------- Calculator Exchange Money--------------------------------------------------------
-    @RequestMapping(value = "/pay/exchange",method = RequestMethod.POST)
+    @PostMapping(value = "/pay/exchange")
     public ResponseEntity<Exchange> exchange(@RequestParam("id") int id,@RequestParam("moneyRecived") int moneyRecived){
         Pay payCurrent = this.payService.findById(id);
         if (payCurrent==null){
@@ -97,33 +100,25 @@ public class PaymentController {
         return new ResponseEntity<>(exchange,HttpStatus.OK);
     }
     //------------------- Make Payment Paypal--------------------------------------------------------
-    @RequestMapping(value = "/make/paypal",method = RequestMethod.POST)
+    @PostMapping(value = "/make/paypal")
     public ResponseEntity<Map<String, Object>>makePayment(@RequestParam("id") int id) throws Exception {
         Pay payCurrent = this.payService.findById(id);
         if (payCurrent==null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         Double usd = payService.currencyExchange(payCurrent.getTotalPayment());
-        return new ResponseEntity<>(payPalClient.createPayment(usd),HttpStatus.OK);
+        return new ResponseEntity<>(payPalClient.createPayment(usd,id),HttpStatus.OK);
 
     }
     //------------------- Complete Payment Paypal--------------------------------------------------------
-    @RequestMapping(value = "/complete/paypal",method = RequestMethod.POST)
-    public ResponseEntity<Map<String, Object>> completePayment(HttpServletRequest request){
-        if (payPalClient.completePayment(request)==null){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(payPalClient.completePayment(request),HttpStatus.OK);
+    @GetMapping(value = "/complete/paypal")
+    public RedirectView completePayment(@RequestParam("id") int id,HttpServletRequest request){
+        payPalClient.completePayment(request);
+        payService.pay(id);
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("http://localhost:4200/list-payment");
+        return redirectView;
     }
 
-    @RequestMapping(value = "/rate",method = RequestMethod.GET)
-    public ResponseEntity <Double> getRate() throws Exception {
-        Double usd = payService.currencyExchange(100000);
-
-        if (usd==null){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(usd,HttpStatus.OK);
-    }
 }
 

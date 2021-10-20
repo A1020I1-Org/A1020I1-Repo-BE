@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.5.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id "org.sonarqube" version "3.0"
 }
 
 group = 'com.example'
@@ -11,7 +12,6 @@ sourceCompatibility = '1.8'
 repositories {
     mavenCentral()
 }
-
 
 
 dependencies {
@@ -32,6 +32,18 @@ dependencies {
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
 }
 
+sonarqube {
+    properties {
+        property 'sonar.host.url', 'http://18.117.194.147:9000'
+        property 'sonar.login', 'f4570cffe1dd5bf39ecbeed0ef04eef921709b5a'
+        property 'sonar.projectKey', 'A1020I1_ReviewCode_DatNT'
+        property 'sonar.projectName', 'A1020I1_ReviewCode_DatNT'
+    }
+}
+
 test {
     useJUnitPlatform()
 }
+
+
+

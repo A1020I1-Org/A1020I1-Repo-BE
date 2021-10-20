@@ -17,8 +17,8 @@ public class Pay {
     private int totalPayment;
     private boolean status;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "pay", cascade = CascadeType.ALL)
-    @JsonIgnore
     Set<OrderService> orderServices;
 
     @OneToOne

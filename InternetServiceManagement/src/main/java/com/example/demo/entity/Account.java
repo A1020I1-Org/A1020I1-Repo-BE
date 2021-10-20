@@ -1,5 +1,9 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -9,14 +13,15 @@ public class Account {
     private String userName;
     @Column(length = 255)
     private String password;
-
     @OneToOne(mappedBy = "account" ,cascade = CascadeType.ALL)
     private Customer customer;
 
     @OneToOne(mappedBy = "account" ,cascade = CascadeType.ALL)
     private Employee employee;
 
+
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @JsonIgnore
     Set<AccountRole> accountRoles;
 
     public Account() {
