@@ -13,6 +13,9 @@ public class Game {
     private String gameImage;
     private String description;
 
+
+//    @ManyToMany(mappedBy = "games", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Set<Computer> computers;
     @ManyToMany(mappedBy = "games", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Computer> computers;
 
@@ -58,6 +61,14 @@ public class Game {
     public void setDescription(String description) {
         this.description = description;
     }
+
+//    public Set<Computer> getComputers() {
+//        return computers;
+//    }
+//
+//    public void setComputers(Set<Computer> computers) {
+//        this.computers = computers;
+//    }
 
     public Set<Computer> getComputers() {
         return computers;
