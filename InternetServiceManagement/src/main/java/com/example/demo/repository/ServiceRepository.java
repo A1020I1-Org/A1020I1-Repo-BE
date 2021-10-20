@@ -10,8 +10,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ServiceRepository extends JpaRepository<Service, String> {
-    @Query("SELECT s FROM Service s WHERE s.serviceId like %:searchName% or s.serviceName like %:searchName% " +
-            "or s.quantity = :searchName  or s.unit like %:searchName% " +
-            "or s.prices = :searchName ")
+//    @Query(value = "SELECT * FROM Service s WHERE s.serviceId like %:searchName% or s.serviceName like %:searchName% " +
+//            "or s.quantity = :searchName  or s.unit like %:searchName% " +
+//            "or s.prices = :searchName ", nativeQuery = true)
+
+    @Query(value = "SELECT * FROM Service s WHERE s.service_id like %:searchName% or " +
+            "s.service_name like %:searchName% or s.unit like %:searchName% " +
+            "or s.prices like %:searchName% or s.quantity like %:searchName%", nativeQuery = true)
     Page<Service> search(Pageable pageable, @Param("searchName") String searchName);
 }
