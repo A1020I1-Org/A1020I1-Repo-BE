@@ -1,6 +1,5 @@
 package com.example.demo.entity;
 
-import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -10,9 +9,7 @@ import java.util.Set;
 @Entity
 public class Service {
     @Id
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int serviceId;
+    private String serviceId;
     private String serviceName;
     private String unit;
     private int quantity;
@@ -31,15 +28,15 @@ public class Service {
     @NotNull
     private int prices;
 
-    @JsonManagedReference
 
+    @JsonBackReference
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
 
     public Service() {
     }
 
-    public int getServiceId() {
+    public String getServiceId() {
         return serviceId;
     }
 
@@ -50,7 +47,6 @@ public class Service {
     }
 
     public void setServiceId(String serviceId) {
-
         this.serviceId = serviceId;
     }
 
@@ -85,8 +81,6 @@ public class Service {
     public void setPrices(int prices) {
         this.prices = prices;
     }
-
-  
 
     public Set<OrderService> getOrderServices() {
         return orderServices;

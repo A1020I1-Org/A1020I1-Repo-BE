@@ -1,5 +1,9 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Service;
+
+import java.util.List;
+
 import java.util.List;
 
 import com.example.demo.entity.Service;
@@ -21,5 +25,6 @@ public interface ServiceService {
     Service deleteService (String serviceId);
 
     Page<Service> search(Pageable pageable, String searchName);
+
 }
 
