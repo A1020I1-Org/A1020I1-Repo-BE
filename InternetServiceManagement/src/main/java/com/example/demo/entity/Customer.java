@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -9,32 +9,26 @@ import java.util.Set;
 @Entity
 public class Customer {
     @Id
-    private int customerId;
+    private String customerId;
     private String fullName;
     private String dateOfBirth;
     private String email;
     private String address;
     private String phone;
     private boolean status;
-    private String idCard;
 
+    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userName",referencedColumnName = "userName")
-
     private Account account;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    Set<OrderService> orderServices;
 
-    @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
-
-    @JsonManagedReference
-    private Account account;
-
+    @JsonBackReference
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     @JsonManagedReference
     Set<OrderService> orderServices;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
     @JsonManagedReference
     Set<Order> orders;
@@ -42,11 +36,22 @@ public class Customer {
     public Customer() {
     }
 
-    public int getCustomerId() {
+
+    public Customer(String customerId, String fullName, String dateOfBirth, String email, String address, String phone, boolean status) {
+        this.customerId = customerId;
+        this.fullName = fullName;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.status = status;
+    }
+
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
@@ -90,20 +95,12 @@ public class Customer {
         this.phone = phone;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
     public void setStatus(boolean status) {
         this.status = status;
-    }
-
-    public String getIdCard() {
-        return idCard;
-    }
-
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
     }
 
     public Account getAccount() {

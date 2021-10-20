@@ -10,9 +10,13 @@ import java.util.Set;
 @Entity
 public class Service {
     @Id
+<<<<<<< HEAD
+    private String serviceId;
+=======
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int serviceId;
+>>>>>>> dev
     private String serviceName;
     private String unit;
     private int quantity;
@@ -39,10 +43,13 @@ public class Service {
     public Service() {
     }
 
-    public int getServiceId() {
+    public String getServiceId() {
         return serviceId;
     }
 
+<<<<<<< HEAD
+    public void setServiceId(String serviceId) {
+=======
     public void setServiceId(int serviceId) {
 
     public String getServiceId() {
@@ -51,6 +58,7 @@ public class Service {
 
     public void setServiceId(String serviceId) {
 
+>>>>>>> dev
         this.serviceId = serviceId;
     }
 
@@ -85,8 +93,6 @@ public class Service {
     public void setPrices(int prices) {
         this.prices = prices;
     }
-
-  
 
     public Set<OrderService> getOrderServices() {
         return orderServices;

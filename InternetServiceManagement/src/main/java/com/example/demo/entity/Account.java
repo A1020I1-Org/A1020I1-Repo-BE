@@ -1,7 +1,11 @@
 package com.example.demo.entity;
 
+<<<<<<< HEAD
+import com.fasterxml.jackson.annotation.JsonBackReference;
+=======
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+>>>>>>> dev
 
 import javax.persistence.*;
 import java.util.Set;
@@ -13,6 +17,7 @@ public class Account {
     @Column(length = 255)
     private String password;
 
+    @JsonBackReference
     @OneToOne(mappedBy = "account" ,cascade = CascadeType.ALL)
     private Customer customer;
 
