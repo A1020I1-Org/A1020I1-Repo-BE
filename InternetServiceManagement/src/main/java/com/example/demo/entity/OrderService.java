@@ -5,38 +5,34 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "order_service")
 public class OrderService {
 
     @Id
-    @Column(name="id")
     private Integer id;
 
     @ManyToOne
     @MapsId("customerId")
     @JoinColumn(name = "customer_id")
     @JsonIgnore
+
     private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "service_id")
     @JsonManagedReference
-
     private Service service;
 
     @ManyToOne
-    @JoinColumn(name = "pay_id")
-    @JsonBackReference
-    private Pay pay;
+    @JoinColumn(name = "order_service_total_id")
+    private OrderServiceToTal orderServiceToTal;
 
     private int quantity;
     private int unit;
     private int totalMoney;
     private String oder_date;
-    private boolean status;
 
     public OrderService() {
     }
@@ -97,19 +93,11 @@ public class OrderService {
         this.oder_date = oder_date;
     }
 
-    public Pay getPay() {
-        return pay;
+    public OrderServiceToTal getOrderServiceToTal() {
+        return orderServiceToTal;
     }
 
-    public void setPay(Pay pay) {
-        this.pay = pay;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setOrderServiceToTal(OrderServiceToTal orderServiceToTal) {
+        this.orderServiceToTal = orderServiceToTal;
     }
 }

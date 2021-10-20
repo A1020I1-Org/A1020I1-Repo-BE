@@ -63,7 +63,6 @@ public class Service {
         this.prices = prices;
     }
 
-  
 
     public Set<OrderService> getOrderServices() {
         return orderServices;

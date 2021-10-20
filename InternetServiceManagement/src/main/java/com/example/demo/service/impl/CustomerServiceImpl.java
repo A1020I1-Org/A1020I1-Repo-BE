@@ -9,6 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
+    CustomerRepository customerRepository;
+    @Override
+    public Customer findByAccount(String account) {
+        return customerRepository.findByAccount_UserName(account);
+    }
+    @Autowired
     private CustomerRepository customerRepository;
     @Override
     public Customer findById(Integer id) {
