@@ -1,5 +1,9 @@
 package com.example.demo.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -33,13 +37,16 @@ public class Computer {
     private String computerWarrantyPeriod;
     private String computerConfiguration;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "computer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
     Set<Order> orders;
 
+    @JsonIgnore
     @ManyToOne(targetEntity = Manufacturer.class)
     @JoinColumn(name = "manufacturerId", referencedColumnName = "manufacturerId")
     private Manufacturer manufacturer;
 
+    @JsonIgnore
     @ManyToOne(targetEntity = Status.class)
     @JoinColumn(name = "statusId", referencedColumnName = "statusId")
     @NotBlank(message = "trạng thái không được để trống")
@@ -48,21 +55,22 @@ public class Computer {
     @NotBlank(message = "Loại phải là 1, 2, 3")
     private Status status;
 
+    @JsonIgnore
     @ManyToOne(targetEntity = Type.class)
     @JoinColumn(name = "typeId", referencedColumnName = "typeId")
     private Type type;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "computer_game",
-//            joinColumns = @JoinColumn(name = "computerId"),
-//            inverseJoinColumns = @JoinColumn(name = "gameId")
-//    )
-//    private Set<Game> games;
+    @JsonIgnore
+   @ManyToMany(fetch = FetchType.EAGER)
+   @JoinTable(
+           name = "computer_game",
+           joinColumns = @JoinColumn(name = "computerId"),
+           inverseJoinColumns = @JoinColumn(name = "gameId")
+   )
+   private Set<Game> games;
 
     public Computer() {
     }
-
 
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -148,13 +156,13 @@ public class Computer {
         this.type = type;
     }
 
-//    public Set<Game> getGames() {
-//        return games;
-//    }
-//
-//    public void setGames(Set<Game> games) {
-//        this.games = games;
-//    }
+   public Set<Game> getGames() {
+       return games;
+   }
+
+   public void setGames(Set<Game> games) {
+       this.games = games;
+   }
 
     public Set<Game> getGames() {
         return games;

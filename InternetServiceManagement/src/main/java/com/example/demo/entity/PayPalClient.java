@@ -1,8 +1,11 @@
 package com.example.demo.entity;
 
+import com.example.demo.service.PayService;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +16,11 @@ import java.util.Map;
 
 @Component
 public class PayPalClient {
+    @Autowired
+    private PayService payService;
     String clientId = "ATGMSC4k8oh3C589nbzpCmQok2r7prU4QT1RGLB8ND77iTRKAJj_jc1RNhZHptpXUNBir8zubnORENnR";
     String clientSecret = "EHmU37XM0DGLVecipm8kBI_i7gQoW-t6iAK_8bRCPdqhA8Om1Sf4oD39Jc8tkZUf-d-6dHmi96Iqv5DN";
-    public Map<String, Object> createPayment(Double sum){
+    public Map<String, Object> createPayment(Double sum,Integer id){
         Map<String, Object> response = new HashMap<String, Object>();
         Amount amount = new Amount();
         amount.setCurrency("USD");
@@ -34,8 +39,8 @@ public class PayPalClient {
         payment.setTransactions(transactions);
 
         RedirectUrls redirectUrls = new RedirectUrls();
-        redirectUrls.setCancelUrl("http://localhost:8080/cancel");
-        redirectUrls.setReturnUrl("http://localhost:8080/");
+        redirectUrls.setCancelUrl("http://localhost:4200/cancel");
+        redirectUrls.setReturnUrl("http://localhost:8080/payment/complete/paypal?id="+id);
         payment.setRedirectUrls(redirectUrls);
         Payment createdPayment;
         try {
@@ -52,6 +57,7 @@ public class PayPalClient {
                 }
                 response.put("status", "success");
                 response.put("redirect_url", redirectUrl);
+                response.put("id",id);
             }
         } catch (PayPalRESTException e) {
             System.out.println("Error happened during payment creation!");
@@ -63,7 +69,6 @@ public class PayPalClient {
         Map<String, Object> response = new HashMap();
         Payment payment = new Payment();
         payment.setId(req.getParameter("paymentId"));
-
         PaymentExecution paymentExecution = new PaymentExecution();
         paymentExecution.setPayerId(req.getParameter("PayerID"));
         try {

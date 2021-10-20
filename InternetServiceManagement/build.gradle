@@ -14,7 +14,6 @@ repositories {
 }
 
 
-
 dependencies {
     // https://mvnrepository.com/artifact/com.paypal.sdk/rest-api-sdk
     implementation group: 'com.paypal.sdk', name: 'rest-api-sdk', version: '1.13.1'
@@ -40,9 +39,19 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
 }
 
+sonarqube {
+    properties {
+        property 'sonar.host.url', 'http://18.117.194.147:9000'
+        property 'sonar.login', 'f4570cffe1dd5bf39ecbeed0ef04eef921709b5a'
+        property 'sonar.projectKey', 'A1020I1_ReviewCode_DatNT'
+        property 'sonar.projectName', 'A1020I1_ReviewCode_DatNT'
+    }
+}
+
 test {
     useJUnitPlatform()
 }
+
 
 sonarqube {
     properties {
@@ -58,3 +67,4 @@ sonarqube {
         property 'sonar.projectName', 'A1020I1_ReviewCode_CuongHN'
     }
 }
+

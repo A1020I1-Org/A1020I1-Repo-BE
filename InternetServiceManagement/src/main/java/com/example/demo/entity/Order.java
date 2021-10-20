@@ -1,10 +1,8 @@
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -18,12 +16,15 @@ public class Order {
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    @JsonIgnore
+    @JsonManagedReference
+
     private Customer customer;
 
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "computer_id")
+
+    @JsonManagedReference
     private Computer computer;
 
 

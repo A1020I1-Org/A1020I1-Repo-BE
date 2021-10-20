@@ -1,9 +1,9 @@
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 
 @Entity
@@ -17,11 +17,14 @@ public class OrderService {
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @JsonIgnore
+
     private Customer customer;
 
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "service_id")
+    @JsonManagedReference
     private Service service;
 
     @ManyToOne
