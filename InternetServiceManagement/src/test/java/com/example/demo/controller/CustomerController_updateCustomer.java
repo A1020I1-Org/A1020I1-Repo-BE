@@ -168,7 +168,7 @@ public class CustomerController_updateCustomer {
         customer.setDistrict("Lien Chieu");
         customer.setCommune("41");
         customer.setPhone("0987654321");
-        customer.setUsername("cuong");
+        customer.setUsername("cuong123");
         customer.setPassword("123");
         customer.setPasswordRetype("123");
         customer.setStatus(true);
