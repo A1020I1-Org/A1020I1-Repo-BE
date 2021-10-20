@@ -31,5 +31,6 @@ public class ServiceServiceImpl implements ServiceService {
     @Override
     public void delete(com.example.demo.entity.Service service) {
         serivceRepository.delete(service);
+
     }
 }

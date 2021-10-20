@@ -2,6 +2,10 @@ package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +18,7 @@ public class Order {
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @JsonIgnore
     private Customer customer;
 
     @JsonManagedReference
@@ -21,8 +26,9 @@ public class Order {
     @JoinColumn(name = "computer_id")
     private Computer computer;
 
-    @JsonManagedReference
+
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonBackReference
     private Pay pay;
 
     private String startTime;

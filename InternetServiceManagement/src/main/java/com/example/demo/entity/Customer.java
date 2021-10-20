@@ -22,12 +22,15 @@ public class Customer {
     @JoinColumn(name = "userName",referencedColumnName = "userName")
     private Account account;
 
+
     @JsonBackReference
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonManagedReference
     Set<OrderService> orderServices;
 
     @JsonBackReference
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
+    @JsonManagedReference
     Set<Order> orders;
 
     public Customer() {
