@@ -16,11 +16,10 @@ public class AccountCustomer {
     @NotBlank(message = "The birth day must not blank.")
     private String dateOfBirth;
 
-    @NotBlank(message = "The email must not Bblank.")
+    @NotBlank(message = "The email must not blank.")
     @Email(message = "The email number must be in the correct format xxx@gmail.com.")
     private String email;
 
-    @NotBlank(message = "Address must not blank.")
     private String address;
 
     @NotBlank(message = "Phone number must not blank")

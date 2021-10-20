@@ -6,6 +6,7 @@ import java.util.Set;
 @Entity
 public class Customer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerId;
     private String fullName;
     private String dateOfBirth;
@@ -31,7 +32,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int customerId, String fullName, String dateOfBirth, String email, String address, String phone, boolean status, String idCard, Account account) {
+    public Customer(int customerId,String fullName, String dateOfBirth, String email, String address, String phone, boolean status, String idCard, Account account) {
         this.customerId = customerId;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;

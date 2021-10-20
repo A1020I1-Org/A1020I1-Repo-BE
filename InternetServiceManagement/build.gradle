@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.5.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id "org.sonarqube" version "3.0"
 }
 
 group = 'com.example'
@@ -13,11 +14,14 @@ repositories {
 }
 
 dependencies {
+    implementation group: 'com.paypal.sdk', name: 'rest-api-sdk', version: '1.13.1'
+    implementation group: 'org.json', name: 'json', version: '20190722'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.4'
@@ -26,4 +30,13 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+sonarqube{
+    properties{
+        property 'sonar.host.url','http://18.117.194.147:9000'
+        property 'sonar.login','e42dbb52c76df604eacb9fd436e7cc8b09a6846c'
+        property 'sonar.projectKey','A1020I1_ReviewCode_NhanNH'
+        property 'sonar.projectName','A1020I1_ReviewCode_NhanNH'
+    }
 }
