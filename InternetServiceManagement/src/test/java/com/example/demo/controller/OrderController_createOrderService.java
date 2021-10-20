@@ -143,9 +143,9 @@ public class OrderController_createOrderService {
     public void createService_18() throws Exception {
         OrderServiceDTO orderServiceDTO = new OrderServiceDTO();
         orderServiceDTO.setId(1);
-        orderServiceDTO.setQuantity(1);
+        orderServiceDTO.setQuantity(2);
         orderServiceDTO.setUnit("lon");
-        orderServiceDTO.setTotalMoney(20000);
+        orderServiceDTO.setTotalMoney(40000);
         orderServiceDTO.setOderDate("2021-10-10");
         orderServiceDTO.setStatus(true);
         orderServiceDTO.setCustomer("1");
