@@ -1,15 +1,36 @@
 package com.example.demo.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 public class Computer {
     @Id
+    @Pattern(regexp = "^CP[\\d]{4}$", message = "Mã máy tính phải đúng định dạng CPXXXX (X từ 0-9)")
+    private String computerId;
+    @Pattern(regexp = "^[A-Z]{1}[\\d]{4}$", message = "Vị trí phải đúng định dạng CPXXXX (X từ 0-9)")
+    private String computerLocation;
+    @DateTimeFormat
+    private String computerStartUsedDate;
+    @NotBlank(message = "Thời gian bảo hành không được để trống")
+    private String computerWarrantyPeriod;
+    @NotBlank(message = "Cấu hình máy không được để trống")
+    private String computerConfiguration;
+
+
+    @OneToMany(mappedBy = "computer", cascade = {CascadeType.ALL, CascadeType.REMOVE})
+    Set<Order> orders;
+
+    @NotBlank(message = "Hãng sản xuất không được để trống")
     private String computerId;
     private String computerLocation;
     private String computerStartUsedDate;
@@ -28,6 +49,10 @@ public class Computer {
     @JsonIgnore
     @ManyToOne(targetEntity = Status.class)
     @JoinColumn(name = "statusId", referencedColumnName = "statusId")
+    @NotBlank(message = "trạng thái không được để trống")
+    private Status status;
+
+    @NotBlank(message = "Loại phải là 1, 2, 3")
     private Status status;
 
     @JsonIgnore
@@ -36,6 +61,18 @@ public class Computer {
     private Type type;
 
     @JsonIgnore
+   @ManyToMany(fetch = FetchType.EAGER)
+   @JoinTable(
+           name = "computer_game",
+           joinColumns = @JoinColumn(name = "computerId"),
+           inverseJoinColumns = @JoinColumn(name = "gameId")
+   )
+   private Set<Game> games;
+
+    public Computer() {
+    }
+
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "computer_game",
@@ -46,7 +83,7 @@ public class Computer {
 
     public Computer() {
     }
-
+  
     public String getComputerId() {
         return computerId;
     }
@@ -118,6 +155,14 @@ public class Computer {
     public void setType(Type type) {
         this.type = type;
     }
+
+   public Set<Game> getGames() {
+       return games;
+   }
+
+   public void setGames(Set<Game> games) {
+       this.games = games;
+   }
 
     public Set<Game> getGames() {
         return games;

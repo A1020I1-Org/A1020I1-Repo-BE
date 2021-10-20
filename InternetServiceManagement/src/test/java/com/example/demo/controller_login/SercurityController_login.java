@@ -1,6 +1,5 @@
 package com.example.demo.controller_login;
 
-import com.example.demo.entity.Account;
 import com.example.demo.jwt.LoginRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

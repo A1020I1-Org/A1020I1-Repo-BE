@@ -1,6 +1,15 @@
 package com.example.demo.controller;
 
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(value = "/pay")
+public class PaymentController {
+}
+
+
 import com.example.demo.entity.PayPalClient;
 import com.example.demo.entity.*;
 import com.example.demo.service.CustomerService;
@@ -16,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.URI;
+
 import java.util.Map;
 
 
@@ -119,6 +128,5 @@ public class PaymentController {
         redirectView.setUrl("http://localhost:4200/list-payment");
         return redirectView;
     }
-
 }
 

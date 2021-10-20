@@ -1,7 +1,5 @@
 package com.example.demo.jwt;
 
-import com.example.demo.entity.Account;
-import com.example.demo.entity.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
