@@ -1,6 +1,9 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -18,11 +21,19 @@ public class Pay {
 
     @JsonBackReference
     @OneToMany(mappedBy = "pay", cascade = CascadeType.ALL)
+    @Column(name="id")
+    private int id;
+    private int totalPayment;
+    private boolean status;
+
+    @OneToMany(mappedBy = "pay", cascade = CascadeType.ALL)
+    @JsonIgnore
     Set<OrderService> orderServices;
 
     @JsonManagedReference
     @OneToOne
     @JoinColumn(name = "order_id")
+    @JsonManagedReference
     private Order order;
 
     public Pay() {
@@ -34,6 +45,14 @@ public class Pay {
 
     public void setId(Integer payId) {
         this.payId = payId;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+
     }
 
     public int getTotalPayment() {

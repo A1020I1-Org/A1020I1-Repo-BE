@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -17,6 +20,9 @@ public class Service {
     private int prices;
 
     @JsonBackReference
+
+    @JsonManagedReference
+
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
 
