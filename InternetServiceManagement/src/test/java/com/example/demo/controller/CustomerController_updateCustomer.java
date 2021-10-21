@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.CustomerDTO;
+import com.example.demo.entity.AccountCustomer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -26,7 +25,7 @@ public class CustomerController_updateCustomer {
 
     @Test
     public void updateCustomer_13() throws Exception {
-        CustomerDTO customer = new CustomerDTO();
+        AccountCustomer customer = new AccountCustomer();
         customer.setCustomerId("1");
         customer.setFullName(null);
         customer.setDateOfBirth("1999-17-10");
@@ -53,7 +52,7 @@ public class CustomerController_updateCustomer {
 
     @Test
     public void updateCustomer_14() throws Exception {
-        CustomerDTO customer = new CustomerDTO();
+        AccountCustomer customer = new AccountCustomer();
         customer.setCustomerId("1");
         customer.setFullName("");
         customer.setDateOfBirth("1999-17-10");
@@ -80,7 +79,7 @@ public class CustomerController_updateCustomer {
 
     @Test
     public void updateCustomer_15() throws Exception {
-        CustomerDTO customer = new CustomerDTO();
+        AccountCustomer customer = new AccountCustomer();
         customer.setCustomerId("1");
         customer.setFullName("Ngoc Cuong");
         customer.setDateOfBirth("1999-17-10");
@@ -107,7 +106,7 @@ public class CustomerController_updateCustomer {
 
     @Test
     public void updateCustomer_16() throws Exception {
-        CustomerDTO customer = new CustomerDTO();
+        AccountCustomer customer = new AccountCustomer();
         customer.setCustomerId("1");
         customer.setFullName("Ngoc Cuong");
         customer.setDateOfBirth("1999-17-10");
@@ -133,7 +132,7 @@ public class CustomerController_updateCustomer {
 
     @Test
     public void updateCustomer_17() throws Exception {
-        CustomerDTO customer = new CustomerDTO();
+        AccountCustomer customer = new AccountCustomer();
         customer.setCustomerId("1");
         customer.setFullName("Ngoc Cuong");
         customer.setDateOfBirth("1999-17-10");
@@ -159,7 +158,7 @@ public class CustomerController_updateCustomer {
 
     @Test
     public void updateCustomer_18() throws Exception {
-        CustomerDTO customer = new CustomerDTO();
+        AccountCustomer customer = new AccountCustomer();
         customer.setCustomerId("1");
         customer.setFullName("Ngoc Cuong");
         customer.setDateOfBirth("1999-17-10");

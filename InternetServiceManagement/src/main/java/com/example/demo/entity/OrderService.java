@@ -2,8 +2,6 @@ package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 
 @Entity
@@ -11,8 +9,13 @@ import javax.persistence.*;
 public class OrderService {
 
     @Id
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private int quantity;
+    private String unit;
+    private int totalMoney;
+    private String oderDate;
+    private boolean status;
 
     @JsonManagedReference
     @ManyToOne
@@ -24,16 +27,10 @@ public class OrderService {
     @JoinColumn(name = "service_id")
     private Service service;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "pay_id")
-    @JsonBackReference
     private Pay pay;
-
-    private int quantity;
-    private String unit;
-    private int totalMoney;
-    private String oder_date;
-    private boolean status;
 
     public OrderService() {
     }
@@ -86,14 +83,6 @@ public class OrderService {
         this.totalMoney = totalMoney;
     }
 
-    public String getOder_date() {
-        return oder_date;
-    }
-
-    public void setOder_date(String oder_date) {
-        this.oder_date = oder_date;
-    }
-
     public Pay getPay() {
         return pay;
     }
@@ -102,9 +91,19 @@ public class OrderService {
         this.pay = pay;
     }
 
-
     public boolean isStatus() {
         return status;
+    }
 
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public String getOderDate() {
+        return oderDate;
+    }
+
+    public void setOderDate(String oderDate) {
+        this.oderDate = oderDate;
     }
 }

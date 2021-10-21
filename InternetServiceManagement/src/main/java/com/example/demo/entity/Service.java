@@ -1,42 +1,20 @@
 package com.example.demo.entity;
 
-import javax.persistence.*;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 public class Service {
     @Id
-<<<<<<< HEAD
     private String serviceId;
-=======
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int serviceId;
->>>>>>> dev
     private String serviceName;
     private String unit;
     private int quantity;
     private int prices;
 
-    @Pattern(regexp = "^SV\\d{4}$")
-    private String serviceId;
-    @NotBlank
-    private String serviceName;
-    @NotBlank
-    private String unit;
-    @Min(1)
-    @NotNull
-    private int quantity;
-    @Min(1000)
-    @NotNull
-    private int prices;
-
-    @JsonManagedReference
-
+    @JsonBackReference
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
 
@@ -47,18 +25,7 @@ public class Service {
         return serviceId;
     }
 
-<<<<<<< HEAD
     public void setServiceId(String serviceId) {
-=======
-    public void setServiceId(int serviceId) {
-
-    public String getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(String serviceId) {
-
->>>>>>> dev
         this.serviceId = serviceId;
     }
 

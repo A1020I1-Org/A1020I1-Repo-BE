@@ -10,6 +10,7 @@ public class Role {
     private int roleId;
 
     private String roleName;
+
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     Set<AccountRole> accountRoles;
 
