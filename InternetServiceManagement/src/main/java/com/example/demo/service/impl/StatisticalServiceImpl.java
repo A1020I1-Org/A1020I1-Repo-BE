@@ -24,7 +24,7 @@ public class StatisticalServiceImpl implements StatisticalService {
     @Autowired
     private OrderServiceRepository orderServiceRepository;
 
-    private final static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    private final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     public List<DataForComputer> findAllInStartTimeToEndTime(String startTime, String endTime) {
@@ -166,7 +166,7 @@ public class StatisticalServiceImpl implements StatisticalService {
     }
 
     private DataForMonth calculateTotalMoney(Date startDate, Date endDate){
-        SimpleDateFormat month = new SimpleDateFormat("dd/MM");
+        SimpleDateFormat month = new SimpleDateFormat("MM");
         List<OrderService> listOrderService = this.orderServiceRepository.
                 findAllInStartTimeToEndTime(startDate, endDate);
         List<Order> listOrder = this.orderRepository.findAllInStartTimeToEndTime(startDate, endDate);
@@ -187,7 +187,7 @@ public class StatisticalServiceImpl implements StatisticalService {
         for(OrderService order : listOrderService){
             totalMoneyService += order.getTotalMoney();
         }
-        return new DataForMonth(month.format(startDate)+":"+month.format(endDate),
+        return new DataForMonth(month.format(startDate),
                 totalMoneyService, totalMoneyComputer);
     }
 
