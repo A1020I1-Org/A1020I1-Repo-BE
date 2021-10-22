@@ -15,4 +15,9 @@ public class CustomerServiceImpl implements CustomerService {
     public void save(Customer customer) {
         customerRepository.save(customer);
     }
+
+    @Override
+    public boolean checkEmail(String email) {
+        return customerRepository.existsByEmail(email);
+    }
 }
