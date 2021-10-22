@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+<<<<<<< HEAD
 import com.example.demo.entity.Service;
 import com.example.demo.service.ServiceService;
 
@@ -89,3 +90,12 @@ public class ServiceController {
     }
 }
 
+=======
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(value = "/service")
+public class ServiceController {
+}
+>>>>>>> 04647869f15f390645125898a77445b73c583a8b

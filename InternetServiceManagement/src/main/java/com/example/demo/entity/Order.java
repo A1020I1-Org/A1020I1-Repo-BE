@@ -21,6 +21,7 @@ public class Order {
     @ManyToOne
     @MapsId("computerId")
     @JoinColumn(name = "computer_id")
+
     @JsonIgnore
     private Computer computer;
 

@@ -1,13 +1,13 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 public class Customer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerId;
     private String fullName;
     private String dateOfBirth;
@@ -33,6 +33,17 @@ public class Customer {
     public Customer() {
     }
 
+    public Customer(int customerId,String fullName, String dateOfBirth, String email, String address, String phone, boolean status, String idCard, Account account) {
+        this.customerId = customerId;
+        this.fullName = fullName;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.status = status;
+        this.idCard = idCard;
+        this.account = account;
+    }
     public int getCustomerId() {
         return customerId;
     }

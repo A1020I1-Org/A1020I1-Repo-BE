@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+<<<<<<< HEAD
 
 import com.example.demo.entity.PayPalClient;
 import com.example.demo.entity.*;
@@ -116,3 +117,12 @@ public class PaymentController {
     }
 }
 
+=======
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(value = "/pay")
+public class PaymentController {
+}
+>>>>>>> 04647869f15f390645125898a77445b73c583a8b

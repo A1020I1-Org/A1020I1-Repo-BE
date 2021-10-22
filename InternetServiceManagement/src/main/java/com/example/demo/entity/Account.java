@@ -22,6 +22,10 @@ public class Account {
     public Account() {
     }
 
+    public Account(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
     public String getUserName() {
         return userName;
     }

@@ -1,5 +1,4 @@
 package com.example.demo.entity;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -52,7 +51,6 @@ public class Pay {
     public void setStatus(boolean status) {
         this.status = status;
     }
-
 
     public Order getOrder() {
         return order;

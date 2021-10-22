@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+<<<<<<< HEAD
 import com.example.demo.entity.Computer;
 import com.example.demo.service.ComputerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,15 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+=======
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+>>>>>>> 04647869f15f390645125898a77445b73c583a8b
 
 @RestController
 @RequestMapping(value = "/computer")
 public class ComputerController {
+<<<<<<< HEAD
 
     @Autowired
     ComputerService computerService;
@@ -52,4 +58,6 @@ public class ComputerController {
         return new ResponseEntity<>(computers, HttpStatus.OK);
 
     }
+=======
+>>>>>>> 04647869f15f390645125898a77445b73c583a8b
 }

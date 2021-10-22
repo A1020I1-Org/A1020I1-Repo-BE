@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 
 @Entity
@@ -27,7 +26,6 @@ public class OrderService {
     @JoinColumn(name = "pay_id")
     @JsonBackReference
     private Pay pay;
-
     private int quantity;
     private int unit;
     private int totalMoney;
@@ -92,7 +90,6 @@ public class OrderService {
     public void setOder_date(String oder_date) {
         this.oder_date = oder_date;
     }
-
     public Pay getPay() {
         return pay;
     }

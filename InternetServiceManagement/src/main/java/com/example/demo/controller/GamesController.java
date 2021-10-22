@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+<<<<<<< HEAD
 import com.example.demo.entity.Game;
 import com.example.demo.service.impl.GameServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+=======
+>>>>>>> 04647869f15f390645125898a77445b73c583a8b
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/games")
 public class GamesController {
+<<<<<<< HEAD
     @Autowired
     GameServiceImpl gameService;
 
@@ -38,4 +42,6 @@ public class GamesController {
         this.gameService.deleteGame(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+=======
+>>>>>>> 04647869f15f390645125898a77445b73c583a8b
 }
