@@ -40,6 +40,12 @@ public class ServiceServiceImpl implements ServiceService {
     }
 
     @Override
+    public void deleteAllService() {
+        serviceRepository.deleteAll();
+    }
+
+
+    @Override
     public Page<com.example.demo.entity.Service> search(Pageable pageable, String searchName) {
         return serviceRepository.search(pageable,searchName);
     }

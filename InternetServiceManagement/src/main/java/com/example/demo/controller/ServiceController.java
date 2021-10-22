@@ -41,8 +41,8 @@ public class ServiceController {
     @GetMapping(value = "/list")
     public ResponseEntity<Page<Service>> listAllService(@PageableDefault(size = 5) Pageable pageable) {
         Page<Service> serviceList = serviceService.findAllService(pageable);
-        if (serviceList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (serviceList == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(serviceList, HttpStatus.OK);
     }
@@ -70,6 +70,13 @@ public class ServiceController {
         serviceService.deleteService(serviceId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @DeleteMapping(value = "/deleteAll")
+    public ResponseEntity<Service> deleteAllService() {
+         serviceService.deleteAllService();
+         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
     @GetMapping(value = "/search")
     public ResponseEntity<Page<Service>> searchService(@RequestParam("searchName") String searchName,
