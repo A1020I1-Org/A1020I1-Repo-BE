@@ -12,6 +12,7 @@ public class Computer {
     private String computerStartUsedDate;
     private String computerWarrantyPeriod;
     private String computerConfiguration;
+    private String computerIpLocal;
 
     @OneToMany(mappedBy = "computer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
     Set<Order> orders;
@@ -37,6 +38,33 @@ public class Computer {
     private Set<Game> games;
 
     public Computer() {
+    }
+
+    public Computer(String computerId, String computerLocation, String computerStartUsedDate, String computerWarrantyPeriod, String computerConfiguration, Set<Order> orders, Manufacturer manufacturer, Status status, Type type, Set<Game> games) {
+        this.computerId = computerId;
+        this.computerLocation = computerLocation;
+        this.computerStartUsedDate = computerStartUsedDate;
+        this.computerWarrantyPeriod = computerWarrantyPeriod;
+        this.computerConfiguration = computerConfiguration;
+        this.orders = orders;
+        this.manufacturer = manufacturer;
+        this.status = status;
+        this.type = type;
+        this.games = games;
+    }
+
+    public Computer(String computerId, String computerLocation, String computerStartUsedDate, String computerWarrantyPeriod, String computerConfiguration, String computerIpLocal, Set<Order> orders, Manufacturer manufacturer, Status status, Type type, Set<Game> games) {
+        this.computerId = computerId;
+        this.computerLocation = computerLocation;
+        this.computerStartUsedDate = computerStartUsedDate;
+        this.computerWarrantyPeriod = computerWarrantyPeriod;
+        this.computerConfiguration = computerConfiguration;
+        this.computerIpLocal = computerIpLocal;
+        this.orders = orders;
+        this.manufacturer = manufacturer;
+        this.status = status;
+        this.type = type;
+        this.games = games;
     }
 
     public String getComputerId() {
@@ -77,6 +105,14 @@ public class Computer {
 
     public void setComputerConfiguration(String computerConfiguration) {
         this.computerConfiguration = computerConfiguration;
+    }
+
+    public String getComputerIpLocal() {
+        return computerIpLocal;
+    }
+
+    public void setComputerIpLocal(String computerIpLocal) {
+        this.computerIpLocal = computerIpLocal;
     }
 
     public Set<Order> getOrders() {

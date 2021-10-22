@@ -30,7 +30,7 @@ public class ComputerController {
     @Autowired
     StatusComputerService statusComputerService;
 
-    @GetMapping("/typeComputer")
+    @GetMapping("/type")
     public ResponseEntity<List<Type>> listTypeComputer(){
         List<Type> typeList = typeComputerService.finAllType();
         if (typeList.isEmpty()){
@@ -38,7 +38,7 @@ public class ComputerController {
         }
         return new ResponseEntity<>(typeList, HttpStatus.OK);
     }
-    @GetMapping("/statusComputer")
+    @GetMapping("/status")
     public ResponseEntity<List<Status>> listStatusComputer(){
         List<Status> statusList = statusComputerService.finAll();
         if (statusList.isEmpty()){
@@ -46,15 +46,15 @@ public class ComputerController {
         }
         return new ResponseEntity<>(statusList, HttpStatus.OK);
     }
-    @GetMapping("/listComputer")
-    public ResponseEntity<Page<Computer>> listComputer(@PageableDefault(size = 4) Pageable pageable) {
+    @GetMapping("/list")
+    public ResponseEntity<Page<Computer>> listComputer(@PageableDefault(size = 5) Pageable pageable) {
         Page<Computer> computerList = computerService.finAll(pageable);
-        if (computerList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (computerList == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(computerList, HttpStatus.OK);
     }
-    @GetMapping("/getInforComputer/{id}")
+    @GetMapping("/getInfor/{id}")
     public ResponseEntity<Computer> getInforComputer(@PathVariable String id){
         Computer computer = computerService.findById(id);
         if (computer==null){
@@ -62,7 +62,7 @@ public class ComputerController {
         }
         return new ResponseEntity<>(computer, HttpStatus.OK);
     }
-    @DeleteMapping("/deleteComputer/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Computer> deleteComputer(@PathVariable String id) {
         Computer computer = computerService.findById(id);
         if (computer == null) {
@@ -72,14 +72,14 @@ public class ComputerController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/searchComputer")
+    @GetMapping("/search")
     public ResponseEntity<Page<Computer>> searchComputer(@RequestParam("computerId") String id,
                                                          @RequestParam("computerLocation") String computerLocation,
                                                          @RequestParam("startUsedDateFromComputer") String startUsedDateFromComputer,
                                                          @RequestParam("startUsedDateToComputer") String startUsedDateToComputer,
                                                          @RequestParam("type") String type,
                                                          @RequestParam("status") String status,
-                                                         @PageableDefault(size = 4) Pageable pageable) {
+                                                         @PageableDefault(size = 5) Pageable pageable) {
 
 
         Page<Computer> computers = computerService.search(id, computerLocation, startUsedDateFromComputer,startUsedDateToComputer, type, status,pageable);
