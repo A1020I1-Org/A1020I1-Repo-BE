@@ -8,14 +8,14 @@ public class OrderServiceDTO {
     private int totalMoney;
     private String oderDate;
     private boolean status;
-    private String customer;
+    private Integer customer;
     private String service;
     private Integer pay;
 
     public OrderServiceDTO() {
     }
 
-    public OrderServiceDTO(Integer id, int quantity, String unit, int totalMoney, String oderDate, boolean status, String customer, String service, Integer pay) {
+    public OrderServiceDTO(Integer id, int quantity, String unit, int totalMoney, String oderDate, boolean status, Integer customer, String service, Integer pay) {
         this.id = id;
         this.quantity = quantity;
         this.unit = unit;
@@ -75,11 +75,11 @@ public class OrderServiceDTO {
         this.status = status;
     }
 
-    public String getCustomer() {
+    public Integer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(String customer) {
+    public void setCustomer(Integer customer) {
         this.customer = customer;
     }
 

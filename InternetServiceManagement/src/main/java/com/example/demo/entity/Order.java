@@ -13,11 +13,13 @@ public class Order {
 
     @JsonManagedReference
     @ManyToOne
+    @MapsId("customerId")
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @JsonManagedReference
     @ManyToOne
+    @MapsId("computerId")
     @JoinColumn(name = "computer_id")
     private Computer computer;
 

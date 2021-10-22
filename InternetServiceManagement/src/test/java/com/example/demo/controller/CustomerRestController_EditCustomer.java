@@ -1,0 +1,175 @@
+package com.example.demo.controller;
+
+import com.example.demo.entity.AccountCustomer;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+public class CustomerRestController_EditCustomer {
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @Test
+    public void editCustomer_13() throws Exception {
+        AccountCustomer customer = new AccountCustomer();
+        customer.setCustomerId(1);
+        customer.setFullName(null);
+        customer.setDateOfBirth("06-09-1998");
+        customer.setEmail("abc@gmail.com");
+        customer.setProvince("Hai Chau");
+        customer.setDistrict("Thanh Binh");
+        customer.setCommune("50");
+        customer.setPhone("0901630920");
+        customer.setUsername("khoadvd1998");
+        customer.setPassword("Khoadvd48!");
+        customer.setPasswordRetype("Khoadvd48!");
+        customer.setStatus(true);
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders
+                        .post("/customer/edit/{id}")
+                        .content(this.objectMapper.writeValueAsString(customer))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void editCustomer_14() throws Exception {
+        AccountCustomer customer = new AccountCustomer();
+        customer.setCustomerId(1);
+        customer.setFullName("");
+        customer.setDateOfBirth("06-09-1998");
+        customer.setEmail("abc@gmail.com");
+        customer.setProvince("Hai Chau");
+        customer.setDistrict("Thanh Binh");
+        customer.setCommune("50");
+        customer.setPhone("0901630920");
+        customer.setUsername("khoadvd1998");
+        customer.setPassword("Khoadvd48!");
+        customer.setPasswordRetype("Khoadvd48!");
+        customer.setStatus(true);
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders
+                        .post("/customer/edit/{id}")
+                        .content(this.objectMapper.writeValueAsString(customer))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void editCustomer_15() throws Exception {
+        AccountCustomer customer = new AccountCustomer();
+        customer.setCustomerId(1);
+        customer.setFullName("Do Khoa");
+        customer.setDateOfBirth("06-09-2015");
+        customer.setEmail("abcgmail.com");
+        customer.setProvince("Hai Chau");
+        customer.setDistrict("Thanh Binh");
+        customer.setCommune("50");
+        customer.setPhone("0901630920");
+        customer.setUsername("khoadvd1998");
+        customer.setPassword("Khoadvd48!");
+        customer.setPasswordRetype("Khoadvd48!");
+        customer.setStatus(true);
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders
+                        .post("/customer/edit/{id}")
+                        .content(this.objectMapper.writeValueAsString(customer))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void editCustomer_16() throws Exception {
+        AccountCustomer customer = new AccountCustomer();
+        customer.setCustomerId(1);
+        customer.setFullName("Do Khoa");
+        customer.setDateOfBirth("06-09-1998");
+        customer.setEmail("abcgmailcom");
+        customer.setProvince("Hai Chau");
+        customer.setDistrict("Thanh Binh");
+        customer.setCommune("50");
+        customer.setPhone("090");
+        customer.setUsername("khoadvd1998");
+        customer.setPassword("Khoadvd48!");
+        customer.setPasswordRetype("Khoadvd48!");
+        customer.setStatus(true);
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders
+                        .post("/customer/edit/{id}")
+                        .content(this.objectMapper.writeValueAsString(customer))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void editCustomer_17() throws Exception {
+        AccountCustomer customer = new AccountCustomer();
+        customer.setCustomerId(1);
+        customer.setFullName("Do Khoa");
+        customer.setDateOfBirth("06-09-1998");
+        customer.setEmail("abc@gmail.com");
+        customer.setProvince("Hai Chau");
+        customer.setDistrict("Thanh Binh");
+        customer.setCommune("50");
+        customer.setPhone("0901630164124125351");
+        customer.setUsername("khoadvd1998");
+        customer.setPassword("Khoadvd48!");
+        customer.setPasswordRetype("Khoadvd48!");
+        customer.setStatus(true);
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders
+                        .post("/customer/edit/{id}")
+                        .content(this.objectMapper.writeValueAsString(customer))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void editCustomer_18() throws Exception {
+        AccountCustomer customer = new AccountCustomer();
+        customer.setCustomerId(1);
+        customer.setFullName("Do Khoa");
+        customer.setDateOfBirth("06-09-1998");
+        customer.setEmail("abc@gmail.com");
+        customer.setProvince("Hai Chau");
+        customer.setDistrict("Thanh Binh");
+        customer.setCommune("50");
+        customer.setPhone("0901630920");
+        customer.setUsername("khoadvd1998");
+        customer.setPassword("Khoadvd48!");
+        customer.setPasswordRetype("Khoadvd48!");
+        customer.setStatus(true);
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders
+                        .post("/customer/edit/{id}")
+                        .content(this.objectMapper.writeValueAsString(customer))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is2xxSuccessful());
+    }
+
+}

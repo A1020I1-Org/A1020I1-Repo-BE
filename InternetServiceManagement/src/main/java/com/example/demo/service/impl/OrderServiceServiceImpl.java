@@ -4,6 +4,7 @@ import com.example.demo.entity.OrderService;
 import com.example.demo.entity.OrderServiceDTO;
 import com.example.demo.repository.CustomerRepository;
 import com.example.demo.repository.OrderServiceRepository;
+
 import com.example.demo.repository.ServiceRepository;
 import com.example.demo.service.OrderServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,7 @@ public class OrderServiceServiceImpl implements OrderServiceService {
         orderServiceDTO.setStatus(orderService.isStatus());
         orderServiceDTO.setCustomer(orderService.getCustomer().getCustomerId());
         orderServiceDTO.setService(orderService.getService().getServiceId());
-        orderServiceDTO.setPay(orderService.getPay().getId());
+        orderServiceDTO.setPay(orderService.getPay().getPayId());
         return orderServiceDTO;
     }
 

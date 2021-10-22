@@ -9,43 +9,44 @@ import com.example.demo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
+    private final CustomerRepository customerRepository;
+    private final AccountRepository accountRepository;
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private CustomerServiceImpl(CustomerRepository customerRepository,
+                                AccountRepository accountRepository){
+        this.customerRepository = customerRepository;
+        this.accountRepository = accountRepository;
+    }
 
-    @Autowired
-    private AccountRepository accountRepository;
 
     @Override
-    public Customer findById(String customerId) {
-        return customerRepository.findById(customerId).orElse(null);
+    public void createCustomer(AccountCustomer accountCustomer) {
+        if (accountCustomer.getPassword().equals(accountCustomer.getPasswordRetype())){
+            Customer customer = toEntity(accountCustomer);
+            Account account = new Account();
+            account.setUserName(accountCustomer.getUsername());
+            account.setPassword(accountCustomer.getPassword());
+            customer.setAccount(account);
+            account.setCustomer(customer);
+            customerRepository.save(customer);
+            accountRepository.save(account);
+        }
     }
 
     @Override
-    public void save(Customer customer) {
-        customerRepository.save(customer);
-    }
-
-    @Override
-    public List<Customer> findAll() {
-        return customerRepository.findAll();
-    }
-
-    @Override
-    public void updateCustomer(AccountCustomer customerAccount, String id) {
+    public void updateCustomer(AccountCustomer accountCustomer, Integer id) {
         Customer customer = customerRepository.findById(id).orElse(null);
-        Account account = accountRepository.findByUserName(customerAccount.getUsername()).orElse(null);
+        Account account = accountRepository.findByUserName(accountCustomer.getUsername()).orElse(null);
         if (customer != null && account != null) {
-            if (customerAccount.getPassword().equals(customerAccount.getPasswordRetype())) {
-                customer = toEntity(customerAccount);
+            if (accountCustomer.getPassword().equals(accountCustomer.getPasswordRetype())) {
+                customer = toEntity(accountCustomer);
                 customer.setCustomerId(id);
-
-                account.setPassword(customerAccount.getPassword());
+                account.setPassword(accountCustomer.getPassword());
                 customer.setAccount(account);
                 account.setCustomer(customer);
                 customerRepository.save(customer);
@@ -54,7 +55,18 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
-    private AccountCustomer toDTO(Customer customer){
+    @Override
+    public AccountCustomer findById(Integer id) {
+        Customer customer = customerRepository.findById(id).orElse(null);
+        if (customer != null){
+            return toRequest(customer);
+        }
+        else {
+            return null;
+        }
+    }
+
+    private AccountCustomer toRequest(Customer customer){
         AccountCustomer accountCustomer = new AccountCustomer();
         accountCustomer.setCustomerId(customer.getCustomerId());
         accountCustomer.setFullName(customer.getFullName());
@@ -95,5 +107,4 @@ public class CustomerServiceImpl implements CustomerService {
 //        }
         return customer;
     }
-
 }

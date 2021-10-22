@@ -1,5 +1,9 @@
 package com.example.demo.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -10,8 +14,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class AccountCustomer implements Validator {
-    private String customerId;
+    private Integer customerId;
 
     @NotBlank(message = "Name can't be blank.")
     @Pattern(regexp = "^[a-zA-Z ]*$", message = "Name can't contain symbols.")
@@ -28,20 +36,17 @@ public class AccountCustomer implements Validator {
     private Boolean status;
     @NotBlank(message = "Username can't be blank.")
     private String username;
-//    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$",
-//            message = "Password must have minimum 8 and maximum 20 characters, at least one uppercase letter," +
-//                    " one lowercase letter, one number and one special character.")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$",
+            message = "Password must have minimum 8 and maximum 20 characters, at least one uppercase letter," +
+                    " one lowercase letter, one number and one special character.")
     private String password;
     private String passwordRetype;
 
-    public AccountCustomer() {
-    }
-
-    public String getCustomerId() {
+    public Integer getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
     }
 

@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/order")
+@RequestMapping(value = "/oder")
 public class OrderController {
 
     @Autowired
@@ -44,6 +44,4 @@ public class OrderController {
         orderServiceService.createOrderService(orderServiceDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
-
 }

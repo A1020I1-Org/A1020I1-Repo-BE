@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Customer;
 import com.example.demo.entity.AccountCustomer;
 import com.example.demo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,22 +11,56 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@CrossOrigin("http://localhost:4200")
 @RequestMapping(value = "/customer")
 public class CustomerController {
-    @Autowired
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
-    @GetMapping(value = "/info/{id}")
-    public ResponseEntity<Customer> customerInfo(@PathVariable String id){
-        Customer customer = customerService.findById(id);
-        if (customer == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(customer, HttpStatus.OK);
+    @Autowired
+    private CustomerController(CustomerService customerService){
+        this.customerService = customerService;
     }
 
-    @PostMapping("/update/{id}")
-    public ResponseEntity<Customer> update(@Validated @RequestBody AccountCustomer accountCustomer, @PathVariable String id, BindingResult bindingResult) {
+    @GetMapping(value = "/{id}")
+    public AccountCustomer getCustomer(@PathVariable Integer id){
+       return customerService.findById(id);
+    }
+
+    @PostMapping(value = "/create")
+    public ResponseEntity<AccountCustomer> createCustomer(@Validated @RequestBody AccountCustomer accountCustomer, BindingResult bindingResult){
+        new AccountCustomer().validate(accountCustomer, bindingResult);
+        if (!bindingResult.hasErrors()) {
+            customerService.createCustomer(accountCustomer);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping(value = "/edit/{id}")
+    public ResponseEntity<AccountCustomer> updateCustomer(@Validated @RequestBody AccountCustomer accountCustomer,
+                                                          BindingResult bindingResult,
+                                                          @PathVariable Integer id){
+        new AccountCustomer().validate(accountCustomer, bindingResult);
+        if (!bindingResult.hasErrors() && id != null) {
+            if (customerService.findById(id) != null) {
+                customerService.updateCustomer(accountCustomer, id);
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping(value = "/info/{id}")
+    public ResponseEntity<AccountCustomer> infoCustomer(@Validated @RequestBody AccountCustomer accountCustomer,
+                                                        BindingResult bindingResult,
+                                                        @PathVariable Integer id){
         new AccountCustomer().validate(accountCustomer, bindingResult);
         if (!bindingResult.hasErrors() && id != null) {
             if (customerService.findById(id) != null) {

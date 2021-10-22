@@ -43,22 +43,6 @@ public class OrderService {
         this.id = id;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Service getService() {
-        return service;
-    }
-
-    public void setService(Service service) {
-        this.service = service;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -83,12 +67,12 @@ public class OrderService {
         this.totalMoney = totalMoney;
     }
 
-    public Pay getPay() {
-        return pay;
+    public String getOderDate() {
+        return oderDate;
     }
 
-    public void setPay(Pay pay) {
-        this.pay = pay;
+    public void setOderDate(String oderDate) {
+        this.oderDate = oderDate;
     }
 
     public boolean isStatus() {
@@ -99,11 +83,27 @@ public class OrderService {
         this.status = status;
     }
 
-    public String getOderDate() {
-        return oderDate;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setOderDate(String oderDate) {
-        this.oderDate = oderDate;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    public Pay getPay() {
+        return pay;
+    }
+
+    public void setPay(Pay pay) {
+        this.pay = pay;
     }
 }

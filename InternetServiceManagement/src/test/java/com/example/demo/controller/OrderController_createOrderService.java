@@ -32,7 +32,7 @@ public class OrderController_createOrderService {
         orderServiceDTO.setTotalMoney(40000);
         orderServiceDTO.setOderDate("2021-10-10");
         orderServiceDTO.setStatus(true);
-        orderServiceDTO.setCustomer("1");
+        orderServiceDTO.setCustomer(1);
         orderServiceDTO.setPay(1);
         orderServiceDTO.setService("1");
 
@@ -55,7 +55,7 @@ public class OrderController_createOrderService {
         orderServiceDTO.setTotalMoney(40000);
         orderServiceDTO.setOderDate("2021-10-10");
         orderServiceDTO.setStatus(true);
-        orderServiceDTO.setCustomer("1");
+        orderServiceDTO.setCustomer(1);
         orderServiceDTO.setPay(1);
         orderServiceDTO.setService("1");
 
@@ -78,7 +78,7 @@ public class OrderController_createOrderService {
         orderServiceDTO.setTotalMoney(40000);
         orderServiceDTO.setOderDate("2021-10-10");
         orderServiceDTO.setStatus(true);
-        orderServiceDTO.setCustomer("1");
+        orderServiceDTO.setCustomer(1);
         orderServiceDTO.setPay(1);
         orderServiceDTO.setService("1");
 
@@ -102,7 +102,7 @@ public class OrderController_createOrderService {
         orderServiceDTO.setTotalMoney(40000);
         orderServiceDTO.setOderDate("2021-10-10");
         orderServiceDTO.setStatus(true);
-        orderServiceDTO.setCustomer("1");
+        orderServiceDTO.setCustomer(1);
         orderServiceDTO.setPay(1);
         orderServiceDTO.setService("1");
 
@@ -148,7 +148,7 @@ public class OrderController_createOrderService {
         orderServiceDTO.setTotalMoney(40000);
         orderServiceDTO.setOderDate("2021-10-10");
         orderServiceDTO.setStatus(true);
-        orderServiceDTO.setCustomer("1");
+        orderServiceDTO.setCustomer(1);
         orderServiceDTO.setPay(1);
         orderServiceDTO.setService("1");
 
