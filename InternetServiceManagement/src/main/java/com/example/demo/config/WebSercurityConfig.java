@@ -34,7 +34,7 @@ public class WebSercurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
-        http.authorizeRequests().antMatchers( "/", "/customer/register","/customer/getAccount").permitAll();
+        http.authorizeRequests().antMatchers( "/", "/customer/*").permitAll();
 
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 
