@@ -80,6 +80,8 @@ public class ServiceController {
             System.out.println("Unable to delete. Service with serviceId" + serviceId + "not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
         // thanhNHM adding
         return new ResponseEntity<>(HttpStatus.OK);
@@ -89,6 +91,7 @@ public class ServiceController {
     @GetMapping(value = "/search")
     public ResponseEntity<Page<Service>> searchService (@RequestParam("searchName") String searchName,
                                                         @PageableDefault(size = 3) Pageable pageable){
+
         Page<Service> searchService = serviceService.search(pageable, searchName);
         System.out.println(searchService);
         if (searchService == null) {
@@ -98,3 +101,4 @@ public class ServiceController {
     }
 
 }
+
