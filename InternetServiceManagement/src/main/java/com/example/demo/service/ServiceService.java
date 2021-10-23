@@ -20,8 +20,5 @@ public interface ServiceService {
 
     Page<Service> search(Pageable pageable, String searchName);
 
-    // ThanhNHM test
-    List<Service> listServiceTest();
-    // ThanhNHM test
 }
 

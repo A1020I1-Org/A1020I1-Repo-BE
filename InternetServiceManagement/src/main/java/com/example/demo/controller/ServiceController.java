@@ -33,22 +33,6 @@ public class ServiceController {
         this.serviceService = serviceService;
     }
 
-    // ThanhNHM test
-    @GetMapping("/list-test")
-    public ResponseEntity<List<Service>> get(){
-        return new ResponseEntity<>(this.serviceService.listServiceTest(), HttpStatus.OK);
-    }
-    // ThanhNHM test
-
-    @GetMapping(value = "/list")
-    public ResponseEntity<Page<Service>> listAllService(@PageableDefault(size = 4) Pageable pageable) {
-        Page<Service> serviceList = serviceService.findAllService(pageable);
-        if (serviceList == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(serviceList, HttpStatus.OK);
-    }
-
     @PostMapping("/create")
     public ResponseEntity<Service> post(@Valid @RequestBody Service service, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
@@ -69,35 +53,6 @@ public class ServiceController {
             this.serviceService.save(service);
             return new ResponseEntity<>(HttpStatus.OK);
         }
-    }
-
-    @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<Service> deleteService(@PathVariable("id") String serviceId) {
-        System.out.println("Fetching and Deleting Service with service id" + serviceId);
-        Service service = serviceService.findServiceById(serviceId);
-
-        if (service == null) {
-            System.out.println("Unable to delete. Service with serviceId" + serviceId + "not found");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-        // thanhNHM adding
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-
-    @GetMapping(value = "/search")
-    public ResponseEntity<Page<Service>> searchService (@RequestParam("searchName") String searchName,
-                                                        @PageableDefault(size = 3) Pageable pageable){
-
-        Page<Service> searchService = serviceService.search(pageable, searchName);
-        System.out.println(searchService);
-        if (searchService == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(searchService, HttpStatus.OK);
     }
 
 }
