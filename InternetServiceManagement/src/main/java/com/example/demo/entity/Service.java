@@ -23,9 +23,8 @@ public class Service {
     @NotNull
     private int prices;
 
-
     @JsonIgnore
-//    @JsonManagedReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
 
@@ -72,7 +71,7 @@ public class Service {
         this.prices = prices;
     }
 
-
+  
 
     public Set<OrderService> getOrderServices() {
         return orderServices;
