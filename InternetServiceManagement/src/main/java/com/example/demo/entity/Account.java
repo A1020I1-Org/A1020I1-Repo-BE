@@ -13,7 +13,8 @@ public class Account {
     @Column(length = 255)
     private String password;
 
-    @JsonIgnore
+    @JsonBackReference
+//    @JsonIgnore
     @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private Customer customer;
 

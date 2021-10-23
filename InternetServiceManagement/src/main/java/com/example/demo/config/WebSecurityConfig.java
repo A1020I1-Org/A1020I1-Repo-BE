@@ -52,10 +52,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/api/public/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/api/employee/**").hasAnyRole("EMPLOYEE", "ADMIN")
-                .antMatchers("/api/member/**").hasAnyRole("MEMBER", "ADMIN")
+                .antMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/api/admin/**").hasRole("ADMIN")
                 // các trang còn lại phải xác thực
-                        .anyRequest().authenticated().and().
+                .anyRequest().authenticated().and().
                 // đảm bảo sử dụng đúng session Stateless;
                 // session sẽ không được sử dụng để lưu trữ thông tin người dùng
                         exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()

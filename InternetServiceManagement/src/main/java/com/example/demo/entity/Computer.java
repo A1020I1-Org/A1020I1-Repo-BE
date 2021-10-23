@@ -6,7 +6,9 @@ import java.util.Set;
 @Entity
 public class Computer {
     @Id
-    private String computerId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private int computerId;
     private String computerIpLocal;
     private String computerLocation;
     private String computerStartUsedDate;
@@ -47,11 +49,11 @@ public class Computer {
         this.computerIpLocal = computerIpLocal;
     }
 
-    public String getComputerId() {
+    public int getComputerId() {
         return computerId;
     }
 
-    public void setComputerId(String computerId) {
+    public void setComputerId(int computerId) {
         this.computerId = computerId;
     }
 

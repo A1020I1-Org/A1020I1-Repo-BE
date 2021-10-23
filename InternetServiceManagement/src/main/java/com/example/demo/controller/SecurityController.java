@@ -5,7 +5,6 @@ import com.example.demo.entity.*;
 import com.example.demo.jwt.JwtResponse;
 import com.example.demo.jwt.JwtResponseEmployee;
 import com.example.demo.jwt.LoginRequest;
-import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.repository.OrderHourRepository;
 import com.example.demo.sercurity.AccountDetailsImpl;
 import com.example.demo.service.AccountService;
@@ -26,7 +25,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.InetAddress;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,17 +65,16 @@ public class SecurityController {
                 return new ResponseEntity<>(json, HttpStatus.NOT_FOUND);
             }
         }
+
         InetAddress IP=InetAddress.getLocalHost();
         String ipHost=IP.getHostAddress();
-        ZonedDateTime dateTime = ZonedDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String time=dateTime.format(formatter);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
+        String time=dtf.format(LocalDateTime.now());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtTokenUtil.generateJwtToken(loginRequest.getUsername());
         AccountDetailsImpl userDetails = (AccountDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Customer customer = customerService.findByAccount(account.getUserName());
         Employee employee = employeeService.findByAccountName(account.getUserName());
-        account.setPassword("");
         Computer computer=computerService.findByIpHost(ipHost);
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
@@ -87,11 +85,13 @@ public class SecurityController {
                     new JwtResponseEmployee(jwt, account, employee, roles)
             );
         }
-//        orderHourRepository.save(new OrderHour(customer,computer,time));
+        OrderHour orderHour=new OrderHour(customer,computer,time,0);
+        orderHourRepository.save(orderHour);
         return ResponseEntity.ok(
-                new JwtResponse(jwt, account, customer, roles)
+                new JwtResponse(jwt, account, customer,orderHour, roles)
         );
     }
+
     @GetMapping("/api/admin/hello")
     public ResponseEntity<?> test() throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();

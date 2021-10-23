@@ -12,15 +12,14 @@ public class OrderHour {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @MapsId("customerId")
-    @JoinColumn(name = "customer_id")
+    @ManyToOne(targetEntity = Customer.class)
+    @JoinColumn(name = "customerId", referencedColumnName = "customerId")
     @JsonIgnore
     private Customer customer;
 
-    @ManyToOne
-    @MapsId("computerId")
-    @JoinColumn(name = "computer_id")
+
+    @ManyToOne(targetEntity = Computer.class)
+    @JoinColumn(name = "computerId", referencedColumnName = "computerId")
     @JsonIgnore
     private Computer computer;
 
@@ -35,10 +34,11 @@ public class OrderHour {
     public OrderHour() {
     }
 
-    public OrderHour(Customer customer, Computer computer, String startTime) {
+    public OrderHour(Customer customer, Computer computer, String startTime, int usageTime) {
         this.customer = customer;
         this.computer = computer;
         this.startTime = startTime;
+        this.usageTime = usageTime;
     }
 
     public OrderHour(Customer customer, String startTime) {

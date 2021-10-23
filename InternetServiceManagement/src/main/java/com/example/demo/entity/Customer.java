@@ -1,12 +1,14 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 public class Customer {
+
     @Id
     private int customerId;
     private String fullName;
@@ -17,15 +19,16 @@ public class Customer {
     private boolean status;
     private String idCard;
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userName",referencedColumnName = "userName")
+    @JsonManagedReference
     private Account account;
 
     @JsonIgnore
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
     Set<OrderHour> orders;
 

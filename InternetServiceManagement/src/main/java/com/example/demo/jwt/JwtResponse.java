@@ -3,6 +3,7 @@ package com.example.demo.jwt;
 import com.example.demo.entity.Account;
 import com.example.demo.entity.Customer;
 import com.example.demo.entity.Employee;
+import com.example.demo.entity.OrderHour;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -15,7 +16,7 @@ public class JwtResponse {
     private String type = "Bearer";
     private Account account;
     private Customer customer;
-    private Employee employee;
+    private OrderHour orderHour;
     private List<String> roles;
 
     public JwtResponse() {
@@ -27,10 +28,12 @@ public class JwtResponse {
         this.roles = roles;
     }
 
-    public JwtResponse(String token, Account account, Employee employee, List<String> roles) {
+
+    public JwtResponse(String token, Account account, Customer customer, OrderHour orderHour, List<String> roles) {
         this.token = token;
         this.account = account;
-        this.employee = employee;
+        this.customer = customer;
+        this.orderHour = orderHour;
         this.roles = roles;
     }
 
@@ -48,6 +51,14 @@ public class JwtResponse {
     public JwtResponse(String token,  List<String> roles) {
         this.token = token;
         this.roles = roles;
+    }
+
+    public OrderHour getOrderHour() {
+        return orderHour;
+    }
+
+    public void setOrderHour(OrderHour orderHour) {
+        this.orderHour = orderHour;
     }
 
     public String getToken() {
