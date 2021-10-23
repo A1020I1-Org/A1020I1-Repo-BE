@@ -53,7 +53,7 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    //    @GetMapping("/customer/list")
+//    @GetMapping("/customer/list")
 //    public ResponseEntity<List<Customer>> getListCustomer() {
 //        List<Customer> customers = customerService.getListCustomer();
 //        if (customers.isEmpty()) {
@@ -64,7 +64,7 @@ public class CustomerController {
 
     @GetMapping("/customer/list")
     public ResponseEntity<Page<Customer>> getListCustomer(@PageableDefault(value = 5) Pageable pageable) {
-        Page<Customer> customers = customerService.getListCustomer(pageable);
+       Page<Customer> customers = customerService.getListCustomer(pageable);
         if (customers.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
