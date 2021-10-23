@@ -1,7 +1,5 @@
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
@@ -14,14 +12,15 @@ public class OrderService {
     @Column(name="id")
     private Integer id;
 
-    @JsonManagedReference
     @ManyToOne
+    @MapsId("customerId")
     @JoinColumn(name = "customer_id")
+    @JsonBackReference
     private Customer customer;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "service_id")
+    @JsonBackReference
     private Service service;
 
     @ManyToOne
@@ -30,7 +29,7 @@ public class OrderService {
     private Pay pay;
 
     private int quantity;
-    private String unit;
+    private int unit;
     private int totalMoney;
     private String oder_date;
     private boolean status;
@@ -69,11 +68,11 @@ public class OrderService {
         this.quantity = quantity;
     }
 
-    public String getUnit() {
+    public int getUnit() {
         return unit;
     }
 
-    public void setUnit(String unit) {
+    public void setUnit(int unit) {
         this.unit = unit;
     }
 
@@ -101,9 +100,11 @@ public class OrderService {
         this.pay = pay;
     }
 
-
     public boolean isStatus() {
         return status;
+    }
 
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

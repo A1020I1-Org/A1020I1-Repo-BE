@@ -14,9 +14,9 @@ public class Account {
     @Column(length = 255)
     private String password;
 
-    @JsonBackReference
     @OneToOne(mappedBy = "account" ,cascade = CascadeType.ALL)
     private Customer customer;
+
   
     @JsonIgnore
     @OneToOne(mappedBy = "account" ,cascade = CascadeType.ALL)
@@ -28,10 +28,12 @@ public class Account {
 
     public Account() {
     }
+
     public Account(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
+
 
     public String getUserName() {
         return userName;

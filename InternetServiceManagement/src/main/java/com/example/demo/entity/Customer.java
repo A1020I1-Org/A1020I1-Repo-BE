@@ -1,14 +1,10 @@
 package com.example.demo.entity;
 
-
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 
 import javax.persistence.*;
 import java.util.Set;
@@ -23,11 +19,9 @@ public class Customer {
     private Integer customerId;
     @Column(name = "name")
     private String fullName;
-    @Column(name = "dateOfBirth", columnDefinition = "DATE")
     private String dateOfBirth;
     @Column(name = "email")
     private String email;
-    @Column(name = "address")
     private String address;
     @Column(name = "phone")
     private String phone;
@@ -36,10 +30,9 @@ public class Customer {
     private Boolean status;
     private String idCard;
 
-
-    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userName",referencedColumnName = "userName")
+    @JoinColumn(name = "userName", referencedColumnName = "userName")
+    @JsonManagedReference
     private Account account;
 
     @JsonBackReference
@@ -47,15 +40,14 @@ public class Customer {
     @JsonManagedReference
     Set<OrderService> orderServices;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
+    @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL, CascadeType.REMOVE})
     @JsonManagedReference
     Set<Order> orders;
 
     public Customer() {
     }
 
-    public Customer(int customerId,String fullName, String dateOfBirth, String email, String address, String phone, boolean status, String idCard, Account account) {
+    public Customer(int customerId, String fullName, String dateOfBirth, String email, String address, String phone, boolean status, String idCard, Account account) {
         this.customerId = customerId;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
@@ -63,7 +55,6 @@ public class Customer {
         this.address = address;
         this.phone = phone;
         this.status = status;
-
         this.idCard = idCard;
         this.account = account;
     }
@@ -126,14 +117,25 @@ public class Customer {
         this.phone = phone;
     }
 
-    public boolean getStatus() {
+    public boolean isStatus() {
         return status;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public void setStatus(boolean status) {
         this.status = status;
     }
-
 
     public String getIdCard() {
         return idCard;
