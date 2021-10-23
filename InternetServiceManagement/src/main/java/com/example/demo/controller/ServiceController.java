@@ -16,6 +16,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,17 +32,39 @@ public class ServiceController {
     public ServiceController(ServiceService serviceService) {
         this.serviceService = serviceService;
     }
-
- 
-
+  
     @GetMapping(value = "/list")
     public ResponseEntity<Page<Service>> listAllService(@PageableDefault(size = 5) Pageable pageable) {
+
         Page<Service> serviceList = serviceService.findAllService(pageable);
         if (serviceList == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+        return new ResponseEntity<>(serviceList, HttpStatus.OK);
     }
 
+    @PostMapping("/create")
+    public ResponseEntity<Service> post(@Validated @RequestBody Service service, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors() || this.serviceService.findById(service.getServiceId()) != null) {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        } else {
+            this.serviceService.save(service);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+    }
+
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<Service> update(@Valid @RequestBody Service service,
+                                          BindingResult bindingResult,
+                                          @PathVariable String id) {
+        if (bindingResult.hasFieldErrors()) {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        } else {
+            this.serviceService.save(service);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+ 
 
     @DeleteMapping(value = "/deleteAll")
     public ResponseEntity<Service> deleteAllService() {
