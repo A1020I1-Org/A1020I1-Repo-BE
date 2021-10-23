@@ -1,22 +1,35 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "order_hour")
 public class Order {
-    @EmbeddedId
-    private OrderKey id;
 
+    @Id
+    private Integer id;
+
+    @JsonManagedReference
     @ManyToOne
-    @MapsId("customerId")
     @JoinColumn(name = "customer_id")
+    @JsonIgnore
     private Customer customer;
 
+    @JsonManagedReference
     @ManyToOne
-    @MapsId("computerId")
     @JoinColumn(name = "computer_id")
     private Computer computer;
+
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private Pay pay;
 
     private String startTime;
     private String endTime;
@@ -25,12 +38,20 @@ public class Order {
     public Order() {
     }
 
-    public OrderKey getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(OrderKey id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Pay getPay() {
+        return pay;
+    }
+
+    public void setPay(Pay pay) {
+        this.pay = pay;
     }
 
     public Customer getCustomer() {

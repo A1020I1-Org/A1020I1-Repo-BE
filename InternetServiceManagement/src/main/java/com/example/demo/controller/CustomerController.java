@@ -4,6 +4,7 @@ import com.example.demo.config.MyConstants;
 import com.example.demo.entity.AccountCustomer;
 import com.example.demo.entity.Customer;
 import com.example.demo.entity.*;
+import com.example.demo.http.request.CustomerRequest;
 import com.example.demo.service.AccountRoleService;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.CustomerService;
@@ -17,6 +18,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
@@ -42,6 +44,44 @@ public class CustomerController {
 
     @Autowired
     JavaMailSender emailSender;
+
+
+    @Autowired
+    private CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
+
+    @GetMapping(value = "/{id}")
+    public CustomerRequest getCustomer(@PathVariable Integer id) {
+        return customerService.findById(id);
+    }
+
+    @PostMapping(value = "/create")
+    public ResponseEntity<CustomerRequest> createCustomer(@Validated @RequestBody CustomerRequest customerRequest, BindingResult bindingResult) {
+        new CustomerRequest().validate(customerRequest, bindingResult);
+        if (!bindingResult.hasErrors()) {
+            customerService.createCustomer(customerRequest);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+    @PutMapping(value = "/edit/{id}")
+    public ResponseEntity<CustomerRequest> updateCustomer(@Validated @RequestBody CustomerRequest customerRequest,
+                                                          BindingResult bindingResult,
+                                                          @PathVariable Integer id) {
+        new CustomerRequest().validate(customerRequest, bindingResult);
+        if (!bindingResult.hasErrors() && id != null) {
+            if (customerService.findById(id) != null) {
+                customerService.updateCustomer(customerRequest, id);
+                return new  ResponseEntity<>(HttpStatus.OK);
+            }
+        }
+        return new  ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 
     @RequestMapping(value = "/checkEmail/{email}",method = RequestMethod.GET)
     public ResponseEntity<Boolean> checkExitsByEmail(@PathVariable("email") String email){
@@ -268,4 +308,5 @@ public class CustomerController {
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
+
 }

@@ -19,7 +19,6 @@ public class AccountRole {
 
     public AccountRole() {
     }
-
     public AccountRole(Account account, Role role) {
         this.account = account;
         this.role = role;

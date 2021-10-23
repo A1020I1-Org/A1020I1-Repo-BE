@@ -1,32 +1,55 @@
 package com.example.demo.entity;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@Table(name = "customer")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customerId;
+    private Integer customerId;
+    @Column(name = "name")
     private String fullName;
+    @Column(name = "dateOfBirth", columnDefinition = "DATE")
     private String dateOfBirth;
+    @Column(name = "email")
     private String email;
+    @Column(name = "address")
     private String address;
+    @Column(name = "phone")
     private String phone;
-    private boolean status;
+
+    @Column(name = "status")
+    private Boolean status;
     private String idCard;
 
+
+    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userName",referencedColumnName = "userName")
     private Account account;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonManagedReference
     Set<OrderService> orderServices;
 
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-    private Set<Pay> pays;
-
+    @JsonBackReference
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
+    @JsonManagedReference
     Set<Order> orders;
 
     public Customer() {
@@ -40,8 +63,19 @@ public class Customer {
         this.address = address;
         this.phone = phone;
         this.status = status;
+
         this.idCard = idCard;
         this.account = account;
+    }
+
+    public Customer(int customerId, String fullName, String dateOfBirth, String email, String address, String phone, boolean status) {
+        this.customerId = customerId;
+        this.fullName = fullName;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.status = status;
     }
 
     public int getCustomerId() {
@@ -92,13 +126,14 @@ public class Customer {
         this.phone = phone;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
     public void setStatus(boolean status) {
         this.status = status;
     }
+
 
     public String getIdCard() {
         return idCard;
@@ -124,13 +159,6 @@ public class Customer {
         this.orderServices = orderServices;
     }
 
-    public Set<Pay> getPays() {
-        return pays;
-    }
-
-    public void setPays(Set<Pay> pays) {
-        this.pays = pays;
-    }
 
     public Set<Order> getOrders() {
         return orders;

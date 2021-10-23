@@ -5,7 +5,6 @@ import javax.persistence.*;
 @Entity
 public class Employee {
     @Id
-  
     private String employeeId;
     private String fullName;
     private String dateOfBirth;
@@ -27,7 +26,6 @@ public class Employee {
 
     public Employee() {
     }
-
     public String getEmployeeId() {
         return employeeId;
     }
@@ -124,3 +122,4 @@ public class Employee {
         this.position = position;
     }
 }
+
