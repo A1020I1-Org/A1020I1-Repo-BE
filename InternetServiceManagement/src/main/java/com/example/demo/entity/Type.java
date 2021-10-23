@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -10,6 +12,7 @@ public class Type {
     private int typeId;
     private String typeName;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "type",cascade = CascadeType.ALL)
     private Set<Computer> computers;
 
