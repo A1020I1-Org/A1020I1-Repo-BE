@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,30 +12,29 @@ import java.util.Date;
 public class OrderService {
 
     @Id
-    @Column(name="id")
     private Integer id;
 
     @ManyToOne
     @MapsId("customerId")
     @JoinColumn(name = "customer_id")
-    @JsonBackReference
+    @JsonIgnore
+
     private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "service_id")
-    @JsonBackReference
+    @JsonManagedReference
     private Service service;
 
     @ManyToOne
-    @JoinColumn(name = "pay_id")
-    @JsonBackReference
-    private Pay pay;
+    @JoinColumn(name = "order_service_total_id")
+    private OrderServiceToTal orderServiceToTal;
 
     private int quantity;
     private int unit;
     private int totalMoney;
-    private Date orderDate;
-    private boolean status;
+    private String oder_date;
+
 
     public OrderService() {
     }
@@ -94,19 +95,11 @@ public class OrderService {
         this.orderDate = orderDate;
     }
 
-    public Pay getPay() {
-        return pay;
+    public OrderServiceToTal getOrderServiceToTal() {
+        return orderServiceToTal;
     }
 
-    public void setPay(Pay pay) {
-        this.pay = pay;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setOrderServiceToTal(OrderServiceToTal orderServiceToTal) {
+        this.orderServiceToTal = orderServiceToTal;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -15,7 +16,7 @@ public class Service {
     private int quantity;
     private int prices;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
 
@@ -62,7 +63,6 @@ public class Service {
         this.prices = prices;
     }
 
-  
 
     public Set<OrderService> getOrderServices() {
         return orderServices;
