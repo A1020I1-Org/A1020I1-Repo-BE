@@ -1,17 +1,27 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Set;
 
 @Entity
 public class Service {
     @Id
+    @Pattern(regexp = "^SV\\d{4}$")
     private String serviceId;
+    @NotBlank
+
     private String serviceName;
+    @NotBlank
     private String unit;
+    @Min(1)
+    @NotNull
     private int quantity;
+    @Min(1000)
+    @NotNull
     private int prices;
 
     @JsonManagedReference
@@ -61,6 +71,7 @@ public class Service {
         this.prices = prices;
     }
 
+  
 
     public Set<OrderService> getOrderServices() {
         return orderServices;
