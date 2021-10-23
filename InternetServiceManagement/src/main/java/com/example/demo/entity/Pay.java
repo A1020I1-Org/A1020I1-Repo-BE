@@ -1,23 +1,5 @@
 package com.example.demo.entity;
 
-import javax.persistence.*;
-import java.util.Set;
-
-
-@Entity
-@Table(name = "pay")
-public class Pay {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int payId;
-    private int totalPayment;
-    private boolean status;
-
-    @OneToMany(mappedBy = "pay", cascade = CascadeType.ALL)
-    Set<OrderService> orderServices;
-
-    @OneToOne
-    @JoinColumn(name = "order_id")
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -48,21 +30,6 @@ public class Pay {
     }
 
     public int getId() {
-        return payId;
-    }
-
-    public void setId(int payId) {
-        this.payId = payId;
-    }
-
-    public int getTotalPayment() {
-        return totalPayment;
-    }
-
-<<<<<<< HEAD
-=======
-    public void setTotalPayment(double totalPayment) {
-    public int getId() {
         return id;
     }
 
@@ -74,7 +41,6 @@ public class Pay {
         return totalPayment;
     }
 
->>>>>>> dev
     public void setTotalPayment(int totalPayment) {
         this.totalPayment = totalPayment;
     }

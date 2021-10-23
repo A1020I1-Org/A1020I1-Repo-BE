@@ -28,7 +28,7 @@ dependencies {
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-   testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.springframework.security:spring-security-test'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.4'
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
     compileOnly 'org.projectlombok:lombok:1.18.20'
@@ -42,17 +42,3 @@ test {
     useJUnitPlatform()
 }
 
-sonarqube {
-    properties {
-        property 'sonar.host.url', 'http://18.117.194.147:9000/'
-        property 'sonar.login', 'f4570cffe1dd5bf39ecbeed0ef04eef921709b5a'
-        property 'sonar.projectKey', 'A1020I1_ReviewCode_KhoaDVD'
-        property 'sonar.projectName', 'A1020I1_ReviewCode_KhoaDVD'
-    }
-}
-        property 'sonar.host.url', 'http://18.117.194.147:9000'
-        property 'sonar.login', 'f4570cffe1dd5bf39ecbeed0ef04eef921709b5a'
-        property 'sonar.projectKey', 'A1020I1_ReviewCode_CuongHN'
-        property 'sonar.projectName', 'A1020I1_ReviewCode_CuongHN'
-    }
-}

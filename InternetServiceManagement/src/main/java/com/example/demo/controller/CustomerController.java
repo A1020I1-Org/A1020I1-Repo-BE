@@ -22,66 +22,40 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @Autowired
-    private CustomerController(CustomerService customerService){
+    private CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
-//    @CrossOrigin
+
     @GetMapping(value = "/{id}")
-    public CustomerRequest getCustomer(@PathVariable Integer id){
-       return customerService.findById(id);
+    public CustomerRequest getCustomer(@PathVariable Integer id) {
+        return customerService.findById(id);
     }
 
-//    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping(value = "/create")
-    public ResponseEntity<CustomerRequest> createCustomer(@Validated @RequestBody CustomerRequest customerRequest, BindingResult bindingResult){
+    public ResponseEntity<CustomerRequest> createCustomer(@Validated @RequestBody CustomerRequest customerRequest, BindingResult bindingResult) {
         new CustomerRequest().validate(customerRequest, bindingResult);
         if (!bindingResult.hasErrors()) {
             customerService.createCustomer(customerRequest);
             return new ResponseEntity<>(HttpStatus.OK);
-        }
-        else {
+        } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
-//    @CrossOrigin
+
     @PutMapping(value = "/edit/{id}")
     public ResponseEntity<CustomerRequest> updateCustomer(@Validated @RequestBody CustomerRequest customerRequest,
-                                                   BindingResult bindingResult,
-                                                   @PathVariable Integer id){
+                                                          BindingResult bindingResult,
+                                                          @PathVariable Integer id) {
         new CustomerRequest().validate(customerRequest, bindingResult);
         if (!bindingResult.hasErrors() && id != null) {
             if (customerService.findById(id) != null) {
                 customerService.updateCustomer(customerRequest, id);
-
-    @Autowired
-    private CustomerService customerService;
-
-    @GetMapping(value = "/info/{id}")
-    public ResponseEntity<Customer> customerInfo(@PathVariable String id){
-        Customer customer = customerService.findById(id);
-        if (customer == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(customer, HttpStatus.OK);
-    }
-
-    @PostMapping("/update/{id}")
-    public ResponseEntity<Customer> update(@Validated @RequestBody CustomerDTO customerDTO, @PathVariable String id, BindingResult bindingResult) {
-        new CustomerDTO().validate(customerDTO, bindingResult);
-        if (!bindingResult.hasErrors() && id != null) {
-            if (customerService.findById(id) != null) {
-                customerService.updateCustomer(customerDTO, id);
-
-                return new ResponseEntity<>(HttpStatus.OK);
-            }
-            else {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                return new  ResponseEntity<>(HttpStatus.OK);
             }
         }
-        else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        return new  ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }
+
