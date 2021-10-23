@@ -14,12 +14,21 @@ public class Employee {
     private String level;
     private String startWorkDate;
     private int yearOfExp;
+<<<<<<< HEAD
     private long avtUrl;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userName",referencedColumnName = "userName")
     private Account account;
 
+=======
+    private String avtUrl;
+    @JsonBackReference
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userName",referencedColumnName = "userName")
+    private Account account;
+    @JsonBackReference
+>>>>>>> 3dfa8296fe87edfabed322497383c885f3b334c1
     @ManyToOne(targetEntity = Position.class)
     @JoinColumn(name = "positionId", referencedColumnName = "positionId")
     private Position position;
@@ -101,6 +110,7 @@ public class Employee {
         this.yearOfExp = yearOfExp;
     }
 
+<<<<<<< HEAD
     public long getAvtUrl() {
         return avtUrl;
     }
@@ -109,6 +119,12 @@ public class Employee {
         this.avtUrl = avtUrl;
     }
 
+=======
+    public String getAvtUrl() {
+        return avtUrl;
+    }
+
+>>>>>>> 3dfa8296fe87edfabed322497383c885f3b334c1
     public Account getAccount() {
         return account;
     }
@@ -123,5 +139,9 @@ public class Employee {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public void setAvtUrl(String avtUrl) {
+        this.avtUrl = avtUrl;
     }
 }
