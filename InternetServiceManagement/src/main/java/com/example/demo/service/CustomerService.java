@@ -9,10 +9,12 @@ import java.util.Optional;
 
 public interface CustomerService {
 
-    //    List<Customer> getListCustomer();
-    Page<Customer> getAllCustomer(Pageable pageable);
 
-    Page<Customer> searchCustomer(Pageable pageable, String username, String status,
+      List<Customer> getListCustomer();
+//    Page<Customer> getListCustomer(Pageable pageable);
+
+
+    Page<Customer> searchCustomer(Pageable pageable ,String username, String status,
                                   String address, String dateBirthFrom, String dateBirthTo);
 
 
