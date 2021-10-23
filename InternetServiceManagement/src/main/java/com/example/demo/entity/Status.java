@@ -12,6 +12,7 @@ public class Status {
     private int statusId;
     private String statusName;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "status",cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Computer> computers;

@@ -12,6 +12,7 @@ public class Manufacturer {
     private int manufacturerId;
     private String manufacturerName;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "manufacturer",cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Computer> computers;

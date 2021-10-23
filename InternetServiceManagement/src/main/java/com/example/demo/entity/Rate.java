@@ -80,3 +80,4 @@ public class Rate {
         return type + " " + imageurl + " " + muatienmat + " " + muack + " " + bantienmat + " " + banck ;
     }
 }
+

@@ -43,4 +43,7 @@ public interface ComputerRepository extends JpaRepository<Computer, String> {
     Page<Computer> advancedSearchComputer(String computerId,String computerLocation, String startUsedDateFromComputer,
                                           String startUsedDateToComputer, String type,String status,Pageable pageable);
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ComputerRepository extends JpaRepository<Computer, Integer> {
 }
