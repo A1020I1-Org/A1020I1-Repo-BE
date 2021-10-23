@@ -1,7 +1,7 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -25,7 +25,6 @@ public class Service {
     private int prices;
 
     @JsonIgnore
-    @JsonManagedReference
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
 
@@ -71,8 +70,6 @@ public class Service {
     public void setPrices(int prices) {
         this.prices = prices;
     }
-
-  
 
     public Set<OrderService> getOrderServices() {
         return orderServices;
