@@ -13,6 +13,7 @@ public class Service {
     @Pattern(regexp = "^SV\\d{4}$")
     private String serviceId;
     @NotBlank
+
     private String serviceName;
     @NotBlank
     private String unit;
