@@ -27,20 +27,20 @@ public class CustomerRestController_EditCustomer {
         AccountCustomer customer = new AccountCustomer();
         customer.setCustomerId(1);
         customer.setFullName(null);
-        customer.setDateOfBirth("06-09-1998");
-        customer.setEmail("abc@gmail.com");
-        customer.setProvince("Hai Chau");
-        customer.setDistrict("Thanh Binh");
-        customer.setCommune("50");
+        customer.setDateOfBirth("1998-06-09");
+        customer.setEmail("cuong34@gmail.com");
+        customer.setProvince("Thanh phố Đà Nẵng");
+        customer.setDistrict("Quận Liên Chiểu");
+        customer.setCommune("Phường Hòa Khánh Băc");
         customer.setPhone("0901630920");
-        customer.setUsername("khoadvd1998");
-        customer.setPassword("Khoadvd48!");
-        customer.setPasswordRetype("Khoadvd48!");
+        customer.setUsername("test1234");
+        customer.setPassword("Cuong123!");
+        customer.setPasswordRetype("Cuong123!");
         customer.setStatus(true);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/customer/edit/{id}")
+                        .put("/customer/edit/1")
                         .content(this.objectMapper.writeValueAsString(customer))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -52,20 +52,20 @@ public class CustomerRestController_EditCustomer {
         AccountCustomer customer = new AccountCustomer();
         customer.setCustomerId(1);
         customer.setFullName("");
-        customer.setDateOfBirth("06-09-1998");
-        customer.setEmail("abc@gmail.com");
-        customer.setProvince("Hai Chau");
-        customer.setDistrict("Thanh Binh");
-        customer.setCommune("50");
+        customer.setDateOfBirth("1998-06-09");
+        customer.setEmail("cuong34@gmail.com");
+        customer.setProvince("Thanh phố Đà Nẵng");
+        customer.setDistrict("Quận Liên Chiểu");
+        customer.setCommune("Phường Hòa Khánh Băc");
         customer.setPhone("0901630920");
-        customer.setUsername("khoadvd1998");
-        customer.setPassword("Khoadvd48!");
-        customer.setPasswordRetype("Khoadvd48!");
+        customer.setUsername("test1234");
+        customer.setPassword("Cuong123!");
+        customer.setPasswordRetype("Cuong123!");
         customer.setStatus(true);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/customer/edit/{id}")
+                        .put("/customer/edit/1")
                         .content(this.objectMapper.writeValueAsString(customer))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -76,21 +76,21 @@ public class CustomerRestController_EditCustomer {
     public void editCustomer_15() throws Exception {
         AccountCustomer customer = new AccountCustomer();
         customer.setCustomerId(1);
-        customer.setFullName("Do Khoa");
-        customer.setDateOfBirth("06-09-2015");
-        customer.setEmail("abcgmail.com");
-        customer.setProvince("Hai Chau");
-        customer.setDistrict("Thanh Binh");
-        customer.setCommune("50");
+        customer.setFullName("ngoc cuong");
+        customer.setDateOfBirth("1998-06-09");
+        customer.setEmail("cuong34@gmail.com");
+        customer.setProvince("Thanh phố Đà Nẵng");
+        customer.setDistrict("Quận Liên Chiểu");
+        customer.setCommune("Phường Hòa Khánh Băc");
         customer.setPhone("0901630920");
-        customer.setUsername("khoadvd1998");
-        customer.setPassword("Khoadvd48!");
-        customer.setPasswordRetype("Khoadvd48!");
+        customer.setUsername("test1234");
+        customer.setPassword("Cuong123!");
+        customer.setPasswordRetype("Cuong123!");
         customer.setStatus(true);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/customer/edit/{id}")
+                        .put("/customer/edit/1")
                         .content(this.objectMapper.writeValueAsString(customer))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -101,21 +101,21 @@ public class CustomerRestController_EditCustomer {
     public void editCustomer_16() throws Exception {
         AccountCustomer customer = new AccountCustomer();
         customer.setCustomerId(1);
-        customer.setFullName("Do Khoa");
-        customer.setDateOfBirth("06-09-1998");
-        customer.setEmail("abcgmailcom");
-        customer.setProvince("Hai Chau");
-        customer.setDistrict("Thanh Binh");
-        customer.setCommune("50");
+        customer.setFullName("ngoc cuong");
+        customer.setDateOfBirth("1998-06-09");
+        customer.setEmail("cuong34@gmail.com");
+        customer.setProvince("Thanh phố Đà Nẵng");
+        customer.setDistrict("Quận Liên Chiểu");
+        customer.setCommune("Phường Hòa Khánh Băc");
         customer.setPhone("090");
-        customer.setUsername("khoadvd1998");
-        customer.setPassword("Khoadvd48!");
-        customer.setPasswordRetype("Khoadvd48!");
+        customer.setUsername("test1234");
+        customer.setPassword("Cuong123!");
+        customer.setPasswordRetype("Cuong123!");
         customer.setStatus(true);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/customer/edit/{id}")
+                        .put("/customer/edit/1")
                         .content(this.objectMapper.writeValueAsString(customer))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -126,21 +126,21 @@ public class CustomerRestController_EditCustomer {
     public void editCustomer_17() throws Exception {
         AccountCustomer customer = new AccountCustomer();
         customer.setCustomerId(1);
-        customer.setFullName("Do Khoa");
-        customer.setDateOfBirth("06-09-1998");
-        customer.setEmail("abc@gmail.com");
-        customer.setProvince("Hai Chau");
-        customer.setDistrict("Thanh Binh");
-        customer.setCommune("50");
-        customer.setPhone("0901630164124125351");
-        customer.setUsername("khoadvd1998");
-        customer.setPassword("Khoadvd48!");
-        customer.setPasswordRetype("Khoadvd48!");
+        customer.setFullName("ngoc cuong");
+        customer.setDateOfBirth("1998-06-09");
+        customer.setEmail("cuong34@gmail.com");
+        customer.setProvince("Thanh phố Đà Nẵng");
+        customer.setDistrict("Quận Liên Chiểu");
+        customer.setCommune("Phường Hòa Khánh Băc");
+        customer.setPhone("090163092012312312312");
+        customer.setUsername("test1234");
+        customer.setPassword("Cuong123!");
+        customer.setPasswordRetype("Cuong123!");
         customer.setStatus(true);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/customer/edit/{id}")
+                        .put("/customer/edit/1")
                         .content(this.objectMapper.writeValueAsString(customer))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -151,21 +151,21 @@ public class CustomerRestController_EditCustomer {
     public void editCustomer_18() throws Exception {
         AccountCustomer customer = new AccountCustomer();
         customer.setCustomerId(1);
-        customer.setFullName("Do Khoa");
-        customer.setDateOfBirth("06-09-1998");
-        customer.setEmail("abc@gmail.com");
-        customer.setProvince("Hai Chau");
-        customer.setDistrict("Thanh Binh");
-        customer.setCommune("50");
+        customer.setFullName("ngoc cuong");
+        customer.setDateOfBirth("1998-06-09");
+        customer.setEmail("cuong34@gmail.com");
+        customer.setProvince("Thanh phố Đà Nẵng");
+        customer.setDistrict("Quận Liên Chiểu");
+        customer.setCommune("Phường Hòa Khánh Băc");
         customer.setPhone("0901630920");
-        customer.setUsername("khoadvd1998");
-        customer.setPassword("Khoadvd48!");
-        customer.setPasswordRetype("Khoadvd48!");
+        customer.setUsername("test123");
+        customer.setPassword("Cuong123!");
+        customer.setPasswordRetype("Cuong123!");
         customer.setStatus(true);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/customer/edit/{id}")
+                        .put("/customer/edit/1")
                         .content(this.objectMapper.writeValueAsString(customer))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())

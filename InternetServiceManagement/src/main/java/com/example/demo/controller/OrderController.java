@@ -11,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin("http://localhost:4200")
 @RequestMapping(value = "/order")
@@ -21,6 +23,12 @@ public class OrderController {
 
     @Autowired
     private OrderServiceService orderServiceService;
+
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Service>> getAllService() {
+        List<Service> service = serviceService.findAll();
+        return new ResponseEntity<>(service, HttpStatus.OK);
+    }
 
     @GetMapping(value = "/service/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Service> getServiceById(@PathVariable("id") String id) {
@@ -40,9 +48,14 @@ public class OrderController {
         return new ResponseEntity<>(orderService, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/create-order-service")
-    public ResponseEntity<OrderServiceDTO> createOrderService(@RequestBody OrderServiceDTO orderServiceDTO) {
-        orderServiceService.createOrderService(orderServiceDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @PostMapping(value = "/create-order-service/{serviceId}")
+    public ResponseEntity<OrderServiceDTO> createOrderService(@RequestBody OrderServiceDTO orderServiceDTO, @PathVariable("serviceId") String id) {
+        if (serviceService.findById(id) != null) {
+            orderServiceService.createOrderService(orderServiceDTO, id);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

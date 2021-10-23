@@ -17,18 +17,18 @@ public class OrderService {
     private String oderDate;
     private boolean status;
 
-    @JsonManagedReference
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
+//    @JsonManagedReference
+    @ManyToOne(targetEntity = Customer.class)
+    @JoinColumn(name = "customer_id", referencedColumnName = "customerId")
     private Customer customer;
 
-    @JsonManagedReference
-    @ManyToOne
+//    @JsonManagedReference
+    @ManyToOne(targetEntity = Service.class)
     @JoinColumn(name = "service_id")
     private Service service;
 
-    @JsonManagedReference
-    @ManyToOne
+//    @JsonManagedReference
+    @ManyToOne(targetEntity = Pay.class)
     @JoinColumn(name = "pay_id")
     private Pay pay;
 

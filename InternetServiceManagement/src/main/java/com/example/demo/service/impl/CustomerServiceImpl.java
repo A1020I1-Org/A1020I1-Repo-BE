@@ -31,8 +31,10 @@ public class CustomerServiceImpl implements CustomerService {
             Account account = new Account();
             account.setUserName(accountCustomer.getUsername());
             account.setPassword(accountCustomer.getPassword());
-            customer.setAccount(account);
             account.setCustomer(customer);
+
+            customer.setAccount(account);
+
             customerRepository.save(customer);
             accountRepository.save(account);
         }

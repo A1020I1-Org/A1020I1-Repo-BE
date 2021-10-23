@@ -2,11 +2,11 @@ package com.example.demo.service;
 
 import com.example.demo.entity.OrderService;
 import com.example.demo.entity.OrderServiceDTO;
+import com.example.demo.entity.Service;
 
 public interface OrderServiceService {
-    void save(OrderService orderService);
-
     OrderService findById(Integer id);
 
-    void createOrderService(OrderServiceDTO orderServiceDTO);
+    void createOrderService(OrderServiceDTO orderServiceDTO, String serviceId);
+
 }

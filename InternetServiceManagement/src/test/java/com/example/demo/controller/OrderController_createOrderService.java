@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.OrderServiceDTO;
+import com.example.demo.entity.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,20 +143,20 @@ public class OrderController_createOrderService {
     @Test
     public void createService_18() throws Exception {
         OrderServiceDTO orderServiceDTO = new OrderServiceDTO();
-        orderServiceDTO.setId(1);
-        orderServiceDTO.setQuantity(2);
-        orderServiceDTO.setUnit("lon");
-        orderServiceDTO.setTotalMoney(40000);
+        orderServiceDTO.setId(null);
+        orderServiceDTO.setQuantity(1);
+        orderServiceDTO.setUnit("mi tom");
+        orderServiceDTO.setTotalMoney(20000);
         orderServiceDTO.setOderDate("2021-10-10");
-        orderServiceDTO.setStatus(true);
+        orderServiceDTO.setStatus(false);
         orderServiceDTO.setCustomer(1);
         orderServiceDTO.setPay(1);
-        orderServiceDTO.setService("1");
+        orderServiceDTO.setService("2");
 
         this.mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .post("/order/create-order-service")
+                                .post("/order/create-order-service/{id}", 2)
                                 .content(this.objectMapper.writeValueAsString(orderServiceDTO))
                                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())

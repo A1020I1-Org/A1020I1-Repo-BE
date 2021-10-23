@@ -1,15 +1,21 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.entity.Customer;
 import com.example.demo.entity.OrderService;
 import com.example.demo.entity.OrderServiceDTO;
+import com.example.demo.entity.Pay;
 import com.example.demo.repository.CustomerRepository;
 import com.example.demo.repository.OrderServiceRepository;
 
+import com.example.demo.repository.PayRepository;
 import com.example.demo.repository.ServiceRepository;
 import com.example.demo.service.OrderServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -23,10 +29,8 @@ public class OrderServiceServiceImpl implements OrderServiceService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    @Override
-    public void save(OrderService orderService) {
-
-    }
+    @Autowired
+    private PayRepository payRepository;
 
     @Override
     public OrderService findById(Integer id) {
@@ -34,19 +38,31 @@ public class OrderServiceServiceImpl implements OrderServiceService {
     }
 
     @Override
-    public void createOrderService(OrderServiceDTO orderServiceDTO) {
+    public void createOrderService(OrderServiceDTO orderServiceDTO, String serviceId) {
         OrderService orderService = toEntity(orderServiceDTO);
-//        Customer customer = new Customer();
-//        Pay pay = new Pay();
-//        pay.setId(orderServiceDTO.getPay());
-//
-//        com.example.demo.entity.Service service = new com.example.demo.entity.Service();
-//
-//        orderService.setCustomer(customer);
-//        orderService.setPay(pay);
-//        orderService.setService(service);
+        Customer customer = customerRepository.findById(1).orElse(null);
+        Pay pay = payRepository.findById(1).orElse(null);
+        com.example.demo.entity.Service service = serviceRepository.findById(serviceId).orElse(null);
 
+        orderService.setCustomer(customer);
+        orderService.setPay(pay);
+        orderService.setService(service);
+
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        Date date = new Date();
+        String date1= dateFormat.format(date);
+        orderService.setOderDate(date1);
+
+        int totalMoney = orderService.getQuantity() * service.getPrices();
+        orderService.setTotalMoney(totalMoney);
         orderServiceRepository.save(orderService);
+
+        orderService.setUnit(service.getUnit());
+
+        int updateQuantity = service.getQuantity() - orderService.getQuantity();
+        service.setQuantity(updateQuantity);
+        serviceRepository.save(service);
+
     }
 
     private OrderServiceDTO toDTO(OrderService orderService){

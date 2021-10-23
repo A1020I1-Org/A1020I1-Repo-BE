@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 public class Pay {
     @Id
-    private int payId;
+    private Integer payId;
     private double totalPayment;
     private boolean status;
 
@@ -24,11 +24,11 @@ public class Pay {
     public Pay() {
     }
 
-    public int getPayId() {
+    public Integer getPayId() {
         return payId;
     }
 
-    public void setPayId(int payId) {
+    public void setPayId(Integer payId) {
         this.payId = payId;
     }
 
@@ -48,4 +48,19 @@ public class Pay {
         this.status = status;
     }
 
+    public Set<OrderService> getOrderServices() {
+        return orderServices;
+    }
+
+    public void setOrderServices(Set<OrderService> orderServices) {
+        this.orderServices = orderServices;
+    }
+
+    public OrderHour getOrder() {
+        return order;
+    }
+
+    public void setOrder(OrderHour order) {
+        this.order = order;
+    }
 }

@@ -53,6 +53,8 @@ public class CustomerRestController_infoCustomer {
                 .andExpect(jsonPath("$.email").value("cuong34@gmail.com"))
                 .andExpect(jsonPath("$.address").value("Thành phố Đà Nẵng,Quận Liên Chiểu,Phường Hòa Khánh Băc"))
                 .andExpect(jsonPath("$.phone").value("0901630920"))
-                .andExpect(jsonPath("$.status").value(true));
+                .andExpect(jsonPath("$.status").value(true))
+                .andExpect(jsonPath("$.userName").value("test1234"));
+
     }
 }
