@@ -7,6 +7,7 @@ import java.util.Set;
 
 @Entity
 public class Position {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int positionId;
