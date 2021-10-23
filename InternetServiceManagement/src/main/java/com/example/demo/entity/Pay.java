@@ -1,13 +1,6 @@
 package com.example.demo.entity;
 
-<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonBackReference;
-=======
-import javax.persistence.*;
-import java.util.Set;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
->>>>>>> 3dfa8296fe87edfabed322497383c885f3b334c1
 
 import javax.persistence.*;
 import java.util.Set;
@@ -31,7 +24,6 @@ public class Pay {
     public Pay() {
     }
 
-<<<<<<< HEAD
     public int getPayId() {
         return payId;
     }
@@ -45,21 +37,6 @@ public class Pay {
     }
 
     public void setTotalPayment(double totalPayment) {
-=======
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getTotalPayment() {
-        return totalPayment;
-    }
-
-    public void setTotalPayment(int totalPayment) {
->>>>>>> 3dfa8296fe87edfabed322497383c885f3b334c1
         this.totalPayment = totalPayment;
     }
 
@@ -71,22 +48,4 @@ public class Pay {
         this.status = status;
     }
 
-<<<<<<< HEAD
-=======
-    public Set<OrderService> getOrderServices() {
-        return orderServices;
-    }
-
-    public void setOrderServices(Set<OrderService> orderServices) {
-        this.orderServices = orderServices;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
->>>>>>> 3dfa8296fe87edfabed322497383c885f3b334c1
 }

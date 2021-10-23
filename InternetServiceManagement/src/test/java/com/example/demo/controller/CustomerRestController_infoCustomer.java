@@ -19,7 +19,7 @@ public class CustomerRestController_infoCustomer {
     private MockMvc mockMvc;
 
     @Test
-    public void testGetInfoStudent_1() throws Exception {
+    public void testGetInfoCustomer_1() throws Exception {
         this.mockMvc
                 .perform(MockMvcRequestBuilders.get("/customer/info/{id}", "null"))
                 .andDo(print())
@@ -27,7 +27,7 @@ public class CustomerRestController_infoCustomer {
     }
 
     @Test
-    public void testGetInfoStudent_2() throws Exception {
+    public void testGetInfoCustomer_2() throws Exception {
         this.mockMvc
                 .perform(MockMvcRequestBuilders.get("/customer/info/{id}", ""))
                 .andDo(print())
@@ -35,7 +35,7 @@ public class CustomerRestController_infoCustomer {
     }
 
     @Test
-    public void testGetInfoStudent_3() throws Exception {
+    public void testGetInfoCustomer_3() throws Exception {
         this.mockMvc
                 .perform(MockMvcRequestBuilders.get("/customer/info/{id}", 99))
                 .andDo(print())
@@ -43,16 +43,16 @@ public class CustomerRestController_infoCustomer {
     }
 
     @Test
-    public void testGetInfoStudent_4() throws Exception {
+    public void testGetInfoCustomer_4() throws Exception {
         this.mockMvc
                 .perform(MockMvcRequestBuilders.get("/customer/info/{id}", 1))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.fullName").value("ngoc cuong"))
-                .andExpect(jsonPath("$.dateOfBirth").value("1999-10-17"))
-                .andExpect(jsonPath("$.email").value("cuong@gmail.com"))
-                .andExpect(jsonPath("$.address").value("hue"))
-                .andExpect(jsonPath("$.phone").value("01324578"))
+                .andExpect(jsonPath("$.dateOfBirth").value("1998-06-09"))
+                .andExpect(jsonPath("$.email").value("cuong34@gmail.com"))
+                .andExpect(jsonPath("$.address").value("Thành phố Đà Nẵng,Quận Liên Chiểu,Phường Hòa Khánh Băc"))
+                .andExpect(jsonPath("$.phone").value("0901630920"))
                 .andExpect(jsonPath("$.status").value(true));
     }
 }

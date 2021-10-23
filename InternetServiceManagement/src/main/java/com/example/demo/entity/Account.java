@@ -1,10 +1,6 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-<<<<<<< HEAD
-=======
-import com.fasterxml.jackson.annotation.JsonManagedReference;
->>>>>>> 3dfa8296fe87edfabed322497383c885f3b334c1
 
 import javax.persistence.*;
 import java.util.Set;
@@ -20,14 +16,9 @@ public class Account {
     @OneToOne(mappedBy = "account" ,cascade = CascadeType.ALL)
     private Customer customer;
 
-<<<<<<< HEAD
-=======
-    @JsonManagedReference
->>>>>>> 3dfa8296fe87edfabed322497383c885f3b334c1
     @OneToOne(mappedBy = "account" ,cascade = CascadeType.ALL)
     private Employee employee;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     Set<AccountRole> accountRoles;
 

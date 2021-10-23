@@ -8,11 +8,6 @@ import java.util.Set;
 @Entity
 public class Service {
     @Id
-<<<<<<< HEAD
-=======
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Pattern(regexp = "^SV\\d{4}$")
->>>>>>> 3dfa8296fe87edfabed322497383c885f3b334c1
     private String serviceId;
     private String serviceName;
     private String unit;
