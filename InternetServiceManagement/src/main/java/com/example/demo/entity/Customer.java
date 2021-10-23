@@ -6,14 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -56,7 +50,7 @@ public class Customer {
 
     @JsonBackReference
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
-    Set<Order> orders;
+    Set<OrderHour> orders;
 
     public Integer getCustomerId() {
         return customerId;
@@ -130,11 +124,11 @@ public class Customer {
         this.orderServices = orderServices;
     }
 
-    public Set<Order> getOrders() {
+    public Set<OrderHour> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Order> orders) {
+    public void setOrders(Set<OrderHour> orders) {
         this.orders = orders;
     }
 

@@ -17,7 +17,7 @@ public class Computer {
 
     @JsonBackReference
     @OneToMany(mappedBy = "computer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
-    Set<Order> orders;
+    Set<OrderHour> orders;
 
     @JsonManagedReference
     @ManyToOne(targetEntity = Manufacturer.class)
@@ -86,11 +86,11 @@ public class Computer {
         this.computerConfiguration = computerConfiguration;
     }
 
-    public Set<Order> getOrders() {
+    public Set<OrderHour> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Order> orders) {
+    public void setOrders(Set<OrderHour> orders) {
         this.orders = orders;
     }
 

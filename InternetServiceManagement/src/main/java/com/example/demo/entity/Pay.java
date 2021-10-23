@@ -19,7 +19,7 @@ public class Pay {
 
     @OneToOne
     @JoinColumn(name = "order_id")
-    private Order order;
+    private OrderHour order;
 
     public Pay() {
     }

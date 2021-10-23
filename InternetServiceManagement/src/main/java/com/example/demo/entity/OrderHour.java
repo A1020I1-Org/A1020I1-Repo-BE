@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "order_hour")
-public class Order {
+public class OrderHour {
 
     @Id
     private Integer id;
@@ -31,7 +31,7 @@ public class Order {
     private String endTime;
     private int usageTime;
 
-    public Order() {
+    public OrderHour() {
     }
 
     public Integer getId() {
