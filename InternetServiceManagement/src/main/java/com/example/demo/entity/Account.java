@@ -1,10 +1,8 @@
 package com.example.demo.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 
 import javax.persistence.*;
 import java.util.Set;
@@ -30,9 +28,6 @@ public class Account {
 
     public Account() {
     }
-
-
-
     public Account(String userName, String password) {
         this.userName = userName;
         this.password = password;
@@ -77,5 +72,4 @@ public class Account {
     public void setAccountRoles(Set<AccountRole> accountRoles) {
         this.accountRoles = accountRoles;
     }
-
 }

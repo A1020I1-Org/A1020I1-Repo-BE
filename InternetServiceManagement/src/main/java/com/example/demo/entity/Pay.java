@@ -12,7 +12,7 @@ import java.util.Set;
 public class Pay {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
     private int totalPayment;
     private boolean status;

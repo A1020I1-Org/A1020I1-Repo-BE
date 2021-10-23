@@ -19,6 +19,10 @@ public class AccountRole {
 
     public AccountRole() {
     }
+    public AccountRole(Account account, Role role) {
+        this.account = account;
+        this.role = role;
+    }
 
     public AccountRole(AccountRoleKey id, Account account, Role role) {
         this.id = id;

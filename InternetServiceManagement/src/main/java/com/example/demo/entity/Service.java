@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -62,8 +61,6 @@ public class Service {
         this.prices = prices;
     }
 
-
-
     public Set<OrderService> getOrderServices() {
         return orderServices;
     }
@@ -72,3 +69,4 @@ public class Service {
         this.orderServices = orderServices;
     }
 }
+

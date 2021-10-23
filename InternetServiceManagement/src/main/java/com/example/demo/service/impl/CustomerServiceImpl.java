@@ -1,7 +1,7 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.Account;
 import com.example.demo.entity.Customer;
+import com.example.demo.entity.Account;
 import com.example.demo.http.request.CustomerRequest;
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.repository.CustomerRepository;
@@ -19,15 +19,25 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerServiceImpl(CustomerRepository customerRepository,
-                                AccountRepository accountRepository){
+                                AccountRepository accountRepository) {
         this.customerRepository = customerRepository;
         this.accountRepository = accountRepository;
+    }
+
+    @Override
+    public void save(Customer customer) {
+        customerRepository.save(customer);
+    }
+
+    @Override
+    public boolean checkEmail(String email) {
+        return customerRepository.existsByEmail(email);
     }
 
 
     @Override
     public void createCustomer(CustomerRequest customerRequest) {
-        if (customerRequest.getPassword().equals(customerRequest.getPasswordRetype())){
+        if (customerRequest.getPassword().equals(customerRequest.getPasswordRetype())) {
             Customer customer = toEntity(customerRequest);
             Account account = new Account();
             account.setUserName(customerRequest.getUsername());
@@ -59,15 +69,14 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerRequest findById(Integer id) {
         Customer customer = customerRepository.findById(id).orElse(null);
-        if (customer != null){
+        if (customer != null) {
             return toRequest(customer);
-        }
-        else {
+        } else {
             return null;
         }
     }
 
-    private CustomerRequest toRequest(Customer customer){
+    private CustomerRequest toRequest(Customer customer) {
         CustomerRequest customerRequest = new CustomerRequest();
         customerRequest.setCustomerId(customer.getCustomerId());
         customerRequest.setFullName(customer.getFullName());
@@ -85,7 +94,7 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRequest;
     }
 
-    private Customer toEntity(CustomerRequest customerRequest){
+    private Customer toEntity(CustomerRequest customerRequest) {
         Customer customer = new Customer();
         if (customerRequest.getCustomerId() != null) {
             Optional<Customer> test = customerRepository.findById(customerRequest.getCustomerId());

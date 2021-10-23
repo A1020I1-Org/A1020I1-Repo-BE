@@ -14,13 +14,11 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@AllArgsConstructor
 @Getter
 @Setter
 @Table(name = "customer")
 public class Customer {
     @Id
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerId;
     @Column(name = "name")
@@ -44,7 +42,6 @@ public class Customer {
     @JoinColumn(name = "userName",referencedColumnName = "userName")
     private Account account;
 
-
     @JsonBackReference
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -58,6 +55,18 @@ public class Customer {
     public Customer() {
     }
 
+    public Customer(int customerId,String fullName, String dateOfBirth, String email, String address, String phone, boolean status, String idCard, Account account) {
+        this.customerId = customerId;
+        this.fullName = fullName;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.status = status;
+
+        this.idCard = idCard;
+        this.account = account;
+    }
 
     public Customer(int customerId, String fullName, String dateOfBirth, String email, String address, String phone, boolean status) {
         this.customerId = customerId;
@@ -125,6 +134,15 @@ public class Customer {
         this.status = status;
     }
 
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
     public Account getAccount() {
         return account;
     }
@@ -140,6 +158,7 @@ public class Customer {
     public void setOrderServices(Set<OrderService> orderServices) {
         this.orderServices = orderServices;
     }
+
 
     public Set<Order> getOrders() {
         return orders;

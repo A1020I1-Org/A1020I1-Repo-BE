@@ -6,6 +6,8 @@ import com.example.demo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AccountServiceImpl implements AccountService {
     @Autowired
@@ -19,5 +21,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void save(Account account) {
         accountRepository.save(account);
+    }
+
+    @Override
+    public List<Account> getAll() {
+        return accountRepository.findAll();
     }
 }
