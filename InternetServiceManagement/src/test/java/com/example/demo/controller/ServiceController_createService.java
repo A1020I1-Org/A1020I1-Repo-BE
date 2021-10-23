@@ -24,7 +24,7 @@ public class ServiceController_createService {
     private ObjectMapper objectMapper;
 
     @Test
-    public void createService_13() throws Exception {
+    private void createService_13() throws Exception {
         Service service = new Service();
         service.setServiceId("null");
         service.setServiceName("Pepsi");
@@ -43,7 +43,7 @@ public class ServiceController_createService {
     }
 
     @Test
-    public void createService_14() throws Exception {
+    private void createService_14() throws Exception {
         Service service = new Service();
         service.setServiceId("");
         service.setServiceName("Pepsi");
@@ -62,7 +62,7 @@ public class ServiceController_createService {
     }
 
     @Test
-    public void createService_15() throws Exception {
+    private void createService_15() throws Exception {
         Service service = new Service();
         service.setServiceId("SV-0001");
         service.setServiceName("Pepsi");
@@ -81,7 +81,7 @@ public class ServiceController_createService {
     }
 
     @Test
-    public void createService_16() throws Exception {
+    private void createService_16() throws Exception {
         Service service = new Service();
         service.setServiceId("SV0001");
         service.setServiceName("Pepsi");
@@ -100,7 +100,7 @@ public class ServiceController_createService {
     }
 
 //    @Test
-//    public void createService_17() throws Exception {
+//    private void createService_17() throws Exception {
 //        Service service = new Service();
 //        service.setServiceId("SV0001");
 //        service.setServiceName("Pepsi");
@@ -119,7 +119,7 @@ public class ServiceController_createService {
 //    }
 
     @Test
-    public void createService_18() throws Exception {
+    private void createService_18() throws Exception {
         Service service = new Service();
         service.setServiceId("SV0020");
         service.setServiceName("Pepsi");

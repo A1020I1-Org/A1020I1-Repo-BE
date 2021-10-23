@@ -2,13 +2,6 @@ package com.example.demo.entity;
 
 import javax.persistence.*;
 
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-
-
 @Entity
 public class Employee {
     @Id
@@ -21,19 +14,12 @@ public class Employee {
     private String level;
     private String startWorkDate;
     private int yearOfExp;
-
     private long avtUrl;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userName",referencedColumnName = "userName")
     private Account account;
 
-    private String avtUrl;
-    @JsonBackReference
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userName",referencedColumnName = "userName")
-    private Account account;
-    @JsonBackReference
     @ManyToOne(targetEntity = Position.class)
     @JoinColumn(name = "positionId", referencedColumnName = "positionId")
     private Position position;
@@ -41,26 +27,12 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String employeeId, String fullName, String dateOfBirth, String email, String address, String phone, String level, String startWorkDate, int yearOfExp, String avtUrl, Account account, Position position) {
-        this.employeeId = employeeId;
-        this.fullName = fullName;
-        this.dateOfBirth = dateOfBirth;
-        this.email = email;
-        this.address = address;
-        this.phone = phone;
-        this.level = level;
-        this.startWorkDate = startWorkDate;
-        this.yearOfExp = yearOfExp;
-        this.avtUrl = avtUrl;
-        this.account = account;
-        this.position = position;
-    }
-
     public String getEmployeeId() {
         return employeeId;
     }
 
     public void setEmployeeId(String employeeId) {
+
         this.employeeId = employeeId;
     }
 
@@ -133,13 +105,6 @@ public class Employee {
     }
 
     public void setAvtUrl(long avtUrl) {
-
-    public String getAvtUrl() {
-        return avtUrl;
-    }
-
-    public void setAvtUrl(String avtUrl) {
-
         this.avtUrl = avtUrl;
     }
 
@@ -159,3 +124,5 @@ public class Employee {
         this.position = position;
     }
 }
+
+

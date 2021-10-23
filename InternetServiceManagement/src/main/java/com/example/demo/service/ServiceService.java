@@ -1,16 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Service;
-
-import java.util.List;
-
-import java.util.List;
 
 import com.example.demo.entity.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+
 
 public interface ServiceService {
 
@@ -22,7 +16,9 @@ public interface ServiceService {
 
     Service findServiceById(String serviceId);
 
-    Service deleteService (String serviceId);
+    void deleteService (String serviceId);
+
+    void deleteAllService ();
 
     Page<Service> search(Pageable pageable, String searchName);
 

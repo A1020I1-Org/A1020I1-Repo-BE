@@ -1,5 +1,8 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -9,16 +12,15 @@ import java.util.Set;
 public class Pay {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int payId;
+    @Column(name = "id")
+    private int id;
     private int totalPayment;
     private boolean status;
 
-
-    @JsonManagedReference
     @OneToMany(mappedBy = "pay", cascade = CascadeType.ALL)
+    @JsonIgnore
     Set<OrderService> orderServices;
-  
-    @JsonManagedReference
+
     @OneToOne
     @JoinColumn(name = "order_id")
     @JsonManagedReference
@@ -28,11 +30,11 @@ public class Pay {
     }
 
     public int getId() {
-        return payId;
+        return id;
     }
 
-    public void setId(int payId) {
-        this.payId = payId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getTotalPayment() {

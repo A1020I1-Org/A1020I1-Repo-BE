@@ -1,9 +1,13 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.entity.Account;
 import com.example.demo.repository.AccountRepository;
+
 import com.example.demo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -18,5 +22,13 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void save(Account account) {
         accountRepository.save(account);
+    }
+
+    @Override
+    public List<Account> getAll() {
+        return accountRepository.findAll();
+    }
+    public Account findByUserName(String userName) {
+        return accountRepository.findAccountByUserName(userName);
     }
 }
