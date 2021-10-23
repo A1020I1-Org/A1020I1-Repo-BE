@@ -1,28 +1,45 @@
 package com.example.demo.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.util.Date;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Set;
 
 @Entity
 public class Computer {
+
     @Id
-    private String computerId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int computerId;
+
+    @Pattern(regexp = "^[A-Z]{1}[\\d]{4}$", message = "Địa chỉ không đúng định dạng")
     private String computerLocation;
+    @DateTimeFormat()
     private String computerStartUsedDate;
+    @NotNull
     private String computerWarrantyPeriod;
+    @NotNull
     private String computerConfiguration;
+    private String computerIpLocal;
 
     @OneToMany(mappedBy = "computer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
     Set<Order> orders;
 
+    @NotNull
     @ManyToOne(targetEntity = Manufacturer.class)
     @JoinColumn(name = "manufacturerId", referencedColumnName = "manufacturerId")
     private Manufacturer manufacturer;
 
+    @NotNull
     @ManyToOne(targetEntity = Status.class)
     @JoinColumn(name = "statusId", referencedColumnName = "statusId")
     private Status status;
 
+    @NotNull
     @ManyToOne(targetEntity = Type.class)
     @JoinColumn(name = "typeId", referencedColumnName = "typeId")
     private Type type;
@@ -38,11 +55,44 @@ public class Computer {
     public Computer() {
     }
 
-    public String getComputerId() {
+    public Computer(String computerId, String computerLocation, String computerStartUsedDate, String computerWarrantyPeriod, String computerConfiguration, Set<Order> orders, Manufacturer manufacturer, Status status, Type type, Set<Game> games) {
+        this.computerId = computerId;
+        this.computerLocation = computerLocation;
+        this.computerStartUsedDate = computerStartUsedDate;
+        this.computerWarrantyPeriod = computerWarrantyPeriod;
+        this.computerConfiguration = computerConfiguration;
+        this.orders = orders;
+        this.manufacturer = manufacturer;
+        this.status = status;
+        this.type = type;
+        this.games = games;
+    }
+
+    public Computer(String computerId, String computerLocation, String computerStartUsedDate, String computerWarrantyPeriod, String computerConfiguration, String computerIpLocal, Set<Order> orders, Manufacturer manufacturer, Status status, Type type, Set<Game> games) {
+        this.computerId = computerId;
+        this.computerLocation = computerLocation;
+        this.computerStartUsedDate = computerStartUsedDate;
+        this.computerWarrantyPeriod = computerWarrantyPeriod;
+        this.computerConfiguration = computerConfiguration;
+        this.computerIpLocal = computerIpLocal;
+        this.orders = orders;
+        this.manufacturer = manufacturer;
+        this.status = status;
+        this.type = type;
+        this.games = games;
+    public String getComputerIpLocal() {
+        return computerIpLocal;
+    }
+
+    public void setComputerIpLocal(String computerIpLocal) {
+        this.computerIpLocal = computerIpLocal;
+    }
+
+    public int getComputerId() {
         return computerId;
     }
 
-    public void setComputerId(String computerId) {
+    public void setComputerId(int computerId) {
         this.computerId = computerId;
     }
 
@@ -76,6 +126,14 @@ public class Computer {
 
     public void setComputerConfiguration(String computerConfiguration) {
         this.computerConfiguration = computerConfiguration;
+    }
+
+    public String getComputerIpLocal() {
+        return computerIpLocal;
+    }
+
+    public void setComputerIpLocal(String computerIpLocal) {
+        this.computerIpLocal = computerIpLocal;
     }
 
     public Set<Order> getOrders() {
