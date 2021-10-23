@@ -1,25 +1,27 @@
 package com.example.demo.controller;
 
-import com.example.demo.config.MyConstants;
-import com.example.demo.entity.AccountCustomer;
 import com.example.demo.entity.Customer;
+import com.example.demo.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import com.example.demo.entity.AccountCustomer;
 import com.example.demo.entity.*;
 import com.example.demo.http.request.CustomerRequest;
 import com.example.demo.service.AccountRoleService;
 import com.example.demo.service.AccountService;
-import com.example.demo.service.CustomerService;
 import com.example.demo.service.RoleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -49,6 +51,45 @@ public class CustomerController {
     @Autowired
     private CustomerController(CustomerService customerService) {
         this.customerService = customerService;
+    }
+
+//    @GetMapping("/customer/list")
+//    public ResponseEntity<List<Customer>> getListCustomer() {
+//        List<Customer> customers = customerService.getListCustomer();
+//        if (customers.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(customers, HttpStatus.OK);
+//    }
+
+    @GetMapping("/customer/list")
+    public ResponseEntity<Page<Customer>> getListCustomer(@PageableDefault(value = 5) Pageable pageable) {
+       Page<Customer> customers = customerService.getListCustomer(pageable);
+        if (customers.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
+
+    @DeleteMapping("/customer/delete/{customerId}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Integer customerId) {
+        this.customerService.deleteCustomer(customerId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("customer/search")
+    public ResponseEntity<Page<Customer>> getSearchCustomer(@PageableDefault(value = 5) Pageable pageable,
+                                                            @RequestParam(defaultValue = "") String username,
+                                                            @RequestParam(defaultValue = "1900-01-01") String dateBirthFrom,
+                                                            @RequestParam(defaultValue = "2100-01-01") String dateBirthTo,
+                                                            @RequestParam(defaultValue = "")String status,
+                                                            @RequestParam(defaultValue = "")String address ) {
+        Page<Customer> customers = customerService.searchCustomer(pageable,username,status,address,dateBirthFrom,dateBirthTo);
+        if (customers.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
 

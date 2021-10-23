@@ -1,13 +1,17 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.Customer;
-import com.example.demo.entity.Account;
-import com.example.demo.http.request.CustomerRequest;
-import com.example.demo.repository.AccountRepository;
+
 import com.example.demo.repository.CustomerRepository;
 import com.example.demo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import com.example.demo.entity.Account;
+import com.example.demo.http.request.CustomerRequest;
+import com.example.demo.repository.AccountRepository;
 
 
 import java.util.Optional;
@@ -22,6 +26,37 @@ public class CustomerServiceImpl implements CustomerService {
                                 AccountRepository accountRepository) {
         this.customerRepository = customerRepository;
         this.accountRepository = accountRepository;
+    }
+    /*
+    @Override
+    public  List<Customer> getListCustomer() {
+        return customerRepository.getListCustomer();
+    }
+    */
+
+//    @Override
+//    public List<Customer> getListCustomer() {
+//        return customerRepository.findAll();
+//    }
+
+
+    @Override
+    public Page<Customer> getListCustomer(Pageable pageable) {
+        return customerRepository.getListCustomer(pageable);
+    }
+
+    @Override
+    public Page<Customer> searchCustomer( Pageable pageable, String username, String status, String address, String dateBirthFrom, String dateBirthTo) {
+        return customerRepository.searchCustomer(pageable, username, dateBirthFrom, dateBirthTo, status, address);
+    }
+    @Override
+    public void deleteCustomer(Integer customerId) {
+        customerRepository.deleteById(customerId);
+    }
+
+    @Override
+    public Customer getCustomerByUsername(String username) {
+        return  customerRepository.getCustomerByUsername(username);
     }
 
     @Override
@@ -112,3 +147,4 @@ public class CustomerServiceImpl implements CustomerService {
         return customer;
     }
 }
+
