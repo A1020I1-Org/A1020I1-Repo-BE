@@ -16,6 +16,7 @@ repositories {
 
 
 dependencies {
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
     implementation group: 'com.paypal.sdk', name: 'rest-api-sdk', version: '1.13.1'
     implementation group: 'org.json', name: 'json', version: '20190722'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
@@ -23,6 +24,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.apache.httpcomponents:httpclient'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
