@@ -78,8 +78,7 @@ public class ComputerController {
                                                          @RequestParam("startUsedDateFromComputer") String startUsedDateFromComputer,
                                                          @RequestParam("startUsedDateToComputer") String startUsedDateToComputer,
                                                          @RequestParam("type") String type,
-                                                         @RequestParam("status") String status,
-                                                         @PageableDefault(size = 5) Pageable pageable) {
+                                                         @RequestParam("status") String status,@PageableDefault(size = 5) Pageable pageable) {
 
 
         Page<Computer> computers = computerService.search(id, computerLocation, startUsedDateFromComputer,startUsedDateToComputer, type, status,pageable);

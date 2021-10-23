@@ -38,9 +38,9 @@ public interface ComputerRepository extends JpaRepository<Computer, String> {
     "(c.computerLocation is null or c.computerLocation like %:computerLocation%) and "+
     "(c.computerStartUsedDate between :startUsedDateFromComputer and :startUsedDateToComputer) and "+
     "(c.type.typeName is null or c.type.typeName like %:type%) and "+
-    "(c.status.statusName is null or c.status.statusName like %:status%) "+
-    "group by c.computerId")
+    "(c.status.statusName is null or c.status.statusName like %:status%)" +
+    "order by c.computerId")
     Page<Computer> advancedSearchComputer(String computerId,String computerLocation, String startUsedDateFromComputer,
-                                          String startUsedDateToComputer, String type,String status, Pageable pageable);
+                                          String startUsedDateToComputer, String type,String status,Pageable pageable);
 
 }

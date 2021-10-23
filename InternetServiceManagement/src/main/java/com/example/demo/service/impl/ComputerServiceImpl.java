@@ -7,8 +7,11 @@ import com.example.demo.service.ComputerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -33,11 +36,8 @@ public class ComputerServiceImpl implements ComputerService {
     }
 
     @Override
-    public Page<Computer> search(String id, String computerLocation, String computerStartUsedFrom, String computerStartUsedTo, String type, String status, Pageable pageable) {
+    public Page<Computer> search(String id, String computerLocation, String computerStartUsedFrom, String computerStartUsedTo,
+                                 String type, String status, Pageable pageable) {
         return computerRepository.advancedSearchComputer(id, computerLocation, computerStartUsedFrom, computerStartUsedTo, type, status, pageable);
     }
-
-
-
-
 }
