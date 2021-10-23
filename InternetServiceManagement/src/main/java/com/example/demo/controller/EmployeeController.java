@@ -10,9 +10,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping(value = "/employee")
 public class EmployeeController {
@@ -30,6 +33,32 @@ public class EmployeeController {
     @Autowired
     PositionService positionService;
 
+    @RequestMapping(value = "/listPosition", method = RequestMethod.GET)
+    public ResponseEntity<List<Position>> getAllPosition() {
+        List<Position> positionList = positionService.findAll();
+        if (positionList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(positionList, HttpStatus.OK);
+    }
+    @RequestMapping(value = "/listAddress", method = RequestMethod.GET)
+    public ResponseEntity<Set<String>> getAllAddress() {
+        List<Employee> employeeList = employeeService.findAll();
+        Set<String> stringSet = new HashSet<>();
+        for (int  i=0;i<employeeList.size();i++){
+            stringSet.add(employeeList.get(i).getAddress());
+        }
+        if (stringSet.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(stringSet, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/listEmployee", method = RequestMethod.GET)
+    public ResponseEntity<Page<Employee>> getAllEmployee(@PageableDefault(size = 5) Pageable pageable) {
+        Page<Employee> employeeList = employeeService.getAllEmployee(pageable);
+        if (employeeList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     @RequestMapping(value = "/createEmployee", method = RequestMethod.POST)
     public ResponseEntity<List<FieldError>> createEmployee(@RequestBody @Valid AccountEmployee accountEmployee, BindingResult bindingResult){
@@ -58,6 +87,19 @@ public class EmployeeController {
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
+    @RequestMapping(value = "/searchEmployee", method = RequestMethod.GET)
+    public ResponseEntity<Page<Employee>> searchEmployee(@RequestParam String idEmp,
+                                                         @RequestParam String dateStart,
+                                                         @RequestParam String dateEnd,
+                                                         @RequestParam String workStart,
+                                                         @RequestParam String workEnd,
+                                                         @RequestParam String address,
+                                                         @RequestParam String positionId,
+                                                         @PageableDefault(size = 5) Pageable pageable) {
+        Page<Employee> employeeList = employeeService.searchEmployee(idEmp,dateStart,dateEnd,workStart
+                ,workEnd,address,positionId,pageable);
+        if (employeeList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     @PutMapping("/updateEmployee/{id}")
     public ResponseEntity<List<FieldError>> updateEmployee(@PathVariable @Valid String id, @RequestBody AccountEmployee accountEmployee, BindingResult bindingResult){
@@ -95,4 +137,13 @@ public class EmployeeController {
         }
         return new ResponseEntity<>(employeeObj, HttpStatus.OK);
     }
+
+//    @GetMapping(value = "/viewEmployee/{id}")
+//    public ResponseEntity<Employee> detailEmployee(@PathVariable String id) {
+//        Employee employeeObj = this.employeeService.findById(id);
+//        if (employeeObj == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(employeeObj, HttpStatus.OK);
+//    }
 }

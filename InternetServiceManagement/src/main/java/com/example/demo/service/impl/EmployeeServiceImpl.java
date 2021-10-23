@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -31,6 +32,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public Page<Employee> searchEmployee(String idEmp, String dateStart, String dateEnd,
+                                         String workStart, String workEnd, String address,
+                                         String positionId, Pageable pageable) {
+        return employeeRepository.searchEmployee(idEmp,dateStart,dateEnd,workStart,workEnd,address,positionId,pageable);
+    }
+
+    @Override
+    public List<Employee> findAll() {
+        return employeeRepository.findAll();
     public void deleteEmployee(String id) {
 
     }

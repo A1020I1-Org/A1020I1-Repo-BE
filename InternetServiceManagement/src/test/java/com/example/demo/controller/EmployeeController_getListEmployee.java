@@ -92,7 +92,7 @@ public class EmployeeController_getListEmployee {
         ResponseEntity<Page<Employee>> responseEntity
                 = this.employeeController.searchEmployee("1","2021-10-07",
                 "2021-10-10","2021-10-07","2021-10-10",
-                "Nghệ An","Lao Công",PageRequest.of(0,2));
+                "Nghệ An",1,PageRequest.of(0,2));
 
         Assertions.assertEquals(200, responseEntity.getStatusCodeValue());
         Assertions.assertEquals(1, responseEntity.getBody().getTotalPages());

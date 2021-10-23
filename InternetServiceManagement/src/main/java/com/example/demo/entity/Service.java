@@ -2,7 +2,6 @@ package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Set;
