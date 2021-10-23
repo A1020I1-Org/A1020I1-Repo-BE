@@ -7,14 +7,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
+import java.util.List;
 
 @Service
 public class ServiceServiceImpl implements ServiceService {
 
     @Autowired
     ServiceRepository serviceRepository;
-
+  
     @Override
     public void save(com.example.demo.entity.Service service) {
         this.serviceRepository.save(service);
@@ -24,31 +24,25 @@ public class ServiceServiceImpl implements ServiceService {
     public com.example.demo.entity.Service findById(String serviceId) {
         return this.serviceRepository.findById(serviceId).orElse(null);
     }
-
+    
     @Override
-    public Page<com.example.demo.entity.Service> findAllService(Pageable pageable) {
-        return serviceRepository.findAll(pageable);
+    public List<com.example.demo.entity.Service> findAllService() {
+        return serviceRepository.findAll();
     }
 
     @Override
     public com.example.demo.entity.Service findServiceById(String serviceId) {
-        return serviceRepository.findById(serviceId).orElse(null);
+        return (com.example.demo.entity.Service) serviceRepository.findById(serviceId).orElse(null);
     }
 
     @Override
-    public void deleteService(String serviceId) {
+    public com.example.demo.entity.Service deleteService(String serviceId) {
         serviceRepository.deleteById(serviceId);
+        return null;
     }
-
-    @Override
-    public void deleteAllService() {
-        serviceRepository.deleteAll();
-    }
-
 
     @Override
     public Page<com.example.demo.entity.Service> search(Pageable pageable, String searchName) {
         return serviceRepository.search(pageable,searchName);
     }
-
 }

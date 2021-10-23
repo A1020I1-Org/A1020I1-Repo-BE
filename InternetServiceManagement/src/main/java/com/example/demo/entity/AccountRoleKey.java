@@ -15,11 +15,6 @@ public class AccountRoleKey implements Serializable {
     public AccountRoleKey() {
     }
 
-    public AccountRoleKey(String userName, int roleId) {
-        this.userName = userName;
-        this.roleId = roleId;
-    }
-
     public String getUserName() {
         return userName;
     }
