@@ -20,23 +20,23 @@ public class CustomerController {
     private CustomerService customerService;
 
 
-    @GetMapping("/customer/list")
-    public ResponseEntity<List<Customer>> getListCustomer() {
-        List<Customer> customers = customerService.getListCustomer();
-        if (customers.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(customers, HttpStatus.OK);
-    }
-
 //    @GetMapping("/customer/list")
-//    public ResponseEntity<Page<Customer>> getListCustomer(@PageableDefault(value = 5) Pageable pageable) {
-//       Page<Customer> customers = customerService.getListCustomer(pageable);
+//    public ResponseEntity<List<Customer>> getListCustomer() {
+//        List<Customer> customers = customerService.getListCustomer();
 //        if (customers.isEmpty()) {
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        }
 //        return new ResponseEntity<>(customers, HttpStatus.OK);
 //    }
+
+    @GetMapping("/customer/list")
+    public ResponseEntity<Page<Customer>> getListCustomer(@PageableDefault(value = 5) Pageable pageable) {
+       Page<Customer> customers = customerService.getListCustomer(pageable);
+        if (customers.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
 
 
     @DeleteMapping("/customer/delete/{customerId}")

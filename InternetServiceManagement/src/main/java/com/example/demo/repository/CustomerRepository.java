@@ -18,8 +18,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     @Query(value= "Select * from customer c where c.username = ?1", nativeQuery=true)
     Customer getCustomerByUsername(String username);
 
-//    @Query(value = "select * from customer " , nativeQuery = true)
-//    Page<Customer> getListCustomer(Pageable pageable);
+    @Query(value = "select * from customer " , nativeQuery = true)
+    Page<Customer> getListCustomer(Pageable pageable);
 
 
     @Query(value = "SELECT customer.*,account.username" +
