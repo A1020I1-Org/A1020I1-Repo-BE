@@ -5,12 +5,14 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "order_hour")
 public class Order {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @ManyToOne
@@ -29,9 +31,10 @@ public class Order {
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Pay pay;
 
-    private String startTime;
-    private String endTime;
+    private Date startTime;
+    private Date endTime;
     private int usageTime;
+    private boolean status;
 
     public Order() {
     }
@@ -68,19 +71,19 @@ public class Order {
         this.computer = computer;
     }
 
-    public String getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public String getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
@@ -90,5 +93,13 @@ public class Order {
 
     public void setUsageTime(int usageTime) {
         this.usageTime = usageTime;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

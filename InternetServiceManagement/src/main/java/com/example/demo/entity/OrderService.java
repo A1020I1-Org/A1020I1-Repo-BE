@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "order_service")
@@ -33,6 +34,7 @@ public class OrderService {
     private int unit;
     private int totalMoney;
     private String oder_date;
+
 
     public OrderService() {
     }
@@ -85,12 +87,12 @@ public class OrderService {
         this.totalMoney = totalMoney;
     }
 
-    public String getOder_date() {
-        return oder_date;
+    public Date getOrderDate() {
+        return orderDate;
     }
 
-    public void setOder_date(String oder_date) {
-        this.oder_date = oder_date;
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 
     public OrderServiceToTal getOrderServiceToTal() {
