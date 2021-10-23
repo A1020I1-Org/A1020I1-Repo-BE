@@ -12,5 +12,7 @@ public interface ServiceRepository extends JpaRepository<Service, String> {
     @Query("SELECT s FROM Service s WHERE s.serviceId like %:searchName% or s.serviceName like %:searchName%  " +
             "or s.quantity = :searchName  or s.unit like %:searchName% " +
             "or s.prices = :searchName ")
+
+    // thanh test
     Page<Service> search(Pageable pageable, @Param("searchName") String searchName);
 }

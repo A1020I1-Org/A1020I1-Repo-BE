@@ -18,8 +18,12 @@ public interface ServiceService {
 
     Service findServiceById(String serviceId);
 
-    Service deleteService (String serviceId);
+    void deleteService (String serviceId);
 
     Page<Service> search(Pageable pageable, String searchName);
+
+    // ThanhNHM test
+    List<Service> listServiceTest();
+    // ThanhNHM test
 }
 

@@ -33,6 +33,13 @@ public class ServiceController {
         this.serviceService = serviceService;
     }
 
+    // ThanhNHM test
+    @GetMapping("/list-test")
+    public ResponseEntity<List<Service>> get(){
+        return new ResponseEntity<>(this.serviceService.listServiceTest(), HttpStatus.OK);
+    }
+    // ThanhNHM test
+
     @GetMapping(value = "/list")
     public ResponseEntity<Page<Service>> listAllService(@PageableDefault(size = 4) Pageable pageable) {
         Page<Service> serviceList = serviceService.findAllService(pageable);
@@ -76,10 +83,15 @@ public class ServiceController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+        // thanhNHM adding
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
     @GetMapping(value = "/search")
-    public ResponseEntity<Page<Service>> searchService(@RequestParam("searchName") String searchName,
-                                                       @PageableDefault(size = 3) Pageable pageable) {
+    public ResponseEntity<Page<Service>> searchService (@RequestParam("searchName") String searchName,
+                                                        @PageableDefault(size = 3) Pageable pageable){
+
         Page<Service> searchService = serviceService.search(pageable, searchName);
         System.out.println(searchService);
         if (searchService == null) {
@@ -87,5 +99,6 @@ public class ServiceController {
         }
         return new ResponseEntity<>(searchService, HttpStatus.OK);
     }
+
 }
 
