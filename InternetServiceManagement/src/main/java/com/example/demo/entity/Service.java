@@ -25,7 +25,7 @@ public class Service {
 
 
     @JsonIgnore
-    @JsonManagedReference
+//    @JsonManagedReference
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
     Set<OrderService> orderServices;
 

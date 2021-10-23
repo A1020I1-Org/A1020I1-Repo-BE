@@ -17,6 +17,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -33,15 +34,8 @@ public class ServiceController {
         this.serviceService = serviceService;
     }
 
-    // ThanhNHM test
-    @GetMapping("/list-test")
-    public ResponseEntity<List<Service>> get(){
-        return new ResponseEntity<>(this.serviceService.listServiceTest(), HttpStatus.OK);
-    }
-    // ThanhNHM test
-
     @GetMapping(value = "/list")
-    public ResponseEntity<Page<Service>> listAllService(@PageableDefault(size = 4) Pageable pageable) {
+    public ResponseEntity<Page<Service>> listAllService(@PageableDefault(page = 1, size = 3) Pageable pageable) {
         Page<Service> serviceList = serviceService.findAllService(pageable);
         if (serviceList == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -50,8 +44,8 @@ public class ServiceController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Service> post(@Valid @RequestBody Service service, BindingResult bindingResult) {
-        if (bindingResult.hasFieldErrors()) {
+    public ResponseEntity<Service> post(@Validated @RequestBody Service service, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors() || this.serviceService.findById(service.getServiceId()) != null) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         } else {
             this.serviceService.save(service);
@@ -81,7 +75,6 @@ public class ServiceController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        // thanhNHM adding
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
