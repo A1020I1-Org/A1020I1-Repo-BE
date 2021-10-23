@@ -1,18 +1,17 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Employee;
-import com.example.demo.entity.Position;
-import com.example.demo.service.EmployeeService;
-import com.example.demo.service.PositionService;
+import com.example.demo.entity.*;
+import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
 
@@ -20,9 +19,16 @@ import java.util.Set;
 @RestController
 @RequestMapping(value = "/employee")
 public class EmployeeController {
+    @Autowired
+    private EmployeeService employeeService;
+    @Autowired
+    AccountService accountService;
 
     @Autowired
-    EmployeeService employeeService;
+    RoleService roleService;
+
+    @Autowired
+    AccountRoleService accountRoleService;
 
     @Autowired
     PositionService positionService;
@@ -53,8 +59,32 @@ public class EmployeeController {
         Page<Employee> employeeList = employeeService.getAllEmployee(pageable);
         if (employeeList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    @RequestMapping(value = "/createEmployee", method = RequestMethod.POST)
+    public ResponseEntity<List<FieldError>> createEmployee(@RequestBody @Valid AccountEmployee accountEmployee, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getFieldErrors(),
+                    HttpStatus.NOT_ACCEPTABLE);
         }
-        return new ResponseEntity<>(employeeList, HttpStatus.OK);
+        if (accountService.checkUserName(accountEmployee.getUserName())){
+            return new ResponseEntity<>(bindingResult.getFieldErrors(),
+                    HttpStatus.NOT_ACCEPTABLE);
+        }
+
+        Account account = new Account(accountEmployee.getUserName(), accountEmployee.getPassword());
+        accountService.save(account);
+        AccountRoleKey accountRoleKey = new AccountRoleKey(account.getUserName(),1);
+        Role role = roleService.findById(1);
+        AccountRole accountRole = new AccountRole(accountRoleKey,account,role);
+        accountRoleService.save(accountRole);
+        Position position = positionService.findByID(accountEmployee.getIdPosition());
+
+        Employee employee = new Employee(accountEmployee.getEmployeeId(),accountEmployee.getFullName(),accountEmployee.getDateOfBirth(),
+                accountEmployee.getEmail(),accountEmployee.getAddress(),accountEmployee.getPhone(),accountEmployee.getLevel(),
+                accountEmployee.getStartWorkDate(), accountEmployee.getYearOfExp(), accountEmployee.getAvtUrl(), account,position);
+        employeeService.saveEmployee(employee);
+        HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/searchEmployee", method = RequestMethod.GET)
@@ -70,18 +100,42 @@ public class EmployeeController {
                 ,workEnd,address,positionId,pageable);
         if (employeeList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    @PutMapping("/updateEmployee/{id}")
+    public ResponseEntity<List<FieldError>> updateEmployee(@PathVariable @Valid String id, @RequestBody AccountEmployee accountEmployee, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getFieldErrors(),
+                    HttpStatus.NOT_ACCEPTABLE);
         }
-        return new ResponseEntity<>(employeeList, HttpStatus.OK);
+        if (accountService.checkUserName(accountEmployee.getUserName())){
+            return new ResponseEntity<>(bindingResult.getFieldErrors(),
+                    HttpStatus.NOT_ACCEPTABLE);
+        }
+
+        Account account = new Account(accountEmployee.getUserName(), accountEmployee.getPassword());
+        accountService.save(account);
+        AccountRoleKey accountRoleKey = new AccountRoleKey(account.getUserName(),1);
+        Role role = roleService.findById(1);
+        AccountRole accountRole = new AccountRole(accountRoleKey,account,role);
+        accountRoleService.save(accountRole);
+        Position position = positionService.findByID(accountEmployee.getIdPosition());
+
+        Employee employee = new Employee(accountEmployee.getEmployeeId(),accountEmployee.getFullName(),accountEmployee.getDateOfBirth(),
+                accountEmployee.getEmail(),accountEmployee.getAddress(),accountEmployee.getPhone(),accountEmployee.getLevel(),
+                accountEmployee.getStartWorkDate(), accountEmployee.getYearOfExp(), accountEmployee.getAvtUrl(), account,position);
+        employeeService.updateEmployee(employee);
+        HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+
     }
 
-    @RequestMapping(value = "/deleteEmployee/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Employee> deleteEmployee(@PathVariable("id") String id) {
-        Employee employee = employeeService.findById(id);
-        if (employee == null) {
-            return new ResponseEntity<Employee>(HttpStatus.NOT_FOUND);
+    @GetMapping(value = "/viewEmployee/{id}")
+    public ResponseEntity<Employee> detailEmployee(@PathVariable String id) {
+        Employee employeeObj = this.employeeService.findById(id);
+        if (employeeObj == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        employeeService.deleteEmployee(id);
-        return new ResponseEntity<Employee>(HttpStatus.OK);
+        return new ResponseEntity<>(employeeObj, HttpStatus.OK);
     }
 
 //    @GetMapping(value = "/viewEmployee/{id}")

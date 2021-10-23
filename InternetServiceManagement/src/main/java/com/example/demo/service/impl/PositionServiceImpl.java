@@ -12,8 +12,14 @@ import java.util.List;
 public class PositionServiceImpl implements PositionService {
     @Autowired
     PositionRepository positionRepository;
+
     @Override
-    public List<Position> findAll() {
+    public List<Position> getAllPosition() {
         return positionRepository.findAll();
+    }
+
+    @Override
+    public Position findByID(int id) {
+        return positionRepository.findById(id).orElse(null);
     }
 }

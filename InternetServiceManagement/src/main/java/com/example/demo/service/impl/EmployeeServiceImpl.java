@@ -4,8 +4,6 @@ import com.example.demo.entity.Employee;
 import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,13 +11,13 @@ import java.util.Set;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-
     @Autowired
     EmployeeRepository employeeRepository;
 
+
     @Override
-    public Page<Employee> getAllEmployee(Pageable pageable) {
-        return employeeRepository.findAll(pageable);
+    public List<Employee> getAllEmployee() {
+        return employeeRepository.findAll();
     }
 
     @Override
@@ -28,8 +26,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteEmployee(String id) {
-        employeeRepository.deleteById(id);
+    public void saveEmployee(Employee employee) {
+        employeeRepository.save(employee);
+
     }
 
     @Override
@@ -42,6 +41,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> findAll() {
         return employeeRepository.findAll();
+    public void deleteEmployee(String id) {
+
     }
 
+    @Override
+    public void updateEmployee(Employee employee) {
+        employeeRepository.save(employee);
+
+    }
 }
