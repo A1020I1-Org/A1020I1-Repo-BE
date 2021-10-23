@@ -52,19 +52,3 @@ test {
     useJUnitPlatform()
 }
 
-
-sonarqube {
-    properties {
-        property 'sonar.host.url', 'http://18.117.194.147:9000/'
-        property 'sonar.login', 'f4570cffe1dd5bf39ecbeed0ef04eef921709b5a'
-        property 'sonar.projectKey', 'A1020I1_ReviewCode_KhoaDVD'
-        property 'sonar.projectName', 'A1020I1_ReviewCode_KhoaDVD'
-    }
-}
-        property 'sonar.host.url', 'http://18.117.194.147:9000'
-        property 'sonar.login', 'f4570cffe1dd5bf39ecbeed0ef04eef921709b5a'
-        property 'sonar.projectKey', 'A1020I1_ReviewCode_CuongHN'
-        property 'sonar.projectName', 'A1020I1_ReviewCode_CuongHN'
-    }
-}
-
