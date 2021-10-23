@@ -38,6 +38,7 @@ public class Computer {
     public Computer() {
     }
 
+
     public String getComputerId() {
         return computerId;
     }
@@ -117,6 +118,4 @@ public class Computer {
     public void setGames(Set<Game> games) {
         this.games = games;
     }
-
 }
-
