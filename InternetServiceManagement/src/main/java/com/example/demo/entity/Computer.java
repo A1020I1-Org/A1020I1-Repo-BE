@@ -1,6 +1,8 @@
 package com.example.demo.entity;
-
 import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -26,24 +28,29 @@ public class Computer {
     private String computerConfiguration;
     private String computerIpLocal;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "computer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
     Set<Order> orders;
 
     @NotNull
+    @JsonIgnore
     @ManyToOne(targetEntity = Manufacturer.class)
     @JoinColumn(name = "manufacturerId", referencedColumnName = "manufacturerId")
     private Manufacturer manufacturer;
 
     @NotNull
+    @JsonIgnore
     @ManyToOne(targetEntity = Status.class)
     @JoinColumn(name = "statusId", referencedColumnName = "statusId")
     private Status status;
 
     @NotNull
+    @JsonIgnore
     @ManyToOne(targetEntity = Type.class)
     @JoinColumn(name = "typeId", referencedColumnName = "typeId")
     private Type type;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "computer_game",

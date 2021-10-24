@@ -1,5 +1,6 @@
 package com.example.demo.sercurity;
 
+import com.example.demo.entity.Account;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,9 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-
 public class AccountDetailsImpl implements UserDetails {
 
     private String username;

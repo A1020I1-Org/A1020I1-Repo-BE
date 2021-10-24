@@ -2,25 +2,28 @@ package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "order_hour")
 public class Order {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @MapsId("customerId")
-    @JoinColumn(name = "customer_id")
+    @ManyToOne(targetEntity = Customer.class)
+    @JoinColumn(name = "customerId", referencedColumnName = "customerId")
     @JsonIgnore
     private Customer customer;
 
-    @ManyToOne
-    @MapsId("computerId")
-    @JoinColumn(name = "computer_id")
+
+    @ManyToOne(targetEntity = Computer.class)
+    @JoinColumn(name = "computerId", referencedColumnName = "computerId")
     @JsonIgnore
     private Computer computer;
 
@@ -31,9 +34,30 @@ public class Order {
     private String startTime;
     private String endTime;
     private int usageTime;
-
+    private Boolean status;
     public Order() {
     }
+
+    public Order(Customer customer, Computer computer, String startTime, int usageTime) {
+        this.customer = customer;
+        this.computer = computer;
+        this.startTime = startTime;
+        this.usageTime = usageTime;
+    }
+
+    public Order(Customer customer, String startTime) {
+        this.customer = customer;
+        this.startTime = startTime;
+    }
+
+    public Boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
 
     public Integer getId() {
         return id;
