@@ -14,6 +14,9 @@ repositories {
 }
 dependencies {
     // https://mvnrepository.com/artifact/com.paypal.sdk/rest-api-sdk
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
     implementation group: 'com.paypal.sdk', name: 'rest-api-sdk', version: '1.13.1'
     implementation group: 'org.json', name: 'json', version: '20190722'
     implementation 'org.springframework.boot:spring-boot-starter-mail'

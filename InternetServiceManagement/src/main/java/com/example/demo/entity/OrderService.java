@@ -1,40 +1,38 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "order_service")
 public class OrderService {
 
     @Id
+    @Column(name="id")
     private Integer id;
 
     @ManyToOne
     @MapsId("customerId")
     @JoinColumn(name = "customer_id")
-    @JsonIgnore
-
+    @JsonBackReference
     private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "service_id")
-    @JsonManagedReference
+    @JsonBackReference
     private Service service;
 
     @ManyToOne
-    @JoinColumn(name = "order_service_total_id")
-    private OrderServiceToTal orderServiceToTal;
+    @JoinColumn(name = "pay_id")
+    @JsonBackReference
+    private Pay pay;
 
     private int quantity;
     private int unit;
     private int totalMoney;
     private String oder_date;
-
+    private boolean status;
 
     public OrderService() {
     }
@@ -87,19 +85,27 @@ public class OrderService {
         this.totalMoney = totalMoney;
     }
 
-    public Date getOrderDate() {
-        return orderDate;
+    public String getOder_date() {
+        return oder_date;
     }
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+    public void setOder_date(String oder_date) {
+        this.oder_date = oder_date;
     }
 
-    public OrderServiceToTal getOrderServiceToTal() {
-        return orderServiceToTal;
+    public Pay getPay() {
+        return pay;
     }
 
-    public void setOrderServiceToTal(OrderServiceToTal orderServiceToTal) {
-        this.orderServiceToTal = orderServiceToTal;
+    public void setPay(Pay pay) {
+        this.pay = pay;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

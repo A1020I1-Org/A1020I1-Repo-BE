@@ -62,6 +62,7 @@ public class StatisticalController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+
 }
 
 

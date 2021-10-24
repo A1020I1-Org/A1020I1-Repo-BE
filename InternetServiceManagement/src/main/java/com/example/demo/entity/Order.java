@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -12,32 +13,51 @@ import java.util.Date;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @MapsId("customerId")
-    @JoinColumn(name = "customer_id")
-    @JsonManagedReference
+    @ManyToOne(targetEntity = Customer.class)
+    @JoinColumn(name = "customerId", referencedColumnName = "customerId")
+    @JsonIgnore
     private Customer customer;
 
-    @ManyToOne
-    @MapsId("computerId")
-    @JoinColumn(name = "computer_id")
 
-    @JsonManagedReference
+    @ManyToOne(targetEntity = Computer.class)
+    @JoinColumn(name = "computerId", referencedColumnName = "computerId")
+    @JsonIgnore
     private Computer computer;
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonBackReference
     private Pay pay;
 
-    private Date startTime;
-    private Date endTime;
+    private String startTime;
+    private String endTime;
     private int usageTime;
-    private boolean status;
-
+    private Boolean status;
     public Order() {
     }
+
+    public Order(Customer customer, Computer computer, String startTime, int usageTime) {
+        this.customer = customer;
+        this.computer = computer;
+        this.startTime = startTime;
+        this.usageTime = usageTime;
+    }
+
+    public Order(Customer customer, String startTime) {
+        this.customer = customer;
+        this.startTime = startTime;
+    }
+
+    public Boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
 
     public Integer getId() {
         return id;
@@ -71,19 +91,19 @@ public class Order {
         this.computer = computer;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
@@ -93,13 +113,5 @@ public class Order {
 
     public void setUsageTime(int usageTime) {
         this.usageTime = usageTime;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
     }
 }

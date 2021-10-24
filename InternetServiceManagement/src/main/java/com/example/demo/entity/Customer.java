@@ -35,6 +35,28 @@ public class Customer {
     public Customer() {
     }
 
+    public Customer(int customerId, String fullName, String dateOfBirth, String email, String address, String phone, boolean status, String idCard, Account account) {
+        this.customerId = customerId;
+        this.fullName = fullName;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.status = status;
+        this.idCard = idCard;
+        this.account = account;
+    }
+
+    public Customer(int customerId, String fullName, String dateOfBirth, String email, String address, String phone, boolean status) {
+        this.customerId = customerId;
+        this.fullName = fullName;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.status = status;
+    }
+
     public int getCustomerId() {
         return customerId;
     }
@@ -121,5 +143,9 @@ public class Customer {
 
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
+    }
+
+    public Boolean getStatus() {
+        return this.status;
     }
 }

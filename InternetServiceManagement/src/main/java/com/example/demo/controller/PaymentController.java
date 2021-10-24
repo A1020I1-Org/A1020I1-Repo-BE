@@ -48,7 +48,7 @@ public class PaymentController {
     //-------------------Retrieve Payment By Role Customer------------------------------------
     @GetMapping(value = "/payCustomer/{id}")
     public ResponseEntity<Pay> getPaymentCustomer(@PathVariable("id") int id) {
-        Customer customer = this.customerService.findById(id);
+        Customer customer = this.customerService.findCusById(id);
         if (customer == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
