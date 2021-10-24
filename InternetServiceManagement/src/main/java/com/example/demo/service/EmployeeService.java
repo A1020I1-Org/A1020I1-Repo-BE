@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 public interface EmployeeService {
@@ -17,4 +18,11 @@ public interface EmployeeService {
     void saveEmployee(Employee employee);
     void updateEmployee(AccountEmployee accountEmployee, String id);
 
+    Page<Employee> searchEmployee(String idEmp, String dateStart,
+                                  String dateEnd, String workStart, String workEnd,
+                                  String address, String positionId, Pageable pageable);
+
+    List<Employee> findAll();
+    void deleteEmployee(String id);
+    void updateEmployee(Employee employee);
 }

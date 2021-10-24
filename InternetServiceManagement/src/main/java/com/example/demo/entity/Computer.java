@@ -37,7 +37,6 @@ public class Computer {
 
     public Computer() {
     }
-
     public String getComputerId() {
         return computerId;
     }
