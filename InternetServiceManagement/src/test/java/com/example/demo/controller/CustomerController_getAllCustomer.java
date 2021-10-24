@@ -41,7 +41,7 @@ public class CustomerController_getAllCustomer {
     public void getAllCustomer_6() {
 
         ResponseEntity<Page<Customer>> responseEntity
-                = this.customerController.getAllCustomer(PageRequest.of(0, 2));
+                = this.customerController.getListCustomer(PageRequest.of(0, 2));
 
         Assertions.assertEquals(200, responseEntity.getStatusCodeValue());
         Assertions.assertEquals(1, responseEntity.getBody().getTotalPages());

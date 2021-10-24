@@ -19,6 +19,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class CustomerRequest implements Validator {
+
     private Integer customerId;
 
     @NotBlank(message = "Name can't be blank.")
@@ -162,4 +163,5 @@ public class CustomerRequest implements Validator {
     public void setPasswordRetype(String passwordRetype) {
         this.passwordRetype = passwordRetype;
     }
+
 }

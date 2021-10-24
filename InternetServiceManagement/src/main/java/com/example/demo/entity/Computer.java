@@ -1,5 +1,9 @@
 package com.example.demo.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -12,17 +16,21 @@ public class Computer {
     private String computerWarrantyPeriod;
     private String computerConfiguration;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "computer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
-    Set<Order> orders;
+    Set<OrderHour> orders;
 
+    @JsonManagedReference
     @ManyToOne(targetEntity = Manufacturer.class)
     @JoinColumn(name = "manufacturerId", referencedColumnName = "manufacturerId")
     private Manufacturer manufacturer;
 
+    @JsonManagedReference
     @ManyToOne(targetEntity = Status.class)
     @JoinColumn(name = "statusId", referencedColumnName = "statusId")
     private Status status;
 
+    @JsonManagedReference
     @ManyToOne(targetEntity = Type.class)
     @JoinColumn(name = "typeId", referencedColumnName = "typeId")
     private Type type;
@@ -79,11 +87,11 @@ public class Computer {
         this.computerConfiguration = computerConfiguration;
     }
 
-    public Set<Order> getOrders() {
+    public Set<OrderHour> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Order> orders) {
+    public void setOrders(Set<OrderHour> orders) {
         this.orders = orders;
     }
 

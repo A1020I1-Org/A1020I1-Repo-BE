@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
-
 @Service
 public class ServiceServiceImpl implements ServiceService {
 
@@ -38,6 +37,7 @@ public class ServiceServiceImpl implements ServiceService {
     @Override
     public void deleteService(String serviceId) {
         serviceRepository.deleteById(serviceId);
+
     }
 
     @Override

@@ -11,4 +11,5 @@ public interface AccountService {
     void save(Account account);
 
     List<Account> getAll();
+
 }

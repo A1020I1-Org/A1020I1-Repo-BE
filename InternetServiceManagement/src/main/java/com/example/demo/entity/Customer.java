@@ -5,11 +5,15 @@ import lombok.Setter;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@AllArgsConstructor
+
 @Getter
 @Setter
 @Table(name = "customer")
@@ -28,7 +32,6 @@ public class Customer {
 
     @Column(name = "status")
     private Boolean status;
-    private String idCard;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userName", referencedColumnName = "userName")
@@ -37,17 +40,16 @@ public class Customer {
 
     @JsonBackReference
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    @JsonManagedReference
     Set<OrderService> orderServices;
 
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL, CascadeType.REMOVE})
     @JsonManagedReference
-    Set<Order> orders;
+    Set<OrderHour> orders;
 
     public Customer() {
     }
 
-    public Customer(int customerId, String fullName, String dateOfBirth, String email, String address, String phone, boolean status, String idCard, Account account) {
+    public Customer(int customerId, String fullName, String dateOfBirth, String email, String address, String phone, boolean status, Account account) {
         this.customerId = customerId;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
@@ -55,7 +57,6 @@ public class Customer {
         this.address = address;
         this.phone = phone;
         this.status = status;
-        this.idCard = idCard;
         this.account = account;
     }
 
@@ -137,13 +138,6 @@ public class Customer {
         this.status = status;
     }
 
-    public String getIdCard() {
-        return idCard;
-    }
-
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
-    }
 
     public Account getAccount() {
         return account;
@@ -162,11 +156,11 @@ public class Customer {
     }
 
 
-    public Set<Order> getOrders() {
+    public Set<OrderHour> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Order> orders) {
+    public void setOrders(Set<OrderHour> orders) {
         this.orders = orders;
     }
 }

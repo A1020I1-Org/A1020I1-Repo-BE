@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class OrderService {
 
     @Id
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
@@ -18,24 +18,23 @@ public class OrderService {
     @JsonBackReference
     private Customer customer;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Service.class)
     @JoinColumn(name = "service_id")
     @JsonBackReference
     private Service service;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Pay.class)
     @JoinColumn(name = "pay_id")
     @JsonBackReference
     private Pay pay;
 
+
     private int quantity;
-    private int unit;
+    private String unit;
     private int totalMoney;
-    private String oder_date;
+    private String oderDate;
     private boolean status;
 
-    public OrderService() {
-    }
     public Integer getId() {
         return id;
     }
@@ -60,6 +59,14 @@ public class OrderService {
         this.service = service;
     }
 
+    public Pay getPay() {
+        return pay;
+    }
+
+    public void setPay(Pay pay) {
+        this.pay = pay;
+    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -68,11 +75,11 @@ public class OrderService {
         this.quantity = quantity;
     }
 
-    public int getUnit() {
+    public String getUnit() {
         return unit;
     }
 
-    public void setUnit(int unit) {
+    public void setUnit(String unit) {
         this.unit = unit;
     }
 
@@ -84,21 +91,6 @@ public class OrderService {
         this.totalMoney = totalMoney;
     }
 
-    public String getOder_date() {
-        return oder_date;
-    }
-
-    public void setOder_date(String oder_date) {
-        this.oder_date = oder_date;
-    }
-
-    public Pay getPay() {
-        return pay;
-    }
-
-    public void setPay(Pay pay) {
-        this.pay = pay;
-    }
 
     public boolean isStatus() {
         return status;
@@ -107,4 +99,12 @@ public class OrderService {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    public String getOderDate() {
+        return oderDate;
+    }
+
+    public void setOderDate(String date1) {
+    }
+
 }

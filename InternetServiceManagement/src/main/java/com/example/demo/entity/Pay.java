@@ -8,12 +8,11 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "pay")
 public class Pay {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private int id;
+    private Integer payId;
     private int totalPayment;
     private boolean status;
 
@@ -24,17 +23,17 @@ public class Pay {
     @OneToOne
     @JoinColumn(name = "order_id")
     @JsonManagedReference
-    private Order order;
+    private OrderHour order;
 
     public Pay() {
     }
 
-    public int getId() {
-        return id;
+    public Integer getPayId() {
+        return payId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPayId(Integer payId) {
+        this.payId = payId;
     }
 
     public int getTotalPayment() {
@@ -53,12 +52,11 @@ public class Pay {
         this.status = status;
     }
 
-
-    public Order getOrder() {
+    public OrderHour getOrder() {
         return order;
     }
 
-    public void setOrder(Order order) {
+    public void setOrder(OrderHour order) {
         this.order = order;
     }
 
@@ -69,4 +67,5 @@ public class Pay {
     public void setOrderServices(Set<OrderService> orderServices) {
         this.orderServices = orderServices;
     }
+
 }

@@ -1,5 +1,8 @@
 package com.example.demo.service;
 
-public interface PayService {
 
+import com.example.demo.entity.Pay;
+
+public interface PayService {
+    Pay findById(Integer id);
 }

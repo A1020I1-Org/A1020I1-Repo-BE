@@ -1,15 +1,16 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Customer;
+import com.example.demo.entity.AccountCustomer;
 import com.example.demo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.entity.AccountCustomer;
 import com.example.demo.entity.*;
 import com.example.demo.http.request.CustomerRequest;
 import com.example.demo.service.AccountRoleService;
@@ -130,6 +131,29 @@ public class CustomerController {
                 customerService.updateCustomer(customerRequest, id);
                 return new  ResponseEntity<>(HttpStatus.OK);
             }
+            else {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping(value = "/info/{id}")
+    public ResponseEntity<AccountCustomer> infoCustomer(@Validated @RequestBody CustomerRequest customerRequest,
+                                                        BindingResult bindingResult,
+                                                        @PathVariable Integer id){
+        new CustomerRequest().validate(customerRequest, bindingResult);
+        if (!bindingResult.hasErrors() && id != null) {
+            if (customerService.findById(id) != null) {
+                customerService.updateCustomer(customerRequest, id);
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+            }
         }
         return new  ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
@@ -166,7 +190,7 @@ public class CustomerController {
         accountRoleService.save(accountRole);
 
         Customer customer = new Customer(accountCustomer.getCustomerId(),accountCustomer.getFullName(),accountCustomer.getDateOfBirth(),
-                accountCustomer.getEmail(),accountCustomer.getAddress(),accountCustomer.getPhone(),accountCustomer.isStatus(),accountCustomer.getIdCard(),account);
+                accountCustomer.getEmail(),accountCustomer.getAddress(),accountCustomer.getPhone(),accountCustomer.isStatus(),account);
         customerService.save(customer);
 
         MimeMessage message = emailSender.createMimeMessage();
