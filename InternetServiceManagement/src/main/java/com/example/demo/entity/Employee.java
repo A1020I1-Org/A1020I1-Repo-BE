@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -44,6 +43,9 @@ public class Employee {
         this.avtUrl = avtUrl;
         this.account = account;
         this.position = position;
+    }
+
+    public Employee(String employeeId, String fullName, String dateOfBirth, String email, String province, String district, String ward, String phone, String level, String startWorkDate, int yearOfExp, String avtUrl, Account account, Position position) {
     }
 
     public String getEmployeeId() {

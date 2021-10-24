@@ -1,5 +1,5 @@
 package com.example.demo.controller;
-import com.example.demo.entity.AccountEmployee;
+import com.example.demo.dto.AccountEmployee;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class EmployeeController_createEmployee {
         accountEmployee.setStartWorkDate("10-09-2021");
         accountEmployee.setYearOfExp(5);
         accountEmployee.setAvtUrl("abc");
-        accountEmployee.setIdPosition(1);
+        accountEmployee.setPositionId(1);
         accountEmployee.setUserName("abc11122");
         accountEmployee.setPassword("abc11122");
 
@@ -60,7 +60,7 @@ public class EmployeeController_createEmployee {
         accountEmployee.setStartWorkDate("10-09-2021");
         accountEmployee.setYearOfExp(5);
         accountEmployee.setAvtUrl("abc");
-        accountEmployee.setIdPosition(1);
+        accountEmployee.setPositionId(1);
         accountEmployee.setUserName("abc111223");
         accountEmployee.setPassword("abc111223");
 
@@ -87,7 +87,7 @@ public class EmployeeController_createEmployee {
         accountEmployee.setStartWorkDate("10-09-2021");
         accountEmployee.setYearOfExp(5);
         accountEmployee.setAvtUrl("abc");
-        accountEmployee.setIdPosition(1);
+        accountEmployee.setPositionId(1);
         accountEmployee.setUserName("abc111224");
         accountEmployee.setPassword("abc111224");
 
@@ -114,7 +114,7 @@ public class EmployeeController_createEmployee {
         accountEmployee.setStartWorkDate("10-09-2021");
         accountEmployee.setYearOfExp(5);
         accountEmployee.setAvtUrl("abc");
-        accountEmployee.setIdPosition(1);
+        accountEmployee.setPositionId(1);
         accountEmployee.setUserName("abc11122");
         accountEmployee.setPassword("abc11122");
 
@@ -140,7 +140,7 @@ public class EmployeeController_createEmployee {
         accountEmployee.setStartWorkDate("10-09-2021");
         accountEmployee.setYearOfExp(5);
         accountEmployee.setAvtUrl("abc");
-        accountEmployee.setIdPosition(1);
+        accountEmployee.setPositionId(1);
         accountEmployee.setUserName("abc12359");
         accountEmployee.setPassword("abc12346");
 
@@ -167,7 +167,7 @@ public class EmployeeController_createEmployee {
         accountEmployee.setStartWorkDate("10-09-2021");
         accountEmployee.setYearOfExp(5);
         accountEmployee.setAvtUrl("abc");
-        accountEmployee.setIdPosition(1);
+        accountEmployee.setPositionId(1);
         accountEmployee.setUserName("abd11122");
         accountEmployee.setPassword("abd11122");
 

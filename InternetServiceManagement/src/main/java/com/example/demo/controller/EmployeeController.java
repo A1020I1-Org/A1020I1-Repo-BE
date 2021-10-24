@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.AccountEmployee;
 import com.example.demo.entity.*;
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.util.Set;
 @CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping(value = "/employee")
+@CrossOrigin("http://localhost:4200/")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
@@ -61,28 +63,26 @@ public class EmployeeController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     @RequestMapping(value = "/createEmployee", method = RequestMethod.POST)
-    public ResponseEntity<List<FieldError>> createEmployee(@RequestBody @Valid AccountEmployee accountEmployee, BindingResult bindingResult){
+    public ResponseEntity<List<FieldError>> createEmployee(@RequestBody @Valid AccountEmployee accountEmployee, BindingResult bindingResult) {
+        System.out.println();
         if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(bindingResult.getFieldErrors(),
-                    HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (accountService.checkUserName(accountEmployee.getUserName())){
             return new ResponseEntity<>(bindingResult.getFieldErrors(),
                     HttpStatus.NOT_ACCEPTABLE);
         }
 
         Account account = new Account(accountEmployee.getUserName(), accountEmployee.getPassword());
         accountService.save(account);
-        AccountRoleKey accountRoleKey = new AccountRoleKey(account.getUserName(),1);
+        AccountRoleKey accountRoleKey = new AccountRoleKey(account.getUserName(), 1);
         Role role = roleService.findById(1);
-        AccountRole accountRole = new AccountRole(accountRoleKey,account,role);
+        AccountRole accountRole = new AccountRole(accountRoleKey, account, role);
         accountRoleService.save(accountRole);
-        Position position = positionService.findByID(accountEmployee.getIdPosition());
+        Position position = positionService.findByID(accountEmployee.getPositionId());
 
-        Employee employee = new Employee(accountEmployee.getEmployeeId(),accountEmployee.getFullName(),accountEmployee.getDateOfBirth(),
-                accountEmployee.getEmail(),accountEmployee.getAddress(),accountEmployee.getPhone(),accountEmployee.getLevel(),
-                accountEmployee.getStartWorkDate(), accountEmployee.getYearOfExp(), accountEmployee.getAvtUrl(), account,position);
+        Employee employee = new Employee(accountEmployee.getEmployeeId(), accountEmployee.getFullName(), accountEmployee.getDateOfBirth(),
+                accountEmployee.getEmail(), accountEmployee.getAddress(), accountEmployee.getPhone(), accountEmployee.getLevel(),
+                accountEmployee.getStartWorkDate(), accountEmployee.getYearOfExp(), accountEmployee.getAvtUrl(), account, position);
         employeeService.saveEmployee(employee);
+        System.out.println("tạo mới thành công");
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
@@ -102,40 +102,28 @@ public class EmployeeController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     @PutMapping("/updateEmployee/{id}")
-    public ResponseEntity<List<FieldError>> updateEmployee(@PathVariable @Valid String id, @RequestBody AccountEmployee accountEmployee, BindingResult bindingResult){
-        if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(bindingResult.getFieldErrors(),
-                    HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (accountService.checkUserName(accountEmployee.getUserName())){
-            return new ResponseEntity<>(bindingResult.getFieldErrors(),
-                    HttpStatus.NOT_ACCEPTABLE);
-        }
+    public ResponseEntity<AccountEmployee> updateEmployee(@Valid @RequestBody AccountEmployee accountEmployees, BindingResult bindingResult, @PathVariable String id) {
+        Employee employeeObj = this.employeeService.findById(id);
+        if(!bindingResult.hasErrors() && id != null){
+                employeeService.updateEmployee(accountEmployees, id);
+                return new ResponseEntity<>(HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
 
-        Account account = new Account(accountEmployee.getUserName(), accountEmployee.getPassword());
-        accountService.save(account);
-        AccountRoleKey accountRoleKey = new AccountRoleKey(account.getUserName(),1);
-        Role role = roleService.findById(1);
-        AccountRole accountRole = new AccountRole(accountRoleKey,account,role);
-        accountRoleService.save(accountRole);
-        Position position = positionService.findByID(accountEmployee.getIdPosition());
-
-        Employee employee = new Employee(accountEmployee.getEmployeeId(),accountEmployee.getFullName(),accountEmployee.getDateOfBirth(),
-                accountEmployee.getEmail(),accountEmployee.getAddress(),accountEmployee.getPhone(),accountEmployee.getLevel(),
-                accountEmployee.getStartWorkDate(), accountEmployee.getYearOfExp(), accountEmployee.getAvtUrl(), account,position);
-        employeeService.updateEmployee(employee);
-        HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<>(headers, HttpStatus.CREATED);
-
-    }
-
+}
     @GetMapping(value = "/viewEmployee/{id}")
-    public ResponseEntity<Employee> detailEmployee(@PathVariable String id) {
+    public ResponseEntity<AccountEmployee> detailEmployee(@PathVariable String id) {
         Employee employeeObj = this.employeeService.findById(id);
         if (employeeObj == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(employeeObj, HttpStatus.OK);
+        AccountEmployee accountEmployee = new AccountEmployee(employeeObj.getEmployeeId(), employeeObj.getFullName(), employeeObj.getDateOfBirth(),
+                employeeObj.getEmail(), employeeObj.getAddress(), employeeObj.getPhone(), employeeObj.getLevel(), employeeObj.getStartWorkDate(),
+                employeeObj.getYearOfExp(), employeeObj.getAvtUrl(), employeeObj.getPosition().getPositionId(),
+                employeeObj.getAccount().getUserName(), employeeObj.getAccount().getPassword());
+
+        return new ResponseEntity<>(accountEmployee, HttpStatus.OK);
     }
 
 //    @GetMapping(value = "/viewEmployee/{id}")

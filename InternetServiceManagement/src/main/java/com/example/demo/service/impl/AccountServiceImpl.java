@@ -10,6 +10,7 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     AccountRepository accountRepository;
 
+
     @Override
     public boolean checkUserName(String userName) {
         return accountRepository.existsById(userName);
