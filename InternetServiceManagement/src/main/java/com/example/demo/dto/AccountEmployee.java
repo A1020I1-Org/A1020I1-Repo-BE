@@ -1,11 +1,13 @@
-package com.example.demo.entity;
+package com.example.demo.dto;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class AccountEmployee {
+public class AccountEmployee implements Validator {
     @NotEmpty
     @Pattern(regexp = "NV-\\d{4}")
     private String employeeId;
@@ -16,7 +18,6 @@ public class AccountEmployee {
     private String dateOfBirth;
     @NotEmpty
     @Size(max = 20)
-    @Pattern(regexp = "^[A-Za-z0-9]+@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$")
     private String email;
     @NotEmpty
     private String address;
@@ -28,32 +29,29 @@ public class AccountEmployee {
     @NotEmpty
     private String startWorkDate;
     @NotNull
-    @Min(0)
-    @Max(100)
     private int yearOfExp;
     private String avtUrl;
-    private int idPosition;
-    @NotBlank(message = "User name must not blank.")
-    @Size(min = 5, max = 15)
+    private int positionId;
     private String userName;
-    @Size(min = 5, max = 15)
     private String password;
 
     public AccountEmployee() {
     }
 
-    public AccountEmployee(String employeeId, String fullName, String dateOfBirth, String email, String address, String phone, String level, String startWorkDate, int yearOfExp, String avtUrl, int idPosition, String userName, String password) {
+    public AccountEmployee( String employeeId, String fullName, String dateOfBirth, String email, String address, String phone,
+                            String level, String startWorkDate, int yearOfExp, String avtUrl, int positionId, String userName,
+                            String password) {
         this.employeeId = employeeId;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
         this.email = email;
-        this.address = address;
+       this.address = address;
         this.phone = phone;
         this.level = level;
         this.startWorkDate = startWorkDate;
         this.yearOfExp = yearOfExp;
         this.avtUrl = avtUrl;
-        this.idPosition = idPosition;
+        this.positionId = positionId;
         this.userName = userName;
         this.password = password;
     }
@@ -154,11 +152,37 @@ public class AccountEmployee {
         this.password = password;
     }
 
-    public int getIdPosition() {
-        return idPosition;
+    public int getPositionId() {
+        return positionId;
     }
 
-    public void setIdPosition(int idPosition) {
-        this.idPosition = idPosition;
+    public void setPositionId(int positionId) {
+        this.positionId = positionId;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return AccountEmployee.class.isAssignableFrom(clazz);
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        AccountEmployee accountEmployee = (AccountEmployee) target;
+        if(accountEmployee.getDateOfBirth().equals("")){
+            errors.rejectValue("dateOfBirth", "employee.age.at.least.16");
+        }else {
+            String[] date = accountEmployee.getDateOfBirth().split("-");
+            int year = Integer.parseInt(date[0]);
+            String birthday = (year + 16) + "-" + date[1] + "-" + date[2];
+            Date birthday18th;
+            try {
+                birthday18th = new SimpleDateFormat("yyyy-MM-dd").parse(birthday);
+                if (birthday18th.compareTo(new Date()) > 0) {
+                    errors.rejectValue("dateOfBirth", "customer.age.at.least.16");
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
