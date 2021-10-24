@@ -74,7 +74,7 @@ public class EmployeeController {
     public ResponseEntity<AccountEmployee> detailEmployee(@PathVariable String id) {
         Employee employeeObj = this.employeeService.findById(id);
         if (employeeObj == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         AccountEmployee accountEmployee = new AccountEmployee(employeeObj.getEmployeeId(), employeeObj.getFullName(), employeeObj.getDateOfBirth(),
                 employeeObj.getEmail(), employeeObj.getAddress(), employeeObj.getPhone(), employeeObj.getLevel(), employeeObj.getStartWorkDate(),
