@@ -23,8 +23,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
+//    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -33,21 +34,8 @@ dependencies {
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
     implementation group: 'com.paypal.sdk', name: 'rest-api-sdk', version: '1.13.1'
     implementation group: 'org.json', name: 'json', version: '20190722'
-
-}
-
-sonarqube {
-    properties {
-        property 'sonar.host.url', 'http://18.117.194.147:9000'
-        property 'sonar.login', 'f4570cffe1dd5bf39ecbeed0ef04eef921709b5a'
-        property 'sonar.projectKey', 'A1020I1_ReviewCode_DatNT'
-        property 'sonar.projectName', 'A1020I1_ReviewCode_DatNT'
-    }
 }
 
 test {
     useJUnitPlatform()
 }
-
-
-

@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+
+
+
 public class Rate {
     @SerializedName("type")
     @Expose
@@ -78,3 +81,4 @@ public class Rate {
         return type + " " + imageurl + " " + muatienmat + " " + muack + " " + bantienmat + " " + banck ;
     }
 }
+
