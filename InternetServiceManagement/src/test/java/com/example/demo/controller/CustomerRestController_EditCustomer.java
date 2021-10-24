@@ -153,7 +153,7 @@ public class CustomerRestController_EditCustomer {
         customer.setCustomerId(1);
         customer.setFullName("ngoc cuong");
         customer.setDateOfBirth("1998-06-09");
-        customer.setEmail("cuong34@gmail.com");
+        customer.setEmail("cuong3412@gmail.com");
         customer.setProvince("Thanh phố Đà Nẵng");
         customer.setDistrict("Quận Liên Chiểu");
         customer.setCommune("Phường Hòa Khánh Băc");
@@ -171,5 +171,4 @@ public class CustomerRestController_EditCustomer {
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful());
     }
-
 }

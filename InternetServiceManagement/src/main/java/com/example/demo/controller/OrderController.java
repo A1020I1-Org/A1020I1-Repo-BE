@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 @CrossOrigin("http://localhost:4200")
+@RestController
 @RequestMapping(value = "/order")
 public class OrderController {
 
@@ -24,7 +24,7 @@ public class OrderController {
     @Autowired
     private OrderServiceService orderServiceService;
 
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Service>> getAllService() {
         List<Service> service = serviceService.findAll();
         return new ResponseEntity<>(service, HttpStatus.OK);
