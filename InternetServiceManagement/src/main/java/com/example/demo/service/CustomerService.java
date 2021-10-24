@@ -18,8 +18,7 @@ public interface CustomerService {
     Page<Customer> searchCustomer(Pageable pageable ,String username, String status,
                                   String address, String dateBirthFrom, String dateBirthTo);
 
-
-
+    Boolean checkExistingAccount(String username);
 
     void deleteCustomer(Integer customerId);
 

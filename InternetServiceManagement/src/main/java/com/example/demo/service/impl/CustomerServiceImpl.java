@@ -111,6 +111,12 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
+    @Override
+    public Boolean checkExistingAccount(String username){
+        Account account = accountRepository.findByUserName(username).orElse(null);
+        return account != null;
+    }
+
     private CustomerRequest toRequest(Customer customer) {
         CustomerRequest customerRequest = new CustomerRequest();
         customerRequest.setCustomerId(customer.getCustomerId());

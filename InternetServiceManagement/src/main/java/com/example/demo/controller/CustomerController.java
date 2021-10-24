@@ -103,6 +103,11 @@ public class CustomerController {
         return customerService.findById(id);
     }
 
+    @GetMapping(value = "account/{username}")
+    public Boolean getCustomer(@PathVariable String username){
+        return customerService.checkExistingAccount(username);
+    }
+
     @PostMapping(value = "/create")
     public ResponseEntity<CustomerRequest> createCustomer(@Validated @RequestBody CustomerRequest customerRequest, BindingResult bindingResult) {
         new CustomerRequest().validate(customerRequest, bindingResult);
