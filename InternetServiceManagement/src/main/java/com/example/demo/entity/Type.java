@@ -14,7 +14,6 @@ public class Type {
 
     @JsonIgnore
     @OneToMany(mappedBy = "type",cascade = CascadeType.ALL)
-    @JsonIgnore
     private Set<Computer> computers;
 
     public Type() {

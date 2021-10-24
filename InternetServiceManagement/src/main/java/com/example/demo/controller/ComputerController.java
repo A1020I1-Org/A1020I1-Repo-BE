@@ -19,18 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import com.example.demo.entity.Type;
-import com.example.demo.service.ComputerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/computer")
@@ -69,7 +60,7 @@ public class ComputerController {
         return new ResponseEntity<>(computerList, HttpStatus.OK);
     }
     @GetMapping("/getInfor/{id}")
-    public ResponseEntity<Computer> getInforComputer(@PathVariable String id){
+    public ResponseEntity<Computer> getInforComputer(@PathVariable int id){
         Computer computer = computerService.findById(id);
         if (computer==null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -77,7 +68,7 @@ public class ComputerController {
         return new ResponseEntity<>(computer, HttpStatus.OK);
     }
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Computer> deleteComputer(@PathVariable String id) {
+    public ResponseEntity<Computer> deleteComputer(@PathVariable int id) {
         Computer computer = computerService.findById(id);
         if (computer == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -87,7 +78,7 @@ public class ComputerController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Page<Computer>> searchComputer(@RequestParam("computerId") String id,
+    public ResponseEntity<Page<Computer>> searchComputer(@RequestParam("computerId") int id,
                                                          @RequestParam("computerLocation") String computerLocation,
                                                          @RequestParam("startUsedDateFromComputer") String startUsedDateFromComputer,
                                                          @RequestParam("startUsedDateToComputer") String startUsedDateToComputer,
@@ -95,13 +86,13 @@ public class ComputerController {
                                                          @RequestParam("status") String status,@PageableDefault(size = 5) Pageable pageable) {
 
 
-        Page<Computer> computers = computerService.search(id, computerLocation, startUsedDateFromComputer,startUsedDateToComputer, type, status,pageable);
-        if (computers.isEmpty()){
+        Page<Computer> computers = computerService.search(id, computerLocation, startUsedDateFromComputer, startUsedDateToComputer, type, status, pageable);
+        if (computers.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(computers, HttpStatus.OK);
+    }
 
-    private ComputerService computerService;
 
 
     @PostMapping("/create")

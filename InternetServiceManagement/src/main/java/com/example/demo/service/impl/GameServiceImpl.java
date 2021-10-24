@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public class GameServiceImpl implements GameService {
     @Autowired
@@ -26,5 +28,20 @@ public class GameServiceImpl implements GameService {
     @Override
     public Game findById(String id) {
         return this.gameRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Page<Game> searchByName(String key, Pageable pageable) {
+        return this.gameRepository.searchByName(key, pageable);
+    }
+
+    @Override
+    public Page<Game> searchByCategory(String key, Pageable pageable) {
+        return this.gameRepository.searchByCategory(key, pageable);
+    }
+
+    @Override
+    public Set<String> getCategoryGame() {
+        return this.gameRepository.findGameByGameCategory();
     }
 }

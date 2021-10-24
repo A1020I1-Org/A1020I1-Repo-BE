@@ -1,12 +1,10 @@
 package com.example.demo.entity;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.Date;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Set;
@@ -29,7 +27,7 @@ public class Computer {
     private String computerIpLocal;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "computer", cascade = {CascadeType.ALL,CascadeType.REMOVE})
+    @OneToMany(mappedBy = "computer", cascade = {CascadeType.ALL, CascadeType.REMOVE})
     Set<Order> orders;
 
     @NotNull
@@ -62,7 +60,7 @@ public class Computer {
     public Computer() {
     }
 
-    public Computer(String computerId, String computerLocation, String computerStartUsedDate, String computerWarrantyPeriod, String computerConfiguration, Set<Order> orders, Manufacturer manufacturer, Status status, Type type, Set<Game> games) {
+    public Computer(int computerId, String computerLocation, String computerStartUsedDate, String computerWarrantyPeriod, String computerConfiguration, Set<Order> orders, Manufacturer manufacturer, Status status, Type type, Set<Game> games) {
         this.computerId = computerId;
         this.computerLocation = computerLocation;
         this.computerStartUsedDate = computerStartUsedDate;
@@ -75,7 +73,7 @@ public class Computer {
         this.games = games;
     }
 
-    public Computer(String computerId, String computerLocation, String computerStartUsedDate, String computerWarrantyPeriod, String computerConfiguration, String computerIpLocal, Set<Order> orders, Manufacturer manufacturer, Status status, Type type, Set<Game> games) {
+    public Computer(int computerId, String computerLocation, String computerStartUsedDate, String computerWarrantyPeriod, String computerConfiguration, String computerIpLocal, Set<Order> orders, Manufacturer manufacturer, Status status, Type type, Set<Game> games) {
         this.computerId = computerId;
         this.computerLocation = computerLocation;
         this.computerStartUsedDate = computerStartUsedDate;
@@ -87,12 +85,6 @@ public class Computer {
         this.status = status;
         this.type = type;
         this.games = games;
-    public String getComputerIpLocal() {
-        return computerIpLocal;
-    }
-
-    public void setComputerIpLocal(String computerIpLocal) {
-        this.computerIpLocal = computerIpLocal;
     }
 
     public int getComputerId() {
@@ -183,3 +175,4 @@ public class Computer {
         this.games = games;
     }
 }
+

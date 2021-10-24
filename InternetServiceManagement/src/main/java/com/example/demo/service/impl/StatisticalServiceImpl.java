@@ -41,7 +41,7 @@ public class StatisticalServiceImpl implements StatisticalService {
         if(listOrder.isEmpty()){
             return null;
         }
-        Map<String, Integer> map = new TreeMap<>();
+        Map<Integer, Integer> map = new TreeMap<>();
         for (Order order : listOrder){
             if(order.isStatus()) {
                 if (map.containsKey(order.getComputer().getComputerId())) {
@@ -52,8 +52,8 @@ public class StatisticalServiceImpl implements StatisticalService {
                 }
             }
         }
-        Set<String> set = map.keySet();
-        for (String key : set){
+        Set<Integer> set = map.keySet();
+        for (Integer key : set){
             list.add(new DataForComputer(key, map.get(key)));
         }
         return list;

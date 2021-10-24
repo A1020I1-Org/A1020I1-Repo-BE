@@ -10,7 +10,7 @@ public class OrderService {
 
     @Id
     @Column(name="id")
-    private Integer id;
+    private String id;
 
     @ManyToOne
     @MapsId("customerId")
@@ -29,7 +29,7 @@ public class OrderService {
     private Pay pay;
 
     private int quantity;
-    private int unit;
+    private String unit;
     private int totalMoney;
     private String oder_date;
     private boolean status;
@@ -37,11 +37,11 @@ public class OrderService {
     public OrderService() {
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -69,11 +69,11 @@ public class OrderService {
         this.quantity = quantity;
     }
 
-    public int getUnit() {
+    public String getUnit() {
         return unit;
     }
 
-    public void setUnit(int unit) {
+    public void setUnit(String unit) {
         this.unit = unit;
     }
 

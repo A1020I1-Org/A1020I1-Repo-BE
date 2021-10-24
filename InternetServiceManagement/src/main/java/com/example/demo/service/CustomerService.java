@@ -16,8 +16,6 @@ public interface CustomerService {
                                   String address, String dateBirthFrom, String dateBirthTo);
 
 
-
-
     void deleteCustomer(Integer customerId);
 
     Customer getCustomerByUsername(String username);

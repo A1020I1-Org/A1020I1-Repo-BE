@@ -14,7 +14,7 @@ public class Employee {
     private String level;
     private String startWorkDate;
     private int yearOfExp;
-    private long avtUrl;
+    private String avtUrl;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userName",referencedColumnName = "userName")
@@ -25,6 +25,21 @@ public class Employee {
     private Position position;
 
     public Employee() {
+    }
+
+    public Employee(String employeeId, String fullName, String dateOfBirth, String email, String address, String phone, String level, String startWorkDate, int yearOfExp, String avtUrl, Account account, Position position) {
+        this.employeeId = employeeId;
+        this.fullName = fullName;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.level = level;
+        this.startWorkDate = startWorkDate;
+        this.yearOfExp = yearOfExp;
+        this.avtUrl = avtUrl;
+        this.account = account;
+        this.position = position;
     }
 
     public String getEmployeeId() {
@@ -99,11 +114,11 @@ public class Employee {
         this.yearOfExp = yearOfExp;
     }
 
-    public long getAvtUrl() {
+    public String getAvtUrl() {
         return avtUrl;
     }
 
-    public void setAvtUrl(long avtUrl) {
+    public void setAvtUrl(String avtUrl) {
         this.avtUrl = avtUrl;
     }
 
