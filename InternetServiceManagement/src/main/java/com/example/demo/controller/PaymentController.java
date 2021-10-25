@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.URI;
 import java.util.Map;
 
 
@@ -116,7 +115,8 @@ public class PaymentController {
         payPalClient.completePayment(request);
         payService.pay(id);
         RedirectView redirectView = new RedirectView();
-        redirectView.setUrl("http://localhost:4200/list-payment");
+        String message = "successfully";
+        redirectView.setUrl("http://localhost:4200/payment-customer?message="+message);
         return redirectView;
     }
 
