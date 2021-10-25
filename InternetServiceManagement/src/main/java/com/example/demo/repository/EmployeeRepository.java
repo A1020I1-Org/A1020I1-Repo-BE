@@ -19,4 +19,6 @@ public interface EmployeeRepository extends JpaRepository<Employee,String> {
                                   String workEnd, String address, String positionId,
                                   Pageable pageable);
 
+    Employee findByAccount_UserName(String userName);
+
 }

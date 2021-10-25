@@ -45,7 +45,7 @@ public class OrderServiceServiceImpl implements OrderServiceService {
         orderServiceDTO.setQuantity(orderService.getQuantity());
         orderServiceDTO.setUnit(orderService.getUnit());
         orderServiceDTO.setTotalMoney(orderService.getTotalMoney());
-        orderServiceDTO.setOderDate(orderService.getOder_date());
+        orderServiceDTO.setOderDate(orderService.getOrderDate());
         orderServiceDTO.setStatus(orderService.isStatus());
         orderServiceDTO.setCustomer(orderService.getCustomer().getCustomerId());
         orderServiceDTO.setService(orderService.getService().getServiceId());
@@ -64,7 +64,7 @@ public class OrderServiceServiceImpl implements OrderServiceService {
         orderService.setQuantity(orderServiceDTO.getQuantity());
         orderService.setUnit(orderServiceDTO.getUnit());
         orderService.setTotalMoney(orderServiceDTO.getTotalMoney());
-        orderService.setOder_date(orderServiceDTO.getOderDate());
+        orderService.setOrderDate(orderServiceDTO.getOderDate());
         orderService.setStatus(orderServiceDTO.getStatus());
 
         return orderService;

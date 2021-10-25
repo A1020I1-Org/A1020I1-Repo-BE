@@ -18,5 +18,7 @@ public interface ComputerService {
     void save(Computer computer);
 
     void update(Computer computer, int id);
-  
+
+    Computer findByIpHost(String ip);
+
 }

@@ -43,4 +43,10 @@ public class ComputerServiceImpl implements ComputerService {
         computerRepository.save(computer);
     }
 
+    @Override
+    public Computer findByIpHost(String ip) {
+        return computerRepository.findByComputerIpLocal(ip);
+    }
+
+
 }

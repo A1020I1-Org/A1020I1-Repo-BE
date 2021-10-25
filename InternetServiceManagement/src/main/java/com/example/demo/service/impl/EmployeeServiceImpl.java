@@ -90,4 +90,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.delete(findById(id));
     }
 
+    @Override
+    public Employee findByAccountName(String account) {
+        return employeeRepository.findByAccount_UserName(account);
+    }
+
 }

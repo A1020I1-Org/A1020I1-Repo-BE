@@ -2,6 +2,8 @@ package com.example.demo.jwt;
 
 import com.example.demo.entity.Account;
 import com.example.demo.entity.Customer;
+import com.example.demo.entity.Employee;
+import com.example.demo.entity.Order;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -14,6 +16,7 @@ public class JwtResponse {
     private String type = "Bearer";
     private Account account;
     private Customer customer;
+    private Order order;
     private List<String> roles;
 
     public JwtResponse() {
@@ -22,6 +25,15 @@ public class JwtResponse {
     public JwtResponse(String token, Account account, List<String> roles) {
         this.token = token;
         this.account = account;
+        this.roles = roles;
+    }
+
+
+    public JwtResponse(String token, Account account, Customer customer, Order order, List<String> roles) {
+        this.token = token;
+        this.account = account;
+        this.customer = customer;
+        this.order = order;
         this.roles = roles;
     }
 
@@ -39,6 +51,14 @@ public class JwtResponse {
     public JwtResponse(String token,  List<String> roles) {
         this.token = token;
         this.roles = roles;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public String getToken() {

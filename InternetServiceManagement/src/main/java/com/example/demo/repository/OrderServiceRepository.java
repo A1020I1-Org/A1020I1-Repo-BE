@@ -9,8 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Date;
 import java.util.List;
 
-@Repository
+
 public interface OrderServiceRepository extends JpaRepository<OrderService, String> {
+
     @Query("select o from OrderService o where (o.orderDate between :startTime and :endTime) and (o.status = true) ")
     List<OrderService> findAllInStartTimeToEndTime(@Param("startTime") Date startTime,
                                                    @Param("endTime")Date endTime);

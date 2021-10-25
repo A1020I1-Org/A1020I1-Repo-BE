@@ -42,4 +42,5 @@ public interface ComputerRepository extends JpaRepository<Computer, Integer> {
     "order by c.computerId")
     Page<Computer> advancedSearchComputer(int computerId,String computerLocation, String startUsedDateFromComputer,
                                           String startUsedDateToComputer, String type,String status,Pageable pageable);
+    Computer findByComputerIpLocal(String ipLocal);
 }

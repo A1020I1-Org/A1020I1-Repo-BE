@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Set;
 
-@Repository
+
 public interface GameRepository extends JpaRepository<Game, String> {
     @Query("select g from Game g where g.gameName like %:key%")
     Page<Game> searchByName(String key, Pageable pageable);

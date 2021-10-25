@@ -24,4 +24,6 @@ public interface EmployeeService {
 
     List<Employee> findAll();
     void deleteEmployee(String id);
+
+    Employee findByAccountName(String account);
 }

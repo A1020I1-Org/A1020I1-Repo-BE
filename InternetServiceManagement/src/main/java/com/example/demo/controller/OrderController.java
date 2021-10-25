@@ -11,16 +11,24 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
-@RestController
 @CrossOrigin("http://localhost:4200")
+@RestController
 @RequestMapping(value = "/order")
 public class OrderController {
+
     @Autowired
     private ServiceService serviceService;
 
     @Autowired
     private OrderServiceService orderServiceService;
+
+    @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Service>> getAllService() {
+        List<Service> service = serviceService.findAllService();
+        return new ResponseEntity<>(service, HttpStatus.OK);
+    }
 
     @GetMapping(value = "/service/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Service> getServiceById(@PathVariable("id") String id) {
@@ -45,5 +53,4 @@ public class OrderController {
         orderServiceService.createOrderService(orderServiceDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
 }
