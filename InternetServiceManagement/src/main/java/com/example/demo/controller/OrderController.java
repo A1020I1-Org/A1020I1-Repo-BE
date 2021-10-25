@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Customer;
 import com.example.demo.entity.OrderService;
 import com.example.demo.entity.OrderServiceDTO;
 import com.example.demo.entity.Service;
@@ -30,6 +31,12 @@ public class OrderController {
         return new ResponseEntity<>(service, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/list-order", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<OrderService>> getAllOrder() {
+        List<OrderService> orderServices = orderServiceService.findAll();
+        return new ResponseEntity<>(orderServices, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/service/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Service> getServiceById(@PathVariable("id") String id) {
         Service service = serviceService.findById(id);
@@ -48,14 +55,10 @@ public class OrderController {
         return new ResponseEntity<>(orderService, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/create-order-service/{serviceId}")
-    public ResponseEntity<OrderServiceDTO> createOrderService(@RequestBody OrderServiceDTO orderServiceDTO, @PathVariable("serviceId") String id) {
-        if (serviceService.findById(id) != null) {
-            orderServiceService.createOrderService(orderServiceDTO, id);
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        }
-        else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    @PostMapping(value = "/create-order-service")
+    public ResponseEntity<OrderServiceDTO> createOrderService(@RequestBody OrderServiceDTO orderServiceDTO) {
+        orderServiceService.createOrderService(orderServiceDTO);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
 }

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,11 +39,11 @@ public class OrderServiceServiceImpl implements OrderServiceService {
     }
 
     @Override
-    public void createOrderService(OrderServiceDTO orderServiceDTO, String serviceId) {
+    public void createOrderService(OrderServiceDTO orderServiceDTO) {
         OrderService orderService = toEntity(orderServiceDTO);
         Customer customer = customerRepository.findById(1).orElse(null);
         Pay pay = payRepository.findById(1).orElse(null);
-        com.example.demo.entity.Service service = serviceRepository.findById(serviceId).orElse(null);
+        com.example.demo.entity.Service service = serviceRepository.findById("2").orElse(null);
 
         orderService.setCustomer(customer);
         orderService.setPay(pay);
@@ -52,18 +53,25 @@ public class OrderServiceServiceImpl implements OrderServiceService {
         Date date = new Date();
         String date1= dateFormat.format(date);
         orderService.setOderDate(date1);
-
-        int totalMoney = orderService.getQuantity() * service.getPrices();
-        orderService.setTotalMoney(totalMoney);
-        orderServiceRepository.save(orderService);
-
         orderService.setUnit(service.getUnit());
 
-        int updateQuantity = service.getQuantity() - orderService.getQuantity();
-        service.setQuantity(updateQuantity);
-        serviceRepository.save(service);
+        if (orderService.getQuantity() <= service.getQuantity()){
+            int totalMoney = orderService.getQuantity() * service.getPrices();
+            orderService.setTotalMoney(totalMoney);
+            orderServiceRepository.save(orderService);
+
+            int updateQuantity = service.getQuantity() - orderService.getQuantity();
+            service.setQuantity(updateQuantity);
+            serviceRepository.save(service);
+        }
 
     }
+
+    @Override
+    public List<OrderService> findAll() {
+        return orderServiceRepository.findAll();
+    }
+
 
     private OrderServiceDTO toDTO(OrderService orderService){
         OrderServiceDTO orderServiceDTO = new OrderServiceDTO();

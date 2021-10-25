@@ -101,12 +101,6 @@ public class CustomerServiceImpl implements CustomerService {
                 + "," + accountCustomer.getDistrict() + "," + accountCustomer.getCommune());
         customer.setPhone(accountCustomer.getPhone());
         customer.setStatus(accountCustomer.getStatus());
-//        Account account = new Account();
-//        if (!accountRepository.findByUserName(customerRequest.getUsername()).isPresent()){
-//            account.setUserName(customerRequest.getUsername());
-//            account.setPassword(customerRequest.getPassword());
-//            customer.setAccount(account);
-//        }
         return customer;
     }
 }

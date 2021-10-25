@@ -151,12 +151,12 @@ public class OrderController_createOrderService {
         orderServiceDTO.setStatus(false);
         orderServiceDTO.setCustomer(1);
         orderServiceDTO.setPay(1);
-        orderServiceDTO.setService("2");
+        orderServiceDTO.setService("1");
 
         this.mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .post("/order/create-order-service/{id}", 2)
+                                .post("/order/create-order-service")
                                 .content(this.objectMapper.writeValueAsString(orderServiceDTO))
                                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())

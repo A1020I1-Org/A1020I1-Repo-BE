@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
-@RequestMapping(value = "/customer", method = {RequestMethod.GET, RequestMethod.PUT})
+@RequestMapping(value = "/customer")
 public class CustomerController {
     private final CustomerService customerService;
 
