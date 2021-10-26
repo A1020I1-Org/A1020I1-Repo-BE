@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.AccountCustomer;
+import com.example.demo.entity.CustomerRequest;
 import com.example.demo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,15 +22,15 @@ public class CustomerController {
     }
 
     @GetMapping(value = "/{id}")
-    public AccountCustomer getCustomer(@PathVariable Integer id){
+    public CustomerRequest getCustomer(@PathVariable Integer id){
        return customerService.findById(id);
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<AccountCustomer> createCustomer(@Validated @RequestBody AccountCustomer accountCustomer, BindingResult bindingResult){
-        new AccountCustomer().validate(accountCustomer, bindingResult);
+    public ResponseEntity<CustomerRequest> createCustomer(@Validated @RequestBody CustomerRequest customerRequest, BindingResult bindingResult){
+        new CustomerRequest().validate(customerRequest, bindingResult);
         if (!bindingResult.hasErrors()) {
-            customerService.createCustomer(accountCustomer);
+            customerService.createCustomer(customerRequest);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         else {
@@ -39,13 +39,13 @@ public class CustomerController {
     }
 
     @PutMapping(value = "/edit/{id}")
-    public ResponseEntity<AccountCustomer> updateCustomer(@Validated @RequestBody AccountCustomer accountCustomer,
+    public ResponseEntity<CustomerRequest> updateCustomer(@Validated @RequestBody CustomerRequest customerRequest,
                                                           BindingResult bindingResult,
                                                           @PathVariable Integer id){
-        new AccountCustomer().validate(accountCustomer, bindingResult);
+        new CustomerRequest().validate(customerRequest, bindingResult);
         if (!bindingResult.hasErrors() && id != null) {
             if (customerService.findById(id) != null) {
-                customerService.updateCustomer(accountCustomer, id);
+                customerService.updateCustomer(customerRequest, id);
                 return new ResponseEntity<>(HttpStatus.OK);
             }
             else {
@@ -58,13 +58,13 @@ public class CustomerController {
     }
 
     @PutMapping(value = "/info/{id}")
-    public ResponseEntity<AccountCustomer> infoCustomer(@Validated @RequestBody AccountCustomer accountCustomer,
+    public ResponseEntity<CustomerRequest> infoCustomer(@Validated @RequestBody CustomerRequest customerRequest,
                                                         BindingResult bindingResult,
                                                         @PathVariable Integer id){
-        new AccountCustomer().validate(accountCustomer, bindingResult);
+        new CustomerRequest().validate(customerRequest, bindingResult);
         if (!bindingResult.hasErrors() && id != null) {
             if (customerService.findById(id) != null) {
-                customerService.updateCustomer(accountCustomer, id);
+                customerService.updateCustomer(customerRequest, id);
                 return new ResponseEntity<>(HttpStatus.OK);
             }
             else {

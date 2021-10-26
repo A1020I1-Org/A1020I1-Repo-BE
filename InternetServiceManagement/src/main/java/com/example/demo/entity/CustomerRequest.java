@@ -18,7 +18,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-public class AccountCustomer implements Validator {
+public class CustomerRequest implements Validator {
     private Integer customerId;
 
     @NotBlank(message = "Name can't be blank.")
@@ -140,11 +140,11 @@ public class AccountCustomer implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return AccountCustomer.class.isAssignableFrom(clazz);    }
+        return CustomerRequest.class.isAssignableFrom(clazz);    }
 
     @Override
     public void validate(Object target, Errors errors) {
-        AccountCustomer customer = (AccountCustomer) target;
+        CustomerRequest customer = (CustomerRequest) target;
         if (customer.getDateOfBirth().equals("")) {
             errors.rejectValue("dateOfBirth", "customer.age.at.least.16");
         } else {

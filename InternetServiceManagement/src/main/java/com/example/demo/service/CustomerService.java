@@ -1,11 +1,11 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.AccountCustomer;
+import com.example.demo.entity.CustomerRequest;
 
 public interface CustomerService {
-    void createCustomer(AccountCustomer accountCustomer);
+    void createCustomer(CustomerRequest customerRequest);
 
-    void updateCustomer(AccountCustomer accountCustomer, Integer id);
+    void updateCustomer(CustomerRequest customerRequest, Integer id);
     
-    AccountCustomer findById(Integer id);
+    CustomerRequest findById(Integer id);
 }

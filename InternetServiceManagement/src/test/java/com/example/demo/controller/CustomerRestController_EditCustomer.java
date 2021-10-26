@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.AccountCustomer;
+import com.example.demo.entity.CustomerRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class CustomerRestController_EditCustomer {
 
     @Test
     public void editCustomer_13() throws Exception {
-        AccountCustomer customer = new AccountCustomer();
+        CustomerRequest customer = new CustomerRequest();
         customer.setCustomerId(1);
         customer.setFullName(null);
         customer.setDateOfBirth("1998-06-09");
@@ -49,7 +49,7 @@ public class CustomerRestController_EditCustomer {
 
     @Test
     public void editCustomer_14() throws Exception {
-        AccountCustomer customer = new AccountCustomer();
+        CustomerRequest customer = new CustomerRequest();
         customer.setCustomerId(1);
         customer.setFullName("");
         customer.setDateOfBirth("1998-06-09");
@@ -74,7 +74,7 @@ public class CustomerRestController_EditCustomer {
 
     @Test
     public void editCustomer_15() throws Exception {
-        AccountCustomer customer = new AccountCustomer();
+        CustomerRequest customer = new CustomerRequest();
         customer.setCustomerId(1);
         customer.setFullName("ngoc cuong");
         customer.setDateOfBirth("1998-06-09");
@@ -99,7 +99,7 @@ public class CustomerRestController_EditCustomer {
 
     @Test
     public void editCustomer_16() throws Exception {
-        AccountCustomer customer = new AccountCustomer();
+        CustomerRequest customer = new CustomerRequest();
         customer.setCustomerId(1);
         customer.setFullName("ngoc cuong");
         customer.setDateOfBirth("1998-06-09");
@@ -124,7 +124,7 @@ public class CustomerRestController_EditCustomer {
 
     @Test
     public void editCustomer_17() throws Exception {
-        AccountCustomer customer = new AccountCustomer();
+        CustomerRequest customer = new CustomerRequest();
         customer.setCustomerId(1);
         customer.setFullName("ngoc cuong");
         customer.setDateOfBirth("1998-06-09");
@@ -149,7 +149,7 @@ public class CustomerRestController_EditCustomer {
 
     @Test
     public void editCustomer_18() throws Exception {
-        AccountCustomer customer = new AccountCustomer();
+        CustomerRequest customer = new CustomerRequest();
         customer.setCustomerId(1);
         customer.setFullName("ngoc cuong");
         customer.setDateOfBirth("1998-06-09");

@@ -7,6 +7,7 @@ import com.example.demo.entity.Service;
 import com.example.demo.service.OrderServiceService;
 import com.example.demo.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -56,9 +57,9 @@ public class OrderController {
     }
 
     @PostMapping(value = "/create-order-service")
-    public ResponseEntity<OrderServiceDTO> createOrderService(@RequestBody OrderServiceDTO orderServiceDTO) {
-        orderServiceService.createOrderService(orderServiceDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<List<OrderService>> createOrderService(@RequestBody OrderServiceDTO orderServiceDTO, @Param("idService") String idService, @Param("quantity") String quantity) {
+        List<OrderService> listOrderService = orderServiceService.createOrderService(orderServiceDTO);
+        return new ResponseEntity<>(listOrderService, HttpStatus.CREATED);
     }
 
 }

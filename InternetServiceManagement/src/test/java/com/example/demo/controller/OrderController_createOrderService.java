@@ -151,7 +151,7 @@ public class OrderController_createOrderService {
         orderServiceDTO.setStatus(false);
         orderServiceDTO.setCustomer(1);
         orderServiceDTO.setPay(1);
-        orderServiceDTO.setService("1");
+        orderServiceDTO.setService("2");
 
         this.mockMvc
                 .perform(

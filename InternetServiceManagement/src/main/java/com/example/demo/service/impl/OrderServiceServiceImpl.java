@@ -39,11 +39,11 @@ public class OrderServiceServiceImpl implements OrderServiceService {
     }
 
     @Override
-    public void createOrderService(OrderServiceDTO orderServiceDTO) {
+    public List<OrderService> createOrderService(OrderServiceDTO orderServiceDTO) {
         OrderService orderService = toEntity(orderServiceDTO);
-        Customer customer = customerRepository.findById(1).orElse(null);
-        Pay pay = payRepository.findById(1).orElse(null);
-        com.example.demo.entity.Service service = serviceRepository.findById("2").orElse(null);
+        Customer customer = customerRepository.findById(orderServiceDTO.getCustomer()).orElse(null);
+        Pay pay = payRepository.findById(orderServiceDTO.getPay()).orElse(null);
+        com.example.demo.entity.Service service = serviceRepository.findById(orderServiceDTO.getService()).orElse(null);
 
         orderService.setCustomer(customer);
         orderService.setPay(pay);
@@ -64,7 +64,7 @@ public class OrderServiceServiceImpl implements OrderServiceService {
             service.setQuantity(updateQuantity);
             serviceRepository.save(service);
         }
-
+        return this.orderServiceRepository.findAll();
     }
 
     @Override

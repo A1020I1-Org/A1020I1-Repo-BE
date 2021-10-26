@@ -2,7 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.entity.Account;
 import com.example.demo.entity.Customer;
-import com.example.demo.entity.AccountCustomer;
+import com.example.demo.entity.CustomerRequest;
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.repository.CustomerRepository;
 import com.example.demo.service.CustomerService;
@@ -25,12 +25,12 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    public void createCustomer(AccountCustomer accountCustomer) {
-        if (accountCustomer.getPassword().equals(accountCustomer.getPasswordRetype())){
-            Customer customer = toEntity(accountCustomer);
+    public void createCustomer(CustomerRequest customerRequest) {
+        if (customerRequest.getPassword().equals(customerRequest.getPasswordRetype())){
+            Customer customer = toEntity(customerRequest);
             Account account = new Account();
-            account.setUserName(accountCustomer.getUsername());
-            account.setPassword(accountCustomer.getPassword());
+            account.setUserName(customerRequest.getUsername());
+            account.setPassword(customerRequest.getPassword());
             account.setCustomer(customer);
 
             customer.setAccount(account);
@@ -41,14 +41,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void updateCustomer(AccountCustomer accountCustomer, Integer id) {
+    public void updateCustomer(CustomerRequest customerRequest, Integer id) {
         Customer customer = customerRepository.findById(id).orElse(null);
-        Account account = accountRepository.findByUserName(accountCustomer.getUsername()).orElse(null);
+        Account account = accountRepository.findByUserName(customerRequest.getUsername()).orElse(null);
         if (customer != null && account != null) {
-            if (accountCustomer.getPassword().equals(accountCustomer.getPasswordRetype())) {
-                customer = toEntity(accountCustomer);
+            if (customerRequest.getPassword().equals(customerRequest.getPasswordRetype())) {
+                customer = toEntity(customerRequest);
                 customer.setCustomerId(id);
-                account.setPassword(accountCustomer.getPassword());
+                account.setPassword(customerRequest.getPassword());
                 customer.setAccount(account);
                 account.setCustomer(customer);
                 customerRepository.save(customer);
@@ -58,7 +58,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public AccountCustomer findById(Integer id) {
+    public CustomerRequest findById(Integer id) {
         Customer customer = customerRepository.findById(id).orElse(null);
         if (customer != null){
             return toRequest(customer);
@@ -68,39 +68,39 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
-    private AccountCustomer toRequest(Customer customer){
-        AccountCustomer accountCustomer = new AccountCustomer();
-        accountCustomer.setCustomerId(customer.getCustomerId());
-        accountCustomer.setFullName(customer.getFullName());
-        accountCustomer.setDateOfBirth(customer.getDateOfBirth());
-        accountCustomer.setEmail(customer.getEmail());
+    private CustomerRequest toRequest(Customer customer){
+        CustomerRequest customerRequest = new CustomerRequest();
+        customerRequest.setCustomerId(customer.getCustomerId());
+        customerRequest.setFullName(customer.getFullName());
+        customerRequest.setDateOfBirth(customer.getDateOfBirth());
+        customerRequest.setEmail(customer.getEmail());
         String[] address = customer.getAddress().split(",");
-        accountCustomer.setProvince(address[0]);
-        accountCustomer.setDistrict(address[1]);
-        accountCustomer.setCommune(address[2]);
-        accountCustomer.setPhone(customer.getPhone());
-        accountCustomer.setUsername(customer.getAccount().getUserName());
-        accountCustomer.setPassword(customer.getAccount().getPassword());
-        accountCustomer.setPasswordRetype(customer.getAccount().getPassword());
-        accountCustomer.setStatus(customer.getStatus());
-        return accountCustomer;
+        customerRequest.setProvince(address[0]);
+        customerRequest.setDistrict(address[1]);
+        customerRequest.setCommune(address[2]);
+        customerRequest.setPhone(customer.getPhone());
+        customerRequest.setUsername(customer.getAccount().getUserName());
+        customerRequest.setPassword(customer.getAccount().getPassword());
+        customerRequest.setPasswordRetype(customer.getAccount().getPassword());
+        customerRequest.setStatus(customer.getStatus());
+        return customerRequest;
     }
 
-    private Customer toEntity(AccountCustomer accountCustomer){
+    private Customer toEntity(CustomerRequest customerRequest){
         Customer customer = new Customer();
-        if (accountCustomer.getCustomerId() != null) {
-            Optional<Customer> test = customerRepository.findById(accountCustomer.getCustomerId());
+        if (customerRequest.getCustomerId() != null) {
+            Optional<Customer> test = customerRepository.findById(customerRequest.getCustomerId());
             if (test.isPresent()) {
                 customer = test.get();
             }
         }
-        customer.setFullName(accountCustomer.getFullName());
-        customer.setDateOfBirth(accountCustomer.getDateOfBirth());
-        customer.setEmail(accountCustomer.getEmail());
-        customer.setAddress(accountCustomer.getProvince()
-                + "," + accountCustomer.getDistrict() + "," + accountCustomer.getCommune());
-        customer.setPhone(accountCustomer.getPhone());
-        customer.setStatus(accountCustomer.getStatus());
+        customer.setFullName(customerRequest.getFullName());
+        customer.setDateOfBirth(customerRequest.getDateOfBirth());
+        customer.setEmail(customerRequest.getEmail());
+        customer.setAddress(customerRequest.getProvince()
+                + "," + customerRequest.getDistrict() + "," + customerRequest.getCommune());
+        customer.setPhone(customerRequest.getPhone());
+        customer.setStatus(customerRequest.getStatus());
         return customer;
     }
 }
