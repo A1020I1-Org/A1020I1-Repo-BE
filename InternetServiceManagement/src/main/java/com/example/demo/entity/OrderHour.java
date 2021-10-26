@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -25,6 +27,23 @@ public class OrderHour {
 
     @JsonManagedReference
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @ManyToOne(targetEntity = Customer.class)
+    @JoinColumn(name = "customerId", referencedColumnName = "customerId")
+    @JsonIgnore
+    private Customer customer;
+
+
+    @ManyToOne(targetEntity = Computer.class)
+    @JoinColumn(name = "computerId", referencedColumnName = "computerId")
+    @JsonIgnore
+    private Computer computer;
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonBackReference
     private Pay pay;
 
     private String startTime;
@@ -32,6 +51,18 @@ public class OrderHour {
     private int usageTime;
 
     public OrderHour() {
+    }
+
+    public OrderHour(Customer customer, Computer computer, String startTime, int usageTime) {
+        this.customer = customer;
+        this.computer = computer;
+        this.startTime = startTime;
+        this.usageTime = usageTime;
+    }
+
+    public OrderHour(Customer customer, String startTime) {
+        this.customer = customer;
+        this.startTime = startTime;
     }
 
     public Integer getId() {
