@@ -149,8 +149,8 @@ public class OrderController_createOrderService {
         orderServiceDTO.setTotalMoney(20000);
         orderServiceDTO.setOderDate("2021-10-10");
         orderServiceDTO.setStatus(false);
-        orderServiceDTO.setCustomer(1);
-        orderServiceDTO.setPay(1);
+        orderServiceDTO.setCustomer(2);
+        orderServiceDTO.setPay(2);
         orderServiceDTO.setService("2");
 
         this.mockMvc

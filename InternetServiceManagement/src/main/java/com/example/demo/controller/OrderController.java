@@ -34,7 +34,7 @@ public class OrderController {
 
     @GetMapping(value = "/list-order", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<OrderService>> getAllOrder() {
-        List<OrderService> orderServices = orderServiceService.findAll();
+        List<OrderService> orderServices = orderServiceService.findListOrderService();
         return new ResponseEntity<>(orderServices, HttpStatus.OK);
     }
 
@@ -57,7 +57,7 @@ public class OrderController {
     }
 
     @PostMapping(value = "/create-order-service")
-    public ResponseEntity<List<OrderService>> createOrderService(@RequestBody OrderServiceDTO orderServiceDTO, @Param("idService") String idService, @Param("quantity") String quantity) {
+    public ResponseEntity<List<OrderService>> createOrderService(@RequestBody OrderServiceDTO orderServiceDTO) {
         List<OrderService> listOrderService = orderServiceService.createOrderService(orderServiceDTO);
         return new ResponseEntity<>(listOrderService, HttpStatus.CREATED);
     }

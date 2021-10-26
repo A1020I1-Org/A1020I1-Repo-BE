@@ -25,23 +25,6 @@ public class OrderHour {
     @JoinColumn(name = "computer_id")
     private Computer computer;
 
-    @JsonManagedReference
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @ManyToOne(targetEntity = Customer.class)
-    @JoinColumn(name = "customerId", referencedColumnName = "customerId")
-    @JsonIgnore
-    private Customer customer;
-
-
-    @ManyToOne(targetEntity = Computer.class)
-    @JoinColumn(name = "computerId", referencedColumnName = "computerId")
-    @JsonIgnore
-    private Computer computer;
-
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     @JsonBackReference
     private Pay pay;
