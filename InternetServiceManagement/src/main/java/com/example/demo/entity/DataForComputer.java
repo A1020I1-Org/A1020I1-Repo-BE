@@ -1,19 +1,19 @@
 package com.example.demo.entity;
 
 public class DataForComputer {
-    private int name;
+    private String name;
     private int time;
 
-    public DataForComputer(int name, int time) {
+    public DataForComputer(String name, int time) {
         this.name = name;
         this.time = time;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 

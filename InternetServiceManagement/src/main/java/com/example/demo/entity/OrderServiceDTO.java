@@ -2,20 +2,20 @@ package com.example.demo.entity;
 
 public class OrderServiceDTO {
 
-    private String id;
+    private Integer id;
     private int quantity;
     private String unit;
     private int totalMoney;
     private String oderDate;
     private boolean status;
-    private int customer;
+    private Integer customer;
     private String service;
     private Integer pay;
 
     public OrderServiceDTO() {
     }
 
-    public OrderServiceDTO(String id, int quantity, String unit, int totalMoney, String oderDate, boolean status, int customer, String service, Integer pay) {
+    public OrderServiceDTO(Integer id, int quantity, String unit, int totalMoney, String oderDate, boolean status, Integer customer, String service, Integer pay) {
         this.id = id;
         this.quantity = quantity;
         this.unit = unit;
@@ -27,11 +27,11 @@ public class OrderServiceDTO {
         this.pay = pay;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -75,11 +75,11 @@ public class OrderServiceDTO {
         this.status = status;
     }
 
-    public int getCustomer() {
+    public Integer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(int customer) {
+    public void setCustomer(Integer customer) {
         this.customer = customer;
     }
 

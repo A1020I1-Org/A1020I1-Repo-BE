@@ -24,10 +24,10 @@ public class ServiceServiceImpl implements ServiceService {
     public com.example.demo.entity.Service findById(String serviceId) {
         return this.serviceRepository.findById(serviceId).orElse(null);
     }
-    
+
     @Override
-    public List<com.example.demo.entity.Service> findAllService() {
-        return serviceRepository.findAll();
+    public Page<com.example.demo.entity.Service> findAllService(Pageable pageable) {
+        return serviceRepository.findAll(pageable);
     }
 
     @Override
@@ -36,13 +36,22 @@ public class ServiceServiceImpl implements ServiceService {
     }
 
     @Override
-    public com.example.demo.entity.Service deleteService(String serviceId) {
+    public void deleteService(String serviceId) {
         serviceRepository.deleteById(serviceId);
-        return null;
     }
 
     @Override
     public Page<com.example.demo.entity.Service> search(Pageable pageable, String searchName) {
         return serviceRepository.search(pageable,searchName);
+    }
+
+    @Override
+    public void deleteAllService() {
+        serviceRepository.deleteAll();
+    }
+
+    @Override
+    public List<com.example.demo.entity.Service> findAll() {
+        return serviceRepository.findAll();
     }
 }

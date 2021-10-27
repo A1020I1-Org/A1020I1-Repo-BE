@@ -16,7 +16,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/statistical")
 public class StatisticalController {
-
     @Autowired
     private StatisticalService statisticalService;
 
@@ -61,8 +60,6 @@ public class StatisticalController {
         }
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
-
-
 }
 
 

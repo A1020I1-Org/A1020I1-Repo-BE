@@ -12,12 +12,16 @@ public interface ServiceService {
 
     Service findById(String serviceId);
 
-    List<Service> findAllService();
+    Page<Service> findAllService(Pageable pageable);
 
     Service findServiceById(String serviceId);
 
-    Service deleteService (String serviceId);
+    void deleteService (String serviceId);
 
     Page<Service> search(Pageable pageable, String searchName);
+
+    void deleteAllService ();
+
+    List<Service> findAll();
 }
 

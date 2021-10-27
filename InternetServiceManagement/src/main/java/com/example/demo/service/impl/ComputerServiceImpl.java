@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class ComputerServiceImpl implements ComputerService {
     @Autowired
@@ -19,27 +20,29 @@ public class ComputerServiceImpl implements ComputerService {
         return computerRepository.findAll(pageable);
     }
 
+
     @Override
-    public Computer findById(int id) {
+    public Computer findById(String id) {
         return computerRepository.findById(id).orElse(null);
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(String id) {
         computerRepository.deleteById(id);
     }
 
     @Override
-    public Page<Computer> search(int id, String computerLocation, String computerStartUsedFrom, String computerStartUsedTo,
+    public Page<Computer> search(String id, String computerLocation, String computerStartUsedFrom, String computerStartUsedTo,
                                  String type, String status, Pageable pageable) {
         return computerRepository.advancedSearchComputer(id, computerLocation, computerStartUsedFrom, computerStartUsedTo, type, status, pageable);
     }
+
     public void save(Computer computer) {
         computerRepository.save(computer);
     }
 
     @Override
-    public void update(Computer computer, int id) {
+    public void update(Computer computer) {
         computerRepository.save(computer);
     }
 
@@ -47,6 +50,5 @@ public class ComputerServiceImpl implements ComputerService {
     public Computer findByIpHost(String ip) {
         return computerRepository.findByComputerIpLocal(ip);
     }
-
 
 }

@@ -1,10 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Computer;
+import com.example.demo.entity.Manufacturer;
 import com.example.demo.entity.Status;
 import com.example.demo.entity.Type;
 import com.example.demo.repository.TypeComputerRepository;
 import com.example.demo.service.ComputerService;
+import com.example.demo.service.ManufacturerComputerService;
 import com.example.demo.service.StatusComputerService;
 import com.example.demo.service.TypeComputerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,27 +32,44 @@ public class ComputerController {
 
     @Autowired
     ComputerService computerService;
+
     @Autowired
     TypeComputerService typeComputerService;
+
     @Autowired
     StatusComputerService statusComputerService;
 
+    @Autowired
+    ManufacturerComputerService manufacturerComputerService;
+
     @GetMapping("/type")
-    public ResponseEntity<List<Type>> listTypeComputer(){
+    public ResponseEntity<List<Type>> listTypeComputer() {
         List<Type> typeList = typeComputerService.finAllType();
-        if (typeList.isEmpty()){
+        if (typeList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(typeList, HttpStatus.OK);
     }
+
     @GetMapping("/status")
-    public ResponseEntity<List<Status>> listStatusComputer(){
+    public ResponseEntity<List<Status>> listStatusComputer() {
         List<Status> statusList = statusComputerService.finAll();
-        if (statusList.isEmpty()){
+        if (statusList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(statusList, HttpStatus.OK);
     }
+
+
+    @GetMapping("/manufacturer")
+    public ResponseEntity<List<Manufacturer>> listManufacturerComputer() {
+        List<Manufacturer> manufacturerList = manufacturerComputerService.findAllManufacturer();
+        if (manufacturerList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(manufacturerList, HttpStatus.OK);
+    }
+
     @GetMapping("/list")
     public ResponseEntity<Page<Computer>> listComputer(@PageableDefault(size = 5) Pageable pageable) {
         Page<Computer> computerList = computerService.finAll(pageable);
@@ -59,16 +78,18 @@ public class ComputerController {
         }
         return new ResponseEntity<>(computerList, HttpStatus.OK);
     }
+
     @GetMapping("/getInfor/{id}")
-    public ResponseEntity<Computer> getInforComputer(@PathVariable int id){
+    public ResponseEntity<Computer> getInforComputer(@PathVariable String id) {
         Computer computer = computerService.findById(id);
-        if (computer==null){
+        if (computer == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(computer, HttpStatus.OK);
     }
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Computer> deleteComputer(@PathVariable int id) {
+    public ResponseEntity<Computer> deleteComputer(@PathVariable String id) {
         Computer computer = computerService.findById(id);
         if (computer == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -78,12 +99,12 @@ public class ComputerController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Page<Computer>> searchComputer(@RequestParam("computerId") int id,
+    public ResponseEntity<Page<Computer>> searchComputer(@RequestParam("computerId") String id,
                                                          @RequestParam("computerLocation") String computerLocation,
                                                          @RequestParam("startUsedDateFromComputer") String startUsedDateFromComputer,
                                                          @RequestParam("startUsedDateToComputer") String startUsedDateToComputer,
                                                          @RequestParam("type") String type,
-                                                         @RequestParam("status") String status,@PageableDefault(size = 5) Pageable pageable) {
+                                                         @RequestParam("status") String status, @PageableDefault(size = 5) Pageable pageable) {
 
 
         Page<Computer> computers = computerService.search(id, computerLocation, startUsedDateFromComputer, startUsedDateToComputer, type, status, pageable);
@@ -92,7 +113,6 @@ public class ComputerController {
         }
         return new ResponseEntity<>(computers, HttpStatus.OK);
     }
-
 
 
     @PostMapping("/create")
@@ -106,7 +126,7 @@ public class ComputerController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Computer> edit(@PathVariable int id) {
+    public ResponseEntity<Computer> edit(@PathVariable String id) {
         Computer computer = computerService.findById(id);
         if (computer == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -116,23 +136,17 @@ public class ComputerController {
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Computer> update(@Valid @RequestBody Computer computer, BindingResult bindingResult, @PathVariable Integer id) {
+    public ResponseEntity<Computer> update(@Valid @RequestBody Computer computer, BindingResult bindingResult, @PathVariable String id) {
         System.out.println(id);
-//        if (bindingResult.hasFieldErrors()) {
-//            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-//        } else {
-//            this.computerService.save(computer);
-//            return new ResponseEntity<>(HttpStatus.OK);
-//        }
         if (!bindingResult.hasErrors() && id != null) {
             if (computerService.findById(id) != null) {
-                computerService.update(computer, id);
+                computerService.update(computer);
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
             }
-        }else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
     }
 }

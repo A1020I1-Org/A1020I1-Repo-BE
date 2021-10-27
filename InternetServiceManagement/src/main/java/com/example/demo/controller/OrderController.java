@@ -6,6 +6,8 @@ import com.example.demo.entity.Service;
 import com.example.demo.service.OrderServiceService;
 import com.example.demo.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import java.util.List;
 @RequestMapping(value = "/order")
 public class OrderController {
 
+
     @Autowired
     private ServiceService serviceService;
 
@@ -26,8 +29,14 @@ public class OrderController {
 
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Service>> getAllService() {
-        List<Service> service = serviceService.findAllService();
+        List<Service> service = serviceService.findAll();
         return new ResponseEntity<>(service, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/list-order", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<OrderService>> getAllOrder() {
+        List<OrderService> orderServices = orderServiceService.findAll();
+        return new ResponseEntity<>(orderServices, HttpStatus.OK);
     }
 
     @GetMapping(value = "/service/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -40,7 +49,7 @@ public class OrderController {
     }
 
     @GetMapping(value = "/order-service/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<OrderService> getServiceOrderById(@PathVariable("id") String id) {
+    public ResponseEntity<OrderService> getServiceOrderById(@PathVariable("id") Integer id) {
         OrderService orderService = orderServiceService.findById(id);
         if (orderService == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

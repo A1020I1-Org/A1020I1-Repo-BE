@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 
 
-public interface ComputerRepository extends JpaRepository<Computer, Integer> {
+public interface ComputerRepository extends JpaRepository<Computer, String> {
     @Query(value = "select * \n " +
             "from computer c \n " +
             "inner join `type` t on c.type_id = t.type_id \n" +
@@ -19,7 +19,7 @@ public interface ComputerRepository extends JpaRepository<Computer, Integer> {
             "and (t.type_name like %:type% or t.type_name is null) \n " +
             "and (s.status_name like %:status% or s.status_name is null) \n " +
             "and ((c.computer_start_used_date between :computerStartUsedFrom and :computerStartUsedTo)) \n ",nativeQuery= true)
-    Page<Computer> searchComputer(@Param("computerId") int computerId,
+    Page<Computer> searchComputer(@Param("computerId") String computerId,
                                   @Param("computerLocation") String computerLocation,
                                   @Param("computerStartUsedFrom") String computerStartUsedFrom,
                                   @Param("computerStartUsedTo") String computerStartUsedTo,
@@ -40,7 +40,8 @@ public interface ComputerRepository extends JpaRepository<Computer, Integer> {
     "(c.type.typeName is null or c.type.typeName like %:type%) and "+
     "(c.status.statusName is null or c.status.statusName like %:status%)" +
     "order by c.computerId")
-    Page<Computer> advancedSearchComputer(int computerId,String computerLocation, String startUsedDateFromComputer,
+    Page<Computer> advancedSearchComputer(String computerId,String computerLocation, String startUsedDateFromComputer,
                                           String startUsedDateToComputer, String type,String status,Pageable pageable);
+
     Computer findByComputerIpLocal(String ipLocal);
 }

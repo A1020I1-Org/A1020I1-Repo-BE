@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -9,56 +9,38 @@ import javax.persistence.*;
 public class OrderService {
 
     @Id
-    @Column(name="id")
-    private String id;
-
-    @ManyToOne
-    @MapsId("customerId")
-    @JoinColumn(name = "customer_id")
-    @JsonBackReference
-    private Customer customer;
-
-    @ManyToOne
-    @JoinColumn(name = "service_id")
-    @JsonBackReference
-    private Service service;
-
-    @ManyToOne
-    @JoinColumn(name = "pay_id")
-    @JsonBackReference
-    private Pay pay;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private int quantity;
     private String unit;
     private int totalMoney;
-    private String orderDate;
+    private String oderDate;
     private boolean status;
+
+    @JsonManagedReference
+    @ManyToOne(targetEntity = Customer.class)
+    @JoinColumn(name = "customer_id", referencedColumnName = "customerId")
+    private Customer customer;
+
+    @JsonManagedReference
+    @ManyToOne(targetEntity = Service.class)
+    @JoinColumn(name = "service_id")
+    private Service service;
+
+    @JsonManagedReference
+    @ManyToOne(targetEntity = Pay.class)
+    @JoinColumn(name = "pay_id")
+    private Pay pay;
 
     public OrderService() {
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Service getService() {
-        return service;
-    }
-
-    public void setService(Service service) {
-        this.service = service;
     }
 
     public int getQuantity() {
@@ -85,20 +67,12 @@ public class OrderService {
         this.totalMoney = totalMoney;
     }
 
-    public String getOrderDate() {
-        return orderDate;
+    public String getOderDate() {
+        return oderDate;
     }
 
-    public void setOrderDate(String oder_date) {
-        this.orderDate = oder_date;
-    }
-
-    public Pay getPay() {
-        return pay;
-    }
-
-    public void setPay(Pay pay) {
-        this.pay = pay;
+    public void setOderDate(String oderDate) {
+        this.oderDate = oderDate;
     }
 
     public boolean isStatus() {
@@ -107,5 +81,29 @@ public class OrderService {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    public Pay getPay() {
+        return pay;
+    }
+
+    public void setPay(Pay pay) {
+        this.pay = pay;
     }
 }
